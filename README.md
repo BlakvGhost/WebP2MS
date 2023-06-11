@@ -91,6 +91,13 @@ Cet avertissement est destiné à garantir un bon flux de travail et à éviter 
 Si vous avez des questions ou des doutes, n'hésitez pas à demander en cliquant ici [par whatsapp](https://wa.me/22995181019) ou 
 [par mail](mailto:kabirou2001@gmail.com)
 
+
+## Tech Stack
+
+**Client:** HTML5, CSS3, Bootstrap 5
+
+**Server:** à decider
+
 ## Authors
 
 - [@Groupe34](https://github.com/BlakvGhost/PIL1_2223_34)
