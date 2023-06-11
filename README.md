@@ -88,7 +88,8 @@ N'hésitez pas à explorer davantage et à utiliser des fonctionnalités plus av
 
 Cet avertissement est destiné à garantir un bon flux de travail et à éviter les conflits ou les pertes de travail. Veuillez suivre ces bonnes pratiques lors de l'utilisation de Git.
 
-Si vous avez des questions ou des doutes, n'hésitez pas à demander en cliquant ici [par whatsapp](https://wa.me/22995181019) ou [par mail](maito:kabirou2001@gmail.com)
+Si vous avez des questions ou des doutes, n'hésitez pas à demander en cliquant ici [par whatsapp](https://wa.me/22995181019) ou 
+[par mail](mailto:kabirou2001@gmail.com)
 
 ## Authors
 
