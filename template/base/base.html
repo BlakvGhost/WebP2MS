@@ -1,8 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     {% include 'base/meta.html' %}
+    <style>
+        @import url("{% static 'vendor/Monterrat/Montserrat-VariableFont_wght.ttf' %}");
+        @import url("{% static 'vendor/Monterrat/Montserrat-Italic-VariableFont_wght.ttf' %}");
+
+        *:not(.fa, .fas, .fad) {
+            font-family: 'Montserrat', sans-serif !important;
+        }
+
+        :root {
+            --app-primary-color: #2e4053
+        }
+    </style>
 </head>
+
 <body>
     <header>
         {% include 'partials/header.html' %}

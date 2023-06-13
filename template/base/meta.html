@@ -1,8 +1,30 @@
 {% load static %}
-{% block 'meta' %}
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> {% block 'title' %} {% endblock %} - TimeTable Plateform</title>
-<link rel="stylesheet" href="style.css">
-{% endblock %}
+<link rel="stylesheet" href="{% static 'css/master.css' %}">
+<link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+
+<!-- beging:: Adding bootstrap files -->
+<script src="{% static 'vendor/bootstrap/bootstrap.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
+<!-- end:: Adding bootstrap files -->
+
+<!-- beging:: Adding mdi files -->
+<link rel="stylesheet" href="{% static 'vendor/mdi/materialdesignicons.min.css' %}">
+<!-- end:: Adding mdi files -->
+
+<!-- beging:: Adding animate files -->
+<script src="{% static 'vendor/animate/animate.min.js' %}"></script>
+<!-- end:: Adding animate files -->
+
+<!-- beging:: Adding vuejs files -->
+<script src="{% static 'vendor/vue/axios.min.js' %}"></script>
+<script src="{% static 'vendor/vue/vue.global.js' %}"></script>
+<!-- end:: Adding vuejs files -->
+
+<!-- beging:: Adding custom js files -->
+<script src="{% static 'js/app.js' %}" async></script>
+<!-- end:: Adding customjs files -->
