@@ -1,0 +1,14 @@
+@import url('/static/vendor/Montserrat/Montserrat-VariableFont_wght.ttf');
+@import url('/static/vendor/Montserrat/Montserrat-Italic-VariableFont_wght.ttf');
+
+:root {
+    --app-primary-color: #2e4053
+}
+
+*:not(.fa, .fas, .fad) {
+    font-family: 'Montserrat' !important;
+}
+
+.bg-auth {
+    background-image: url('/static/img/bg4.jpg');
+}

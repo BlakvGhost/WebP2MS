@@ -1,28 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     {% include 'base/meta.html' %}
     <title> {% block 'title' %} {% endblock %} - TimeTable Plateform</title>
-    <style>
-        @import url("{% static 'vendor/Montserrat/Montserrat-VariableFont_wght.ttf' %}");
-        @import url("{% static 'vendor/Montserrat/Montserrat-Italic-VariableFont_wght.ttf' %}");
-
-        *:not(.fa, .fas, .fad) {
-            font-family: 'Montserrat'!important;
-        }
-
-        :root {
-            --app-primary-color: #2e4053
-        }
-    </style>
 </head>
 </head>
+
 <body>
-    <main class="">
-        {% block 'main' %}
-        <!-- Ne rien ecrire dans ce fichier -->
-        {% endblock %}
+    <main class="pt-5 bg-auth">
+        <div class="container pt-5">
+            <div class="d-flex flex-wrap align-items-center justify-content-between h-lg-50">
+                <img src="{% static 'img/logoifri.png' %}" class="lifri " alt="Logo de l'IFRI">
+                <div class="bg-light rounded-3 ">
+                    {% block 'main' %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
     </main>
 </body>
+
 </html>

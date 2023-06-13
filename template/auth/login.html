@@ -4,7 +4,22 @@
 
 {% block 'main' %}
 
-    <!-- Ecrivez le code ici -->
-    <h1>Login Page</h1>
+<form action="" class="px-5">
+    <div class="row">
+        <h2 class="col-6 offset-2 my-4">Se Connecter</h2>
+    </div>
+    <input type="email" class="text-secondary m-2 ps-2 rounded-3 bg-transpare" required placeholder="Email"><br>
+    <input type="password" class="text-secondary m-2 ps-2 rounded-3 clair" required placeholder="Mot de passe"><br>
+    <div class="row">
+        <a href="forgot.html" class="col-6 offset-6 text-secondary text-decoration-none">Mot de
+            Passe Oublié?</a>
+    </div>
+    <button class="btn btn-secondary text-light rounded-3 px-5 my-4" type="submit">Se
+        Connecter</button>
+    <div class="row">
+        <a href="" class="col-9 offset-2 pb-3 text-decoration-none text-secondary">🔐Confidentialité
+            générale d'utilisation</a>
+    </div>
+</form>
 
 {% endblock %}
