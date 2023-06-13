@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def default(request):
+    
+    context = {}
+    
+    return render(request, 'app/default.html', context)

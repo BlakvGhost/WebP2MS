@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Acceuil {% endblock %}
+
+{% block 'main' %}
+<!-- Ecrivez le code ici -->
+<div class="text-center">
+    <h1>Main Page</h1>
+
+    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+    <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+    <a href="{% url 'password.forgot' %}" class="btn btn-warning">Forgot Password</a>
+    <a href="{% url 'password.new' %}" class="btn btn-danger">New Password</a>
+</div>
+
+{% endblock %}

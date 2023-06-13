@@ -5,11 +5,11 @@
 <head>
     {% include 'base/meta.html' %}
     <style>
-        @import url("{% static 'vendor/Monterrat/Montserrat-VariableFont_wght.ttf' %}");
-        @import url("{% static 'vendor/Monterrat/Montserrat-Italic-VariableFont_wght.ttf' %}");
+        @import url("{% static 'vendor/Montserrat/Montserrat-VariableFont_wght.ttf' %}");
+        @import url("{% static 'vendor/Montserrat/Montserrat-Italic-VariableFont_wght.ttf' %}");
 
         *:not(.fa, .fas, .fad) {
-            font-family: 'Montserrat', sans-serif !important;
+            font-family: 'Montserrat'!important;
         }
 
         :root {
@@ -24,10 +24,10 @@
     </header>
     <div class="container-fluid">
         <div class="row">
-            <aside class="col col-4">
+            <aside class="col col-4 align-self-center">
                 {% include 'partials/sidebar.html' %}
             </aside>
-            <main class="col col-8 py-3">
+            <main class="col col-8 py-3 align-self-center border">
                 {% block 'main' %}
                 {% endblock %}
             </main>
