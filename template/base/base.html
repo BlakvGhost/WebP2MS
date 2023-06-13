@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% include 'base/meta.html' %}
+</head>
+<body>
+    <header>
+        {% include 'partials/header.html' %}
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col col-4">
+                {% include 'partials/sidebar.html' %}
+            </aside>
+            <main class="col col-8 py-3">
+                {% block 'main' %}
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+    <footer>
+        {% include 'partials/header.html' %}
+    </footer>
+</body>
+</html>
