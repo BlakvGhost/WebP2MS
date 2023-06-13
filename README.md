@@ -36,6 +36,15 @@ git clone https://github.com/BlakvGhost/PIL1_2223_34.git
 cd PIL1_2223_34
 ```
 
+6. Demarrer le serveur d'application django:
+```bash
+python manage.py runserver
+```
+
+7. Dirigez vous dans le dossier `template` et travailler sur le fichier qui vous concerne
+
+8. N'importez rien d'externe comme fichiers `images, polices ou bootstrap`, tout est deja inclus, commencez juste à ecrire votre code et utiliser le fichier `static/css/master.css` pour ecrire votre css
+
 Maintenant, vous pouvez commencer à travailler sur le projet localement et utiliser les commandes Git pour effectuer des commits, etc.
 
 ## Commandes Git de base
