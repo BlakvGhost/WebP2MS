@@ -10,10 +10,10 @@
     </div>
     <form class="my-2" @submit.prevent="login">
         {% csrf_token %}
-        <div v-if="errors" class="alert alert-dismissible alert-danger text-center w-100 w-lg-75 mx-auto my-2" role="alert"
-            id="liveAlert">
+        <div v-if="error" class="alert alert-dismissible alert-danger text-center w-100 w-lg-75 mx-auto my-2"
+            role="alert" id="liveAlert">
             <div class="msg-alert">
-                <p class="fw-bold" v-for="error in errors">
+                <p class="fw-bold">
                     [[ error ]]
                 </p>
             </div>

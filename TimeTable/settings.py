@@ -130,6 +130,8 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'no-reply@kabirou-alassane.com'
 EMAIL_HOST_PASSWORD = 'jQ0yiv~!Y;&='
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'no-reply@kabirou-alassane.com'
+
 
 
 
