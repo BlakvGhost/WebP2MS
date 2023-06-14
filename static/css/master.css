@@ -9,6 +9,20 @@
     font-family: 'Montserrat' !important;
 }
 
+.text-app-secondary {
+    color: var(--app-primary-color)!important;
+}
+
+.bg-app-secondary {
+    background-color: var(--app-primary-color)!important;
+}
+
+.btn-hover:hover {
+    transition: .4s ease-in;
+    opacity: .8!important;
+}
+
 .bg-auth {
-    background-image: url('/static/img/bg4.jpg');
+    background-image: url('/static/img/bg5.jpg');
+    background-size: 100% 100%;
 }

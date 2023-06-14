@@ -8,18 +8,26 @@
 </head>
 </head>
 
-<body>
-    <main class="pt-5 bg-auth">
-        <div class="container pt-5">
-            <div class="d-flex flex-wrap align-items-center justify-content-between h-lg-50">
-                <img src="{% static 'img/logoifri.png' %}" class="lifri " alt="Logo de l'IFRI">
-                <div class="bg-light rounded-3 ">
+<body class="bg-auth">
+    <div class="container position-relative" style="height: 100vh;">
+        <div class="position-absolute w-100 top-sm-0" style="top: 10%">
+            <div class="row justify-content-center w-100">
+                <div class="col col-12 col-lg-7 px-4 text-center text-light mb-3">
+                    <div class="mx-auto" style="height: 250px; width: 300px;">
+                        <img src="{% static 'img/logo.svg' %}" alt="logo timetable" class="w-100 h-100">
+                    </div>
+                    <div class="mx-auto text-light">
+                        <h3 class="text-white fw-normal m-0"> Plateforme web de gestion et de suivi des emplois du temps
+                            à IFRI </h3>
+                    </div>
+                </div>
+                <div class="col col-12 col-lg-5 card shadow rounded">
                     {% block 'main' %}
                     {% endblock %}
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 </body>
 
 </html>
