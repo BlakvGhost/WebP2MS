@@ -9,6 +9,9 @@
     font-family: 'Montserrat' !important;
 }
 
+html, body {
+    overflow-x: hidden!important;
+}
 .text-app-secondary {
     color: var(--app-primary-color)!important;
 }
