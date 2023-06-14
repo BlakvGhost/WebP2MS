@@ -34,13 +34,52 @@
         delimiters: ['[[', ']]'],
         data() {
             return {
-                user: {}
+                user: {},
+                checking: 0,
+                errors: null,
+                success: null,
             }
         },
         methods: {
+            base: function (path) {
+                this.checking = 1;
+
+                axios.post(path, this.user).then(res => {
+
+                    if (res.status == 201) {
+                        this.success = res.data.success;
+                        return this.checking = false;
+                    }
+
+                    window.location.reload();
+                })
+                    .catch(err => {
+                        this.checking = 0;
+                        console.error(err);
+                        this.errors = err.response.data
+                    })
+            },
             login: function () {
-                
-            }
+                if (this.user.email && this.user.password) {
+                    this.base("{% url 'ajax.login' %}")
+                }
+                return this.errors = ["Veillez remplir tout les champs ci dessous"]
+            },
+            register: function () {
+                if (this.user.email && this.user.first_name && this.user.last_name && this.user.password) {
+                    if (this.user.password === this.user.confirm_password) {
+                        return this.base("{% url 'ajax.register' %}")
+                    }
+                    return this.errors = ["Vos deux mots de passe ne sont pas identiques"]
+                }
+                return this.errors = ["Veillez remplir tout les champs ci dessous"]
+            },
+            forgotPassword: function () {
+                if (this.user.email) {
+                    this.base("{% url 'ajax.password.forgot' %}")
+                }
+                return this.errors = ["Veillez saisi votre email"]
+            },
         },
         mounted() {
 

@@ -6,6 +6,7 @@
 <!-- Ecrivez le code ici -->
 <div class="text-center">
     <h1>Main Page</h1>
+    <h4 class="my-3">Welcome <span class="fw-bold">{{ user.first_name }} {{ user.last_name }}</span> </h4>
 
     <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
     <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>

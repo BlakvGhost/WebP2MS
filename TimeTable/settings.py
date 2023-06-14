@@ -124,6 +124,14 @@ MEDIA_ROOT = BASE_DIR / 'assets'
 AUTH_USER_MODEL = 'Auth.MyUser'
 LOGIN_URL = '/auth/login'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.kabirou-alassane.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'no-reply@kabirou-alassane.com'
+EMAIL_HOST_PASSWORD = 'jQ0yiv~!Y;&='
+EMAIL_USE_TLS = True
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

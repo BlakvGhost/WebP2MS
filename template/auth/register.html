@@ -10,29 +10,44 @@
         <h6 class="text-muted">Ceci est un compte étudiant, contactez l'administration pour un compte
             collaborateur/enseignant</h6>
     </div>
-    <form method="POST" class="my-2">
+    <form method="POST" class="my-2" @submit.prevent="register">
+        <div v-if="errors" class="alert alert-dismissible alert-danger text-center w-100 w-lg-75 mx-auto my-2" role="alert"
+            id="liveAlert">
+            <div class="msg-alert">
+                <p class="fw-bold" v-for="error in errors">
+                    [[ error ]]
+                </p>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         {% csrf_token %}
         <div class="form-group my-2">
-            <input name="first_name" id="first_name" type="text" placeholder="Votre Prénom" class="form-control">
+            <input v-model="user.first_name" name="first_name" id="first_name" type="text" placeholder="Votre Prénom" class="form-control">
         </div>
         <div class="form-group my-2">
-            <input name="last_name" id="last_name" type="text" placeholder="Votre Nom" class="form-control">
+            <input v-model="user.last_name" name="last_name" id="last_name" type="text" placeholder="Votre Nom" class="form-control">
         </div>
         <div class="form-group my-2">
-            <input name="email" id="email" type="email" placeholder="Email" class="form-control">
+            <input v-model="user.email" name="email" id="email" type="email" placeholder="Email" class="form-control">
         </div>
         <div class="form-group my-2">
-            <input name="password" id="password" type="password" placeholder="Mot de Passe" class="form-control">
+            <input v-model="user.password" name="password" id="password" type="password" placeholder="Mot de Passe" class="form-control">
         </div>
         <div class="form-group my-2">
-            <input name="confirm_password" id="password2" type="password" placeholder="Confirmer le Mot de Passe"
+            <input v-model="user.confirm_password" name="confirm_password" id="password2" type="password" placeholder="Confirmer le Mot de Passe"
                 class="form-control">
         </div>
         <div class="text-end my-2">
             <a href="{% url 'login' %}" class="text-decoration-none text-app-secondary">Vous avez déjà un compte?</a>
         </div>
         <div class="form-group my-2 text-center">
-            <button class="btn text-light shadow bg-app-secondary w-100 mx-2 fw-bold btn-hover">S'inscrire</button>
+            <button v-if="!checking" type="submit"
+                class="btn text-light shadow bg-app-secondary w-100 mx-2 fw-bold btn-hover">S'inscrire</button>
+            <button v-if="checking" class="btn btn-success bg-app-secondary border-0 w-100 mx-2 fw-bold" type="button"
+                disabled id="checkingBtn">
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Verification...
+            </button>
         </div>
         <div class="text-center my-4">
             <a href="javascript:void(0)" class="text-app-secondary text-decoration-none">&#128274;

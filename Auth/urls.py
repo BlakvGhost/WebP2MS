@@ -13,4 +13,6 @@ urlpatterns = [
     #Ajax routes
     
     path('ajax-login', views.ajax_login, name="ajax.login"),
+    path('ajax-register', views.ajax_register, name="ajax.register"),
+    path('ajax-password.forgot', views.ajax_forgot_password, name="ajax.password.forgot"),
 ]
