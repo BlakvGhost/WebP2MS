@@ -9,7 +9,7 @@
 </head>
 
 <body class="bg-auth">
-    <div class="container position-relative" style="height: 100vh;">
+    <div class="container position-relative" style="height: 100vh;" id="app">
         <div class="position-absolute w-100 top-sm-0" style="top: 10%">
             <div class="row justify-content-center w-100">
                 <div class="col col-12 col-lg-7 px-4 text-center text-light mb-3">
@@ -29,5 +29,23 @@
         </div>
     </div>
 </body>
+<script>
+    Vue.createApp({
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                user: {}
+            }
+        },
+        methods: {
+            login: function () {
+                
+            }
+        },
+        mounted() {
+
+        }
+    }).mount('#app')
+</script>
 
 </html>

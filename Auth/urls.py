@@ -8,4 +8,9 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('forgot-password', views.forgot_password, name='password.forgot'),
     path('new-password', views.new_password, name='password.new'),
+    path('logout', views.logout, name='logout'),
+    
+    #Ajax routes
+    
+    path('ajax-login', views.ajax_login, name="ajax.login"),
 ]
