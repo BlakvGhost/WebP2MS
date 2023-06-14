@@ -61,7 +61,7 @@
             },
             login: function () {
                 if (this.user.email && this.user.password) {
-                    this.base("{% url 'ajax.login' %}")
+                    return this.base("{% url 'ajax.login' %}")
                 }
                 return this.errors = ["Veillez remplir tout les champs ci dessous"]
             },
@@ -76,7 +76,7 @@
             },
             forgotPassword: function () {
                 if (this.user.email) {
-                    this.base("{% url 'ajax.password.forgot' %}")
+                    return this.base("{% url 'ajax.password.forgot' %}")
                 }
                 return this.errors = ["Veillez saisi votre email"]
             },
