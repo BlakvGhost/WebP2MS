@@ -120,15 +120,10 @@ def ajax_forgot_password(request):
             try:
                 user = User.objects.get(email=email)
                 
-                new_password = User.objects.make_random_password()
-                
-                user.set_password(new_password)
-                user.save()
-                
                 if send_html_email(
                     'Réinitialisation de votre mot de passe',
                     'mails/forgot-password.html',
-                    {'password': new_password},
+                    {'to': user},
                     [email]
                 ): 
                 

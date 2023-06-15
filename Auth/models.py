@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django.utils import timezone
+
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -22,6 +24,12 @@ class MyUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
+    def is_reset_token_valid(self, user, token):
+        return user.reset_token == token
+
+    def is_reset_token_expired(self, user):
+        return user.reset_token_expiration is not None and user.reset_token_expiration < timezone.now()
+
 
 class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
@@ -29,6 +37,9 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=50, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    created_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    reset_token = models.CharField(max_length=255, null=True, blank=True)
+    reset_token_expiration = models.DateTimeField(null=True, blank=True)
 
     USERNAME_FIELD = 'email'
 
