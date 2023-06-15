@@ -75,33 +75,37 @@ def ajax_login(request):
 def ajax_register(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        
+
         email = data.get('email')
         first_name = data.get('first_name')
         last_name = data.get('last_name')
         password = data.get('password')
         password_confirm = data.get('confirm_password')
-        
+
         if email and password and first_name and last_name:
             if password == password_confirm:
-                
-                user = User.objects.create_user(email=email, password=password)
-                user.first_name = first_name
-                user.last_name = last_name
-                user.save()
-                
-                user = authenticate(request, email=email, password=password)
-                if user is not None:
-                    user_login(request, user)
-                    return JsonResponse({'success': 'User registered and logged in successfully'})
-                else:
-                    return JsonResponse({'error': 'Email or password incorrect'}, status=401)
+                try:
+                    user = User.objects.get(email=email)
+                    return JsonResponse({'error': 'User with this email already exists'}, status=400)
+                except User.DoesNotExist:
+                    user = User.objects.create_user(email=email, password=password)
+                    user.first_name = first_name
+                    user.last_name = last_name
+                    user.save()
+
+                    user = authenticate(request, email=email, password=password)
+                    if user is not None:
+                        user_login(request, user)
+                        return JsonResponse({'success': 'User registered and logged in successfully'})
+                    else:
+                        return JsonResponse({'error': 'Email or password incorrect'}, status=401)
             else:
                 return JsonResponse({'error': 'Passwords do not match'}, status=400)
         else:
             return JsonResponse({'error': 'Missing email, password, first name, or last name'}, status=400)
     else:
         return JsonResponse({'error': 'Invalid HTTP method'}, status=400)
+
 
 
 @csrf_exempt
