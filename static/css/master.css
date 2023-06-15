@@ -30,3 +30,23 @@ html, body {
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+/*header css*/
+.drop{
+    
+    display:flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+.img{
+    width: 25px;
+}
+.DIV{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
