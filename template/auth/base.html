@@ -80,6 +80,16 @@
                 }
                 return this.error = "Veillez saisi votre email"
             },
+            newPassword: function () {
+                this.user.token = "{{ token }}"
+                if (this.user.password && this.user.token) {
+                    if (this.user.password === this.user.confirm_password) {
+                        return this.base("{% url 'ajax.password.new' %}")
+                    }
+                    return this.error = "Vos deux mots de passe ne sont pas identiques"
+                }
+                return this.error = "Veillez saisi un nouveau mot de passe valide"
+            },
         },
         mounted() {
 

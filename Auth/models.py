@@ -20,7 +20,8 @@ class MyUserManager(BaseUserManager):
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Le superutilisateur doit avoir is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Le superutilisateur doit avoir is_superuser=True.')
+            raise ValueError(
+                'Le superutilisateur doit avoir is_superuser=True.')
 
         return self.create_user(email, password, **extra_fields)
 
@@ -44,3 +45,9 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     objects = MyUserManager()
+
+    def is_reset_token_valid(self, token):
+        return self.reset_token == token
+
+    def is_reset_token_expired(self):
+        return self.reset_token_expiration is not None and self.reset_token_expiration < timezone.now()
