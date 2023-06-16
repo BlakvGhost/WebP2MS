@@ -29,7 +29,7 @@
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
                 data-kt-menu="true" data-kt-menu-expand="false">
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="dashboard">
+                    <a href="{% url 'default' %}">
                         <span class="menu-link" data-jma-link="default">
                             <span class="svg-icon menu-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -48,7 +48,7 @@
                     </a>
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="dashboard/projects">
+                    <a href="{% url 'shedules' %}">
                         <span class="menu-link" data-jma-link="project">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
@@ -89,7 +89,7 @@
                     </a>
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="dashboard/files">
+                    <a href="{% url 'courses' %}">
                         <span class="menu-link" data-jma-link="files">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
@@ -110,7 +110,7 @@
                     </a>
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="dashboard/tasks">
+                    <a href="{% url 'classrooms' %}">
                         <span class="menu-link" data-jma-link="task">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
@@ -127,7 +127,7 @@
                     </a>
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="dashboard">
+                    <a href="{% url 'helps' %}">
                         <span class="menu-link">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
