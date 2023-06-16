@@ -42038,7 +42038,7 @@ code:not([class*=language-]) {
   display: block;
   height: 2.15rem;
   width: 2.15rem;
-  color: var(--bs-text-primary)!important;
+  color: var(--bs-text-primary);
 }
 .svg-icon.svg-icon-white {
   color: var(--bs-text-white);
