@@ -7,7 +7,7 @@ def send_html_email(subject, template_name, context, recipient_list):
     html_message = render_to_string(template_name, context)
     plain_message = strip_tags(html_message)
     
-    from_email = 'IFRI TIMETABLE <no-reply@kabirou-alassane.com>'
+    from_email = 'WebP2MS - IFRI <no-reply@kabirou-alassane.com>'
     
     email = EmailMultiAlternatives(subject, plain_message, from_email, recipient_list)
     email.attach_alternative(html_message, "text/html")

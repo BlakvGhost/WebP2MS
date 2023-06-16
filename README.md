@@ -1,8 +1,7 @@
 
-# PIL1_2223_34
+# WebP2MS
 
-Ce projet est une application web de gestion des emplois du temps pour
-un établissement d’enseignement supérieur, notamment l’IFRI.
+WebP2MS (Web Platform for Managing and Monitoring Schedules) est une application web de gestion des emplois du temps pour le compte de l’IFRI.
 
 ## Fonctionnalités
 
