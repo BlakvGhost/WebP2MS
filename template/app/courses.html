@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Les Enseignants {% endblock %}
+
+{% block 'main' %}
+<!-- Ecrivez le code ici -->
+<div class="text-center">
+    <h1>Les Enseignants</h1>
+    <h4 class="my-3">Welcome <span class="fw-bold">{{ user.first_name }} {{ user.last_name }}</span> </h4>
+
+    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+    <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+    <a href="{% url 'password.forgot' %}" class="btn btn-warning">Forgot Password</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+</div>
+
+{% endblock %}

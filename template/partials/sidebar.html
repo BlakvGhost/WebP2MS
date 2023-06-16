@@ -1,43 +1,166 @@
-<div>
-    <button class="btn btn-light rounded-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-      <i class="mdi mdi-chevron-double-right text-primary fs-5"></i>
-    </button>
-    <div class="offcanvas offcanvas-start bg-secondary show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel" style="width: auto;" >
-        <div class="offcanvas-header bg-dark">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img src="/static/img/logo.svg" alt="logo WebP2MS" class="w-100 h-100"></h5>
-            <button type="button" class="text-reset bg-white btn-outline-light rounded-3" data-bs-dismiss="offcanvas" aria-label="Close">
-                <i class="mdi mdi-chevron-double-right mdi-rotate-180 text-primary bg-white fs-5"></i> 
-            </button>
+<div id="kt_app_sidebar" class="app-sidebar flex-column bg-jma" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
+    data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
+    data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
+    <div class="app-sidebar-logo px-6 justify-content-center bg-dark" id="kt_app_sidebar_logo">
+        <a href="dashboard" class="align-center">
+            <img alt="Logo" src="/static/favicon.ico" class="h-30px app-sidebar-logo-default" />
+        </a>
+        <div id="kt_app_sidebar_toggle"
+            class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 end-0 translate-middle rotate"
+            data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+            data-kt-toggle-name="app-sidebar-minimize">
+            <span class="svg-icon svg-icon-2 rotate-180">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.5"
+                        d="M14.2657 11.4343L18.45 7.25C18.8642 6.83579 18.8642 6.16421 18.45 5.75C18.0358 5.33579 17.3642 5.33579 16.95 5.75L11.4071 11.2929C11.0166 11.6834 11.0166 12.3166 11.4071 12.7071L16.95 18.25C17.3642 18.6642 18.0358 18.6642 18.45 18.25C18.8642 17.8358 18.8642 17.1642 18.45 16.75L14.2657 12.5657C13.9533 12.2533 13.9533 11.7467 14.2657 11.4343Z"
+                        fill="currentColor" />
+                    <path
+                        d="M8.2657 11.4343L12.45 7.25C12.8642 6.83579 12.8642 6.16421 12.45 5.75C12.0358 5.33579 11.3642 5.33579 10.95 5.75L5.40712 11.2929C5.01659 11.6834 5.01659 12.3166 5.40712 12.7071L10.95 18.25C11.3642 18.6642 12.0358 18.6642 12.45 18.25C12.8642 17.8358 12.8642 17.1642 12.45 16.75L8.2657 12.5657C7.95328 12.2533 7.95328 11.7467 8.2657 11.4343Z"
+                        fill="currentColor" />
+                </svg>
+            </span>
         </div>
-        <div class="offcanvas-body d-flex flex-column">
-            <div class="row m-2">
-                <a href="" class="text-light fw-bold text-decoration-none">
-                    <i class="mdi mdi-view-grid-plus-outline text-white fs-3 "></i>
-                    <span class="col-8 fs-5 mx-3 mb-3 center">Tableau de bord</span></a>
-            </div>
-            <div class="row m-2">
-                <a href="" class="text-light fw-bold text-decoration-none">
-                    <i class="mdi mdi-format-list-checks text-white fs-3 "></i>
-                    <span class="col-9 fs-5 m-3">Cours</span> </a>
-            </div>
-            <div class="row m-2">
-                <a href="" class="text-light fw-bold text-decoration-none">
-                    <i class="mdi mdi-account-tie text-white fs-3 "></i>
-                    <span class="col-9 fs-5 m-3">Enseignants</span> </a>
-            </div>
-            <div class="row m-2">
-                <a href="" class="text-light fw-bold text-decoration-none">
-                    <i class="mdi mdi-file-check text-white fs-3 "></i>
-                    <span class="col-9 fs-5 m-3">Fichiers</span> </a>
-            </div>
-            <div class="row m-2">
-                <a href="" class="text-light fw-bold text-decoration-none ">
-                    <i class="mdi mdi-progress-question text-white fs-3 "></i>
-                    <span class="col-9 fs-5 m-3">Aide</span> </a>
+    </div>
+    <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+        <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5"
+            data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto"
+            data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+            data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
+            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
+                data-kt-menu="true" data-kt-menu-expand="false">
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="dashboard">
+                        <span class="menu-link" data-jma-link="default">
+                            <span class="svg-icon menu-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
+                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor">
+                                    </rect>
+                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor">
+                                    </rect>
+                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor">
+                                    </rect>
+                                </svg>
+                            </span>
+                            <span class="menu-title fw-bold ms-2">Tableau de Bord</span>
+                        </span>
+                    </a>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="dashboard/projects">
+                        <span class="menu-link" data-jma-link="project">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z"
+                                            fill="currentColor"></path>
+                                        <path opacity="0.3"
+                                            d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="menu-title fw-bold ms-2">Emplois du Temps</span>
+                        </span>
+                    </a>
+                </div>
+                <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                    class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention">
+                    <a href="{% url 'teachers' %}">
+                        <span class="menu-link" data-jma-link="ticket">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M13 5.91517C15.8 6.41517 18 8.81519 18 11.8152C18 12.5152 17.9 13.2152 17.6 13.9152L20.1 15.3152C20.6 15.6152 21.4 15.4152 21.6 14.8152C21.9 13.9152 22.1 12.9152 22.1 11.8152C22.1 7.01519 18.8 3.11521 14.3 2.01521C13.7 1.91521 13.1 2.31521 13.1 3.01521V5.91517H13Z"
+                                            fill="currentColor"></path>
+                                        <path opacity="0.3"
+                                            d="M19.1 17.0152C19.7 17.3152 19.8 18.1152 19.3 18.5152C17.5 20.5152 14.9 21.7152 12 21.7152C9.1 21.7152 6.50001 20.5152 4.70001 18.5152C4.30001 18.0152 4.39999 17.3152 4.89999 17.0152L7.39999 15.6152C8.49999 16.9152 10.2 17.8152 12 17.8152C13.8 17.8152 15.5 17.0152 16.6 15.6152L19.1 17.0152ZM6.39999 13.9151C6.19999 13.2151 6 12.5152 6 11.8152C6 8.81517 8.2 6.41515 11 5.91515V3.01519C11 2.41519 10.4 1.91519 9.79999 2.01519C5.29999 3.01519 2 7.01517 2 11.8152C2 12.8152 2.2 13.8152 2.5 14.8152C2.7 15.4152 3.4 15.7152 4 15.3152L6.39999 13.9151Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="menu-title fw-bold ms-2">Les Enseignants</span>
+                        </span>
+                    </a>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="dashboard/files">
+                        <span class="menu-link" data-jma-link="files">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3"
+                                            d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z"
+                                            fill="currentColor"></path>
+                                        <path d="M20 8L14 2V6C14 7.10457 14.8954 8 16 8H20Z" fill="currentColor"></path>
+                                        <path
+                                            d="M10.3629 14.0084L8.92108 12.6429C8.57518 12.3153 8.03352 12.3153 7.68761 12.6429C7.31405 12.9967 7.31405 13.5915 7.68761 13.9453L10.2254 16.3488C10.6111 16.714 11.215 16.714 11.6007 16.3488L16.3124 11.8865C16.6859 11.5327 16.6859 10.9379 16.3124 10.5841C15.9665 10.2565 15.4248 10.2565 15.0789 10.5841L11.4631 14.0084C11.1546 14.3006 10.6715 14.3006 10.3629 14.0084Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="menu-title fw-bold ms-2">Les Cours</span>
+                        </span>
+                    </a>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="dashboard/tasks">
+                        <span class="menu-link" data-jma-link="task">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-check-square icon">
+                                        <polyline points="9 11 12 14 22 4"></polyline>
+                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="menu-title fw-bold ms-2">Les Salles</span>
+                        </span>
+                    </a>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="dashboard">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path fill="currentColor"
+                                            d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" />
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="menu-title fw-bold ms-2">Aides</span>
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="offcanvas-footer text-light fw-bold row p-4">
-            <span class="col-6 offset-4">©IFRI</span>
-        </div>
+    </div>
+    <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="kt_app_sidebar_footer">
+        <a href="javascript:void(0)"
+            class="btn btn-flex flex-center text-light bg-dark overflow-hidden text-nowrap px-0 h-40px w-100"
+            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" title="PMP WebP2MS 1.1">
+            <span class="btn-label">&copy; 2023 WebP2MS V1.1</span>
+            <span class="svg-icon btn-icon svg-icon-2 m-0 d-none">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.3"
+                        d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM12.5 18C12.5 17.4 12.6 17.5 12 17.5H8.5C7.9 17.5 8 17.4 8 18C8 18.6 7.9 18.5 8.5 18.5L12 18C12.6 18 12.5 18.6 12.5 18ZM16.5 13C16.5 12.4 16.6 12.5 16 12.5H8.5C7.9 12.5 8 12.4 8 13C8 13.6 7.9 13.5 8.5 13.5H15.5C16.1 13.5 16.5 13.6 16.5 13ZM12.5 8C12.5 7.4 12.6 7.5 12 7.5H8C7.4 7.5 7.5 7.4 7.5 8C7.5 8.6 7.4 8.5 8 8.5H12C12.6 8.5 12.5 8.6 12.5 8Z"
+                        fill="currentColor" />
+                    <rect x="7" y="17" width="6" height="2" rx="1" fill="currentColor" />
+                    <rect x="7" y="12" width="10" height="2" rx="1" fill="currentColor" />
+                    <rect x="7" y="7" width="6" height="2" rx="1" fill="currentColor" />
+                    <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="currentColor" />
+                </svg>
+            </span>
+        </a>
     </div>
 </div>

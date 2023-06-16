@@ -2,27 +2,30 @@
 @import url('/static/vendor/Montserrat/Montserrat-Italic-VariableFont_wght.ttf');
 
 :root {
-    --app-primary-color: #2e4053
+    --app-primary-color: #2e4053;
+    --jma-primary-color: #2e4053
 }
 
 *:not(.fa, .fas, .fad) {
-    font-family: 'Montserrat' !important;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
-html, body {
-    overflow-x: hidden!important;
+html,
+body {
+    overflow-x: hidden !important;
 }
+
 .text-app-secondary {
-    color: var(--app-primary-color)!important;
+    color: var(--app-primary-color) !important;
 }
 
 .bg-app-secondary {
-    background-color: var(--app-primary-color)!important;
+    background-color: var(--app-primary-color) !important;
 }
 
 .btn-hover:hover {
     transition: .4s ease-in;
-    opacity: .8!important;
+    opacity: .8 !important;
 }
 
 .bg-auth {
@@ -31,7 +34,39 @@ html, body {
     background-repeat: no-repeat;
 }
 
-.offcanvas-body .row a:hover{
-    background-color: rgb(3, 3, 57);
-    border-radius: 10%;
+.text-jma {
+    color: var(--jma-primary-color) !important;
+}
+
+.bg-jma {
+    background-color: var(--jma-primary-color) !important;
+}
+
+.app-sidebar-menu .menu-item .menu-link:hover,
+.menu-active {
+    background-color: var(--bs-text-dark);
+    transition: .5s all;
+    color: white;
+}
+
+.app-sidebar-menu .menu-item .menu-link:hover svg,
+.menu-active svg {
+    color: var(--bs-text-primary) !important;
+    transition: .5s ease-in-out all;
+}
+
+.app-sidebar-menu svg {
+    color: var(--bs-text-light) !important;
+}
+
+.svg-light svg {
+    color: var(--bs-text-light) !important;
+}
+
+#kt_app_content_container #menuCardTop svg {
+    color: var(--bs-text-light) !important;
+}
+
+.nav-active .active svg {
+    color: var(--jma-primary-color) !important;
 }
