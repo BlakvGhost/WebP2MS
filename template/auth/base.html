@@ -80,7 +80,7 @@
                 if (this.user.email) {
                     return this.base("{% url 'ajax.password.forgot' %}")
                 }
-                return this.error = "Veuillez saisi votre email"
+                return this.error = "Veuillez saisir votre email"
             },
             newPassword: function () {
                 this.user.token = "{{ token }}"
@@ -90,7 +90,7 @@
                     }
                     return this.error = "Vos deux mots de passe ne sont pas identiques"
                 }
-                return this.error = "Veuillez saisi un nouveau mot de passe valide"
+                return this.error = "Veuillez saisir un nouveau mot de passe valide"
             },
         },
         mounted() {
