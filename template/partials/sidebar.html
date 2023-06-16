@@ -1,3 +1,43 @@
-<div class="text-center border p-3">
-    <h4>Sidebar Component</h4>
+<div>
+    <button class="btn btn-light rounded-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+      <i class="mdi mdi-chevron-double-right text-primary fs-5"></i>
+    </button>
+    <div class="offcanvas offcanvas-start bg-secondary show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel" style="width: auto;" >
+        <div class="offcanvas-header bg-dark">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img src="/static/img/logo.svg" alt="logo WebP2MS" class="w-100 h-100"></h5>
+            <button type="button" class="text-reset bg-white btn-outline-light rounded-3" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="mdi mdi-chevron-double-right mdi-rotate-180 text-primary bg-white fs-5"></i> 
+            </button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column">
+            <div class="row m-2">
+                <a href="" class="text-light fw-bold text-decoration-none">
+                    <i class="mdi mdi-view-grid-plus-outline text-white fs-3 "></i>
+                    <span class="col-8 fs-5 mx-3 mb-3 center">Tableau de bord</span></a>
+            </div>
+            <div class="row m-2">
+                <a href="" class="text-light fw-bold text-decoration-none">
+                    <i class="mdi mdi-format-list-checks text-white fs-3 "></i>
+                    <span class="col-9 fs-5 m-3">Cours</span> </a>
+            </div>
+            <div class="row m-2">
+                <a href="" class="text-light fw-bold text-decoration-none">
+                    <i class="mdi mdi-account-tie text-white fs-3 "></i>
+                    <span class="col-9 fs-5 m-3">Enseignants</span> </a>
+            </div>
+            <div class="row m-2">
+                <a href="" class="text-light fw-bold text-decoration-none">
+                    <i class="mdi mdi-file-check text-white fs-3 "></i>
+                    <span class="col-9 fs-5 m-3">Fichiers</span> </a>
+            </div>
+            <div class="row m-2">
+                <a href="" class="text-light fw-bold text-decoration-none ">
+                    <i class="mdi mdi-progress-question text-white fs-3 "></i>
+                    <span class="col-9 fs-5 m-3">Aide</span> </a>
+            </div>
+        </div>
+        <div class="offcanvas-footer text-light fw-bold row p-4">
+            <span class="col-6 offset-4">©IFRI</span>
+        </div>
+    </div>
 </div>
