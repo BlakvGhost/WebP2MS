@@ -26,35 +26,37 @@
                 data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true"
                 data-kt-swapper-mode="{default: 'append', lg: 'prepend'}"
                 data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
-
-            </div>
-            <div class="app-navbar flex-shrink-0">
-                <div class="app-navbar-item align-items-stretch ms-1 ms-md-3">
-                    <div id="kt_header_search_t" class="header-search d-flex align-items-stretch">
-                        <div class="d-flex align-items-center" data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                            data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                            <div
-                                class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px">
-                                <span class="svg-icon svg-icon-2 svg-icon-md-1">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                            <path
-                                                d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
-                                                fill="currentColor" fill-rule="nonzero" opacity="0.3"></path>
-                                            <path
-                                                d="M11,14 L9,14 C8.44771525,14 8,13.5522847 8,13 C8,12.4477153 8.44771525,12 9,12 L11,12 L11,10 C11,9.44771525 11.4477153,9 12,9 C12.5522847,9 13,9.44771525 13,10 L13,12 L15,12 C15.5522847,12 16,12.4477153 16,13 C16,13.5522847 15.5522847,14 15,14 L13,14 L13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,14 Z"
-                                                fill="currentColor"></path>
-                                        </g>
-                                    </svg>
-                                </span>
-                                <span class="pulse-ring"></span>
-                            </div>
-                        </div>
-                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0" data-kt-menu="true">
+                <!--begin::Menu-->
+                <div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0"
+                    id="kt_app_header_menu" data-kt-menu="true">
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
+                        class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
+                        <!--begin:Menu link-->
+                        <span class="menu-link">
+                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Actions Rapides"
+                                class="svg-icon svg-icon-2 svg-icon-md-1">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                        <path
+                                            d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                            fill="currentColor" fill-rule="nonzero" opacity="0.3"></path>
+                                        <path
+                                            d="M11,14 L9,14 C8.44771525,14 8,13.5522847 8,13 C8,12.4477153 8.44771525,12 9,12 L11,12 L11,10 C11,9.44771525 11.4477153,9 12,9 C12.5522847,9 13,9.44771525 13,10 L13,12 L15,12 C15.5522847,12 16,12.4477153 16,13 C16,13.5522847 15.5522847,14 15,14 L13,14 L13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,14 Z"
+                                            fill="currentColor"></path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="pulse-ring"></span>
+                        </span>
+                        <!--begin:Menu sub-->
+                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0">
+                            <!--begin:Pages menu-->
                             <div class="menu-active-bg px-4 px-lg-0">
-                                <div class="menu-item px-2 my-2">
+                                <h3 class="menu-item px-5 my-4">Actions Rapide</h3>
+                                <div class="menu-item px-5 my-2">
                                     <a href="javascript:void(0)" class="menu-link px-5" data-bs-toggle="modal"
                                         data-bs-target="#kt_modal_create_app">
                                         <span class="svg-icon svg-icon-2 mx-2">
@@ -70,11 +72,16 @@
                                         </span>
                                         Creer un Empoi du temps
                                     </a>
-                                </div>
+                                </div>                                
                             </div>
+                            <!--end:Pages menu-->
                         </div>
+                        <!--end:Menu sub-->
                     </div>
                 </div>
+                <!--end::Menu-->
+            </div>
+            <div class="app-navbar flex-shrink-0">
                 <div class="app-navbar-item ms-1 ms-md-3">
                     <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px"
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
