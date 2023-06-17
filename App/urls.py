@@ -11,5 +11,5 @@ urlpatterns = [
     
     #Ajax routes
     
-    path('ajax-delete-user', views.ajax_delete_user, name='ajax.user.delete'),
+    path('ajax-delete', views.ajax_delete, name='ajax.user.delete'),
 ]

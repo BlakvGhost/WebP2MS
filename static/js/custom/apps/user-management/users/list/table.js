@@ -85,6 +85,7 @@ var KTUsersList = function () {
         });
     }
 
+    var desc;
 
     // Delete subscirption
     var handleDeleteRows = () => {
@@ -101,10 +102,15 @@ var KTUsersList = function () {
 
                 const user_id = parent.dataset.userId;
 
+                const model = parent.dataset.model;
+
                 const route_for_del = parent.dataset.route;
 
+                desc = parent.dataset.desc;
+
+                const userName = parent.dataset.name;
+
                 // Get user name
-                const userName = parent.querySelectorAll('td')[1].querySelectorAll('a')[1].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
@@ -130,7 +136,8 @@ var KTUsersList = function () {
                             }
                         }).then(function () {
                             axios.post(route_for_del, {
-                                user_id: user_id
+                                object_id: user_id,
+                                model: model
                             }).then(res => {
                                 datatable.row($(parent)).remove().draw();
                             })
@@ -181,7 +188,7 @@ var KTUsersList = function () {
         deleteSelected.addEventListener('click', function () {
             // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
             Swal.fire({
-                text: "Voulez-vous vraiment supprimer les enseignants/collaborateurs sélectionnés ?",
+                text: "Voulez-vous vraiment supprimer les " + desc + " sélectionnés ?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
@@ -194,7 +201,7 @@ var KTUsersList = function () {
             }).then(function (result) {
                 if (result.value) {
                     Swal.fire({
-                        text: "Vous avez supprimé tous les enseignants/collaborateurs sélectionnés !.",
+                        text: "Vous avez supprimé tous les " + desc + " sélectionnés !.",
                         icon: "success",
                         buttonsStyling: false,
                         confirmButtonText: "D'accord, j'ai compris !",
@@ -218,7 +225,7 @@ var KTUsersList = function () {
                     });
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: "Les enseignants/collaborateurs sélectionnés n'ont pas été supprimés.",
+                        text: "Les " + desc + " sélectionnés n'ont pas été supprimés.",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "D'accord, j'ai compris !",

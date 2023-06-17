@@ -12,7 +12,7 @@ from django.db.models import Q
 from django.core.files.storage import default_storage
 from django.urls import reverse
 from Auth.mail import send_html_email
-from Auth.views import anonymous_required
+from . import models
 
 
 User = get_user_model()
@@ -58,13 +58,13 @@ def teachers(request):
 
             if not exist:
                 created_by = User.objects.get(id=request.user.id)
-                
+
                 token = secrets.token_urlsafe(32)
                 reset_link = request.build_absolute_uri(
                     reverse('password.new', args=[token]))
 
                 expire_at = 2
-                
+
                 user = {
                     'first_name': first_name,
                     'last_name': last_name
@@ -76,7 +76,7 @@ def teachers(request):
                     {'to': user, 'reset_link': reset_link, 'expire': expire_at},
                     [email]
                 ):
-                
+
                     User.objects.create(
                         email=email,
                         first_name=first_name,
@@ -86,7 +86,7 @@ def teachers(request):
                         created_by=created_by,
                         avatar=file_path if avatar else None,
                         reset_token=token,
-                        reset_token_expiration = timezone.now() + timedelta(hours=expire_at)
+                        reset_token_expiration=timezone.now() + timedelta(hours=expire_at)
                     )
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
@@ -143,7 +143,51 @@ def cours(request):
 @login_required
 def salles(request):
 
-    context = {}
+    errors, exist = [], False
+
+    if request.method == 'POST':
+        slug = request.POST.get('slug')
+        capacity = request.POST.get('capacity')
+        _method = request.POST.get('method')
+
+        if _method == 'POST':
+
+            if slug and capacity:
+                if models.Classrooms.objects.filter(slug=slug).exists():
+                    exist = True
+                    errors.append("Une classe existe déjà avec cet slug")
+            else:
+                errors.append("Veuillez remplir tous les champs obligatoires")
+
+            if not exist:
+                created_by = User.objects.get(id=request.user.id)
+
+                models.Classrooms.objects.create(
+                    slug=slug,
+                    capacity=capacity,
+                    created_by=created_by
+                )
+
+        elif _method in ['PUT', 'PATCH', 'UPDATE']:
+            object_id = request.POST.get('object_id')
+            classroom = models.Classrooms.objects.get(id=object_id)
+
+            slug = request.POST.get('slug')
+            capacity = request.POST.get('capacity')
+
+            if slug and capacity:
+
+                classroom.slug = slug
+                classroom.capacity = capacity
+                classroom.save()
+
+        else:
+            errors.append("Veuillez remplir tous les champs obligatoires")
+
+    context = {
+        'classrooms': models.Classrooms.objects.all(),
+        'errors': errors
+    }
 
     return render(request, 'app/classrooms.html', context)
 
@@ -163,21 +207,29 @@ def aides(request):
 
     return render(request, 'app/helps.html', context)
 
+
 @csrf_exempt
 @login_required
-def ajax_delete_user(request):
+def ajax_delete(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        user_id = data.get('user_id')
+        object_id = data.get('object_id')
+        model = data.get('model')
 
-        if user_id:
+        if object_id:
+            if model == 'users':
+                objects = User
+            elif model == 'classrooms':
+                objects = models.Classrooms
+            else:
+                return False
             try:
-                user = User.objects.get(id=user_id)
-                user.delete()
-                return JsonResponse({'success': 'User deleted successfully'})
+                objects = objects.objects.get(id=object_id)
+                objects.delete()
+                return JsonResponse({'success': 'Object deleted successfully'})
             except User.DoesNotExist:
-                return JsonResponse({'error': 'User not found'}, status=400)
+                return JsonResponse({'error': 'Object not found'}, status=400)
         else:
-            return JsonResponse({'error': 'Missing user_id'}, status=400)
+            return JsonResponse({'error': 'Missing object_id'}, status=400)
     else:
         return JsonResponse({'error': 'Invalid HTTP method'}, status=400)
