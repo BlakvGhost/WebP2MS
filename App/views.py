@@ -135,7 +135,50 @@ def teachers(request):
 @login_required
 def cours(request):
 
-    context = {}
+    errors, exist = [], False
+
+    if request.method == 'POST':
+        slug = request.POST.get('slug')
+        code = request.POST.get('code')
+        level = request.POST.get('level')
+        level = request.POST.get('level')
+        _method = request.POST.get('method')
+
+        if _method == 'POST':
+
+            if slug:
+                if models.Levels.objects.filter(slug=slug).exists():
+                    exist = True
+                    errors.append("Une classe existe déjà avec cet slug")
+            else:
+                errors.append("Veuillez remplir tous les champs obligatoires")
+
+            if not exist:
+                created_by = User.objects.get(id=request.user.id)
+
+                models.Levels.objects.create(
+                    slug=slug,
+                    created_by=created_by
+                )
+
+        elif _method in ['PUT', 'PATCH', 'UPDATE']:
+            object_id = request.POST.get('object_id')
+            classroom = models.Levels.objects.get(id=object_id)
+
+            slug = request.POST.get('slug')
+
+            if slug:
+
+                classroom.slug = slug
+                classroom.save()
+
+        else:
+            errors.append("Veuillez remplir tous les champs obligatoires")
+
+    context = {
+        'levels': models.Levels.objects.all(),
+        'errors': errors
+    }
 
     return render(request, 'app/courses.html', context)
 
@@ -193,6 +236,54 @@ def salles(request):
 
 
 @login_required
+def levels(request):
+
+    errors, exist = [], False
+
+    if request.method == 'POST':
+        slug = request.POST.get('slug')
+        _method = request.POST.get('method')
+
+        if _method == 'POST':
+
+            if slug:
+                if models.Levels.objects.filter(slug=slug).exists():
+                    exist = True
+                    errors.append("Une classe existe déjà avec cet slug")
+            else:
+                errors.append("Veuillez remplir tous les champs obligatoires")
+
+            if not exist:
+                created_by = User.objects.get(id=request.user.id)
+
+                models.Levels.objects.create(
+                    slug=slug,
+                    created_by=created_by
+                )
+
+        elif _method in ['PUT', 'PATCH', 'UPDATE']:
+            object_id = request.POST.get('object_id')
+            classroom = models.Levels.objects.get(id=object_id)
+
+            slug = request.POST.get('slug')
+
+            if slug:
+
+                classroom.slug = slug
+                classroom.save()
+
+        else:
+            errors.append("Veuillez remplir tous les champs obligatoires")
+
+    context = {
+        'levels': models.Levels.objects.all(),
+        'errors': errors
+    }
+
+    return render(request, 'app/levels.html', context)
+
+
+@login_required
 def shedules(request):
 
     context = {}
@@ -221,6 +312,8 @@ def ajax_delete(request):
                 objects = User
             elif model == 'classrooms':
                 objects = models.Classrooms
+            elif model == 'levels':
+                objects = models.Levels
             else:
                 return False
             try:

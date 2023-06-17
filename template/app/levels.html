@@ -7,7 +7,7 @@
 <script src="/static/js/custom/apps/user-management/users/list/add.js"></script>
 {% endblock %}
 
-{% block 'title' %} Les Matieres {% endblock %}
+{% block 'title' %} Les Niveaux {% endblock %}
 
 {% block 'main' %}
 <div class="d-flex flex-column flex-column-fluid">
@@ -15,7 +15,7 @@
         <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                    Les Matières
+                    Les Niveaux
                 </h1>
             </div>
         </div>
@@ -55,19 +55,18 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                            <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
-                                data-kt-menu-placement="bottom-end">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                                <span class="svg-icon svg-icon-2">
+                            <button type="button" class="btn btn-primary text-center" data-bs-toggle="modal"
+                                data-bs-target="#kt_modal_add_user">
+                                <span class="svg-icon svg-icon-2 svg-light">
                                     <svg class="m-auto" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
-                                            fill="currentColor" />
+                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                                            transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->Filtrer</button>
-                            <!--begin::Menu 1-->
+                                Ajouter
+                            </button>
                             <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
                                 <!--begin::Header-->
                                 <div class="px-7 py-5">
@@ -106,20 +105,6 @@
                                 </div>
                                 <!--end::Content-->
                             </div>
-                            <!--end::Menu 1-->
-                            <!--end::Filter-->
-                            <button type="button" class="btn btn-primary text-center" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_add_user">
-                                <span class="svg-icon svg-icon-2 svg-light">
-                                    <svg class="m-auto" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
-                                            transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                Ajouter
-                            </button>
                         </div>
                         <div class="d-flex justify-content-end align-items-center d-none"
                             data-kt-user-table-toolbar="selected">
@@ -134,7 +119,7 @@
                         <div class="modal-dialog modal-dialog-centered mw-650px">
                             <div class="modal-content">
                                 <div class="modal-header" id="kt_modal_add_user_header">
-                                    <h2 class="fw-bold">Ajouter une salle de classe</h2>
+                                    <h2 class="fw-bold">Ajouter un niveau</h2>
                                     <div class="btn btn-icon btn-sm btn-active-icon-primary"
                                         data-kt-users-modal-action="close">
                                         <span class="svg-icon svg-icon-1">
@@ -169,49 +154,9 @@
                                                 <!--begin::Input-->
                                                 <input type="text" name="slug"
                                                     class="form-control form-control-solid mb-3 mb-lg-0"
-                                                    placeholder="Ex: Anglais" />
+                                                    placeholder="Ex: Licence 1" />
                                                 <!--end::Input-->
                                             </div>
-
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="fw-semibold fs-6 mb-2">Identifiant de la matière: </label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="text" name="code"
-                                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                                    placeholder="Ex: 1AK34" />
-                                                <!--end::Input-->
-                                            </div>
-
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="required fw-semibold fs-6 mb-2">Associée à quelle niveau?:
-                                                </label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <select name="level" id="" class="form-select form-select-solid">
-                                                    {% for level in levels %}
-                                                    <option value="{{ level.id }}"> {{ level.slug }} </option>
-                                                    {% endfor %}
-                                                </select>
-                                                <!--end::Input-->
-                                            </div>
-
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="required fw-semibold fs-6 mb-2">Nombre total d'heure:
-                                                </label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input required type="number" name="total_time"
-                                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                                    placeholder="Ex: 2 pour 2 heure" />
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <!--end::Input group-->
                                         </div>
                                         <!--end::Scroll-->
                                         <!--begin::Actions-->
@@ -248,17 +193,13 @@
                                     </div>
                                 </th>
                                 <th class="min-w-125px">Slug</th>
-                                <th class="min-w-125px">Identifiant</th>
-                                <th class="min-w-125px">Niveau</th>
-                                <th class="min-w-125px">Total heure</th>
-                                <th class="min-w-125px">heure Restante</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 fw-semibold">
-                            {% for subject in subjects %}
-                            <tr data-user-id="{{ subject.id }}" data-route="{% url 'ajax.user.delete' %}"
-                                data-model="subjects" data-desc="une matière" data-name="{{ subject.slug }}">
+                            {% for level in levels %}
+                            <tr data-user-id="{{ level.id }}" data-route="{% url 'ajax.user.delete' %}"
+                                data-model="levels" data-desc="un niveau" data-name="{{ level.slug }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                                         <input class="form-check-input" type="checkbox" value="1" />
@@ -266,41 +207,20 @@
                                 </td>
                                 <td class="align-items-center">
                                     <div class="badge badge-primary fw-bold">
-                                        {{ subject.slug }}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="badge badge-danger fw-bold">
-                                        {{ subject.code }}
-                                    </div>
-                                </td>
-                                <td>
-                                    {{ subject.code }}
-                                </td>
-                                <td>
-                                    {{ subject.level.slug }}
-                                </td>
-                                <td>
-                                    <div class="badge badge-success fw-bold">
-                                        {{ subject.total_time }}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="badge badge-danger fw-bold">
-                                        {{ '1' }}
+                                        {{ level.slug }}
                                     </div>
                                 </td>
                                 <td class="text-end">
                                     <a href="javascript:void(0)" class="btn btn-success px-3" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_edit_user{{subject.id}}">Editer</a>
+                                        data-bs-target="#kt_modal_edit_user{{level.id}}">Editer</a>
                                     <a href="#" class="btn btn-danger px-3"
                                         data-kt-users-table-filter="delete_row">Supprimer</a>
-                                    <div class="modal fade" id="kt_modal_edit_user{{ subject.id }}" tabindex="-1"
+                                    <div class="modal fade" id="kt_modal_edit_user{{ level.id }}" tabindex="-1"
                                         aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered mw-650px">
                                             <div class="modal-content">
                                                 <div class="modal-header" id="kt_modal_add_user_header">
-                                                    <h2 class="fw-bold">Editer {{ subject.slug }} </h2>
+                                                    <h2 class="fw-bold">Editer {{ level.slug }} </h2>
                                                     <div class="btn btn-icon btn-sm btn-active-icon-primary"
                                                         data-kt-users-modal-action="close">
                                                         <span class="svg-icon svg-icon-1">
@@ -330,7 +250,7 @@
                                                             {% csrf_token %}
                                                             <input type="hidden" name="method" value="PUT">
                                                             <input type="hidden" name="object_id"
-                                                                value="{{ subject.id }}">
+                                                                value="{{ level.id }}">
                                                             <!--begin::Input group-->
                                                             <div class="fv-row mb-7">
                                                                 <!--begin::Label-->
@@ -340,58 +260,11 @@
                                                                 <!--begin::Input-->
                                                                 <input type="text" name="slug"
                                                                     class="form-control form-control-solid mb-3 mb-lg-0"
-                                                                    placeholder="Ex: Anglais"
-                                                                    value="{{ subject.slug }}" />
+                                                                    placeholder="Ex: Licence 2"
+                                                                    value="{{ level.slug }}" />
                                                                 <!--end::Input-->
                                                             </div>
 
-                                                            <div class="fv-row mb-7">
-                                                                <!--begin::Label-->
-                                                                <label class="fw-semibold fs-6 mb-2">Identifiant de la
-                                                                    matière: </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <input type="text" name="code"
-                                                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                                                    placeholder="Ex: I2KAA"
-                                                                    value="{{ subject.code }}" />
-                                                                <!--end::Input-->
-                                                            </div>
-
-                                                            <div class="fv-row mb-7">
-                                                                <!--begin::Label-->
-                                                                <label class="required fw-semibold fs-6 mb-2">Associée à
-                                                                    quelle niveau?:
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <select name="level" id=""
-                                                                    class="form-select form-select-solid">
-                                                                    <option></option>
-                                                                    {% for le in levels %}
-                                                                    <option value="{{ level.id }}" {% if level.id == le.id %} selected {% endif %}  >
-                                                                        {{ level.slug }}
-                                                                    </option>
-                                                                    {% endfor %}
-                                                                </select>
-                                                                <!--end::Input-->
-                                                            </div>
-
-                                                            <div class="fv-row mb-7">
-                                                                <!--begin::Label-->
-                                                                <label class="required fw-semibold fs-6 mb-2">Nombre
-                                                                    total d'heure:
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <input value="{{ subject.total_time }}" required
-                                                                    type="number" name="total_time"
-                                                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                                                    placeholder="Ex: 2 pour 2 heure" />
-                                                                <!--end::Input-->
-                                                            </div>
-                                                            <!--end::Input group-->
-                                                            <!--begin::Input group-->
                                                             <!--end::Input group-->
                                                         </div>
                                                         <!--end::Scroll-->
