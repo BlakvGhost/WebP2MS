@@ -38,31 +38,22 @@
             document.documentElement.setAttribute("data-bs-theme", themeMode);
         }
     </script>
-    <!--end::Theme mode setup on page load-->
-    <!--begin::App-->
     <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
         {% include 'partials/header.html' %}
-        <!--begin::Wrapper-->
         <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
             {% include 'partials/sidebar.html' %}
-            <!--begin::Page-->
             <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-                <!--begin::Main-->
                 {% block 'main' %}
                 {% endblock %}
-                <!--end::Main-->
             </div>
-            <!--end::Page-->
-            <!--end::Wrapper-->
         </div>
     </div>
 </body>
-<!--begin::Javascript-->
 <script>
     var hostUrl = "/static/";
 </script>
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="/static/plugins/global/plugins.bundle.js"></script>
 <script src="/static/js/scripts.bundle.js"></script>
-
+{% block 'scripts' %}
+{% endblock %}
 </html>

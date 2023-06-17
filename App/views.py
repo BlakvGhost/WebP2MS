@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+from django.db.models import Q
+
+User = get_user_model()
 
 
 @login_required
@@ -12,7 +16,9 @@ def default(request):
 @login_required
 def teachers(request):
     
-    context = {}
+    context = {
+        'users': User.objects.filter(Q(is_teacher=True) | Q(is_staff=True))
+    }
     
     return render(request, 'app/teachers.html', context)
 

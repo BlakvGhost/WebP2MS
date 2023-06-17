@@ -4161,6 +4161,7 @@ var KTSearch = function(element, options) {
     // Handlera
     var _handlers = function() {
         // Focus
+        console.log(the);
         the.inputElement.addEventListener('focus', _focus);
 
         // Blur
