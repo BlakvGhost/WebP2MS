@@ -11,42 +11,6 @@ var KTUsersList = function () {
     // Private functions
     var initUserTable = function () {
         // Set date data order
-        const tableRows = table.querySelectorAll('tbody tr');
-
-        tableRows.forEach(row => {
-            const dateRow = row.querySelectorAll('td');
-            const lastLogin = dateRow[3].innerText.toLowerCase(); // Get last login time
-            let timeCount = 0;
-            let timeFormat = 'minutes';
-
-            // Determine date & time format -- add more formats when necessary
-            if (lastLogin.includes('yesterday')) {
-                timeCount = 1;
-                timeFormat = 'days';
-            } else if (lastLogin.includes('mins')) {
-                timeCount = parseInt(lastLogin.replace(/\D/g, ''));
-                timeFormat = 'minutes';
-            } else if (lastLogin.includes('hours')) {
-                timeCount = parseInt(lastLogin.replace(/\D/g, ''));
-                timeFormat = 'hours';
-            } else if (lastLogin.includes('days')) {
-                timeCount = parseInt(lastLogin.replace(/\D/g, ''));
-                timeFormat = 'days';
-            } else if (lastLogin.includes('weeks')) {
-                timeCount = parseInt(lastLogin.replace(/\D/g, ''));
-                timeFormat = 'weeks';
-            }
-
-            // Subtract date/time from today -- more info on moment datetime subtraction: https://momentjs.com/docs/#/durations/subtract/
-            const realDate = moment().subtract(timeCount, timeFormat).format();
-
-            // Insert real date to last login attribute
-            dateRow[3].setAttribute('data-order', realDate);
-
-            // Set real date for joined column
-            const joinedDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
-            dateRow[5].setAttribute('data-order', joinedDate);
-        });
 
         // Init datatable --- more info on datatables: https://datatables.net/manual/
         datatable = $(table).DataTable({
@@ -54,10 +18,6 @@ var KTUsersList = function () {
             'order': [],
             "pageLength": 10,
             "lengthChange": false,
-            'columnDefs': [
-                { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
-                { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)                
-            ]
         });
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
@@ -139,17 +99,21 @@ var KTUsersList = function () {
                 // Select parent row
                 const parent = e.target.closest('tr');
 
+                const user_id = parent.dataset.userId;
+
+                const route_for_del = parent.dataset.route;
+
                 // Get user name
                 const userName = parent.querySelectorAll('td')[1].querySelectorAll('a')[1].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete " + userName + "?",
+                    text: "Etes-vous sûr que vous voulez supprimer " + userName + "?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
-                    confirmButtonText: "Yes, delete!",
-                    cancelButtonText: "No, cancel",
+                    confirmButtonText: "Oui, supprimez !",
+                    cancelButtonText: "Non, annuler",
                     customClass: {
                         confirmButton: "btn fw-bold btn-danger",
                         cancelButton: "btn fw-bold btn-active-light-primary"
@@ -157,26 +121,30 @@ var KTUsersList = function () {
                 }).then(function (result) {
                     if (result.value) {
                         Swal.fire({
-                            text: "You have deleted " + userName + "!.",
+                            text: "Vous avez supprimé " + userName + "!.",
                             icon: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "D'accord, j'ai compris !",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-primary",
                             }
                         }).then(function () {
-                            // Remove current row
-                            datatable.row($(parent)).remove().draw();
+                            axios.post(route_for_del, {
+                                user_id: user_id
+                            }).then(res => {
+                                datatable.row($(parent)).remove().draw();
+                            })
+            
                         }).then(function () {
                             // Detect checked checkboxes
                             toggleToolbars();
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: customerName + " was not deleted.",
+                            text: customerName + " n'a pas été supprimé.",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "D'accord, j'ai compris !",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-primary",
                             }
@@ -213,12 +181,12 @@ var KTUsersList = function () {
         deleteSelected.addEventListener('click', function () {
             // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
             Swal.fire({
-                text: "Are you sure you want to delete selected customers?",
+                text: "Voulez-vous vraiment supprimer les enseignants/collaborateurs sélectionnés ?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
-                confirmButtonText: "Yes, delete!",
-                cancelButtonText: "No, cancel",
+                confirmButtonText: "Oui, supprimez !",
+                cancelButtonText: "Non, annuler",
                 customClass: {
                     confirmButton: "btn fw-bold btn-danger",
                     cancelButton: "btn fw-bold btn-active-light-primary"
@@ -226,10 +194,10 @@ var KTUsersList = function () {
             }).then(function (result) {
                 if (result.value) {
                     Swal.fire({
-                        text: "You have deleted all selected customers!.",
+                        text: "Vous avez supprimé tous les enseignants/collaborateurs sélectionnés !.",
                         icon: "success",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "D'accord, j'ai compris !",
                         customClass: {
                             confirmButton: "btn fw-bold btn-primary",
                         }
@@ -250,10 +218,10 @@ var KTUsersList = function () {
                     });
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: "Selected customers was not deleted.",
+                        text: "Les enseignants/collaborateurs sélectionnés n'ont pas été supprimés.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "D'accord, j'ai compris !",
                         customClass: {
                             confirmButton: "btn fw-bold btn-primary",
                         }

@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'TimeTable.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'webp2ms',
+        "USER": 'root',
+        "PASSWORD": '',
+        'HOST': 'localhost'
     }
 }
 
@@ -121,6 +124,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static/']
 MEDIA_ROOT = BASE_DIR / 'assets'
+MEDIA_URL = '/assets/'
 
 AUTH_USER_MODEL = 'Auth.MyUser'
 LOGIN_URL = '/auth/login'

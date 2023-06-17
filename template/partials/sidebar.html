@@ -30,7 +30,7 @@
                 data-kt-menu="true" data-kt-menu-expand="false">
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                     <a href="{% url 'default' %}">
-                        <span class="menu-link" data-jma-link="default">
+                        <span class="menu-link" data-web-link="{% url 'default' %}">
                             <span class="svg-icon menu-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +49,7 @@
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                     <a href="{% url 'shedules' %}">
-                        <span class="menu-link" data-jma-link="project">
+                        <span class="menu-link" data-web-link="{% url 'shedules' %}">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -70,7 +70,7 @@
                 <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start"
                     class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention">
                     <a href="{% url 'teachers' %}">
-                        <span class="menu-link" data-jma-link="ticket">
+                        <span class="menu-link" data-web-link="{% url 'teachers' %}">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -90,7 +90,7 @@
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                     <a href="{% url 'courses' %}">
-                        <span class="menu-link" data-jma-link="files">
+                        <span class="menu-link" data-web-link="{% url 'courses' %}">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -111,7 +111,7 @@
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                     <a href="{% url 'classrooms' %}">
-                        <span class="menu-link" data-jma-link="task">
+                        <span class="menu-link" data-web-link="{% url 'classrooms' %}">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -128,7 +128,7 @@
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                     <a href="{% url 'helps' %}">
-                        <span class="menu-link">
+                        <span class="menu-link" data-web-link="{% url 'helps' %}">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg"

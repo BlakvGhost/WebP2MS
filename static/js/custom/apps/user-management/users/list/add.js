@@ -15,17 +15,24 @@ var KTUsersAddUser = function () {
             form,
             {
                 fields: {
-                    'user_name': {
+                    'first_name': {
                         validators: {
                             notEmpty: {
-                                message: 'Full name is required'
+                                message: 'Le Prenom est obligatoire'
                             }
                         }
                     },
-                    'user_email': {
+                    'last_name': {
                         validators: {
                             notEmpty: {
-                                message: 'Valid email address is required'
+                                message: 'Le nom est obligatoire'
+                            }
+                        }
+                    },
+                    'email': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Un email valide est obligatoire'
                             }
                         }
                     },
@@ -72,7 +79,7 @@ var KTUsersAddUser = function () {
                                 text: "Form has been successfully submitted!",
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "D'accord, j'ai compris !",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
@@ -82,15 +89,15 @@ var KTUsersAddUser = function () {
                                 }
                             });
 
-                            //form.submit(); // Submit form
+                            form.submit(); // Submit form
                         }, 2000);
                     } else {
                         // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "Désolé, il semble qu'il y ait des erreurs détectées, veuillez réessayer.",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "D'accord, j'ai compris !",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
@@ -106,11 +113,11 @@ var KTUsersAddUser = function () {
             e.preventDefault();
 
             Swal.fire({
-                text: "Are you sure you would like to cancel?",
+                text: "Voulez-vous vraiment annuler ?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
-                confirmButtonText: "Yes, cancel it!",
+                confirmButtonText: "Oui, annulez-le !",
                 cancelButtonText: "No, return",
                 customClass: {
                     confirmButton: "btn btn-primary",
@@ -119,13 +126,13 @@ var KTUsersAddUser = function () {
             }).then(function (result) {
                 if (result.value) {
                     form.reset(); // Reset form			
-                    modal.hide();	
+                    modal.hide();
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: "Your form has not been cancelled!.",
+                        text: "Votre formulaire n'a pas été annulé !.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "D'accord, j'ai compris !",
                         customClass: {
                             confirmButton: "btn btn-primary",
                         }
@@ -140,11 +147,11 @@ var KTUsersAddUser = function () {
             e.preventDefault();
 
             Swal.fire({
-                text: "Are you sure you would like to cancel?",
+                text: "Voulez-vous vraiment annuler ?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
-                confirmButtonText: "Yes, cancel it!",
+                confirmButtonText: "Oui, annulez-le !",
                 cancelButtonText: "No, return",
                 customClass: {
                     confirmButton: "btn btn-primary",
@@ -153,13 +160,13 @@ var KTUsersAddUser = function () {
             }).then(function (result) {
                 if (result.value) {
                     form.reset(); // Reset form			
-                    modal.hide();	
+                    modal.hide();
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: "Your form has not been cancelled!.",
+                        text: "Votre formulaire n'a pas été annulé !.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "D'accord, j'ai compris !",
                         customClass: {
                             confirmButton: "btn btn-primary",
                         }
