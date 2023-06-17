@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load humanize %}
+{% load custom_filters %}
 
 {% block 'scripts' %}
 <script src="/static/plugins/custom/datatables/datatables.bundle.js"></script>
@@ -251,7 +252,7 @@
                                 <th class="min-w-125px">Identifiant</th>
                                 <th class="min-w-125px">Niveau</th>
                                 <th class="min-w-125px">Total heure</th>
-                                <th class="min-w-125px">heure Restante</th>
+                                <th class="min-w-125px">heure Faite</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
                         </thead>
@@ -282,7 +283,7 @@
                                 </td>
                                 <td>
                                     <div class="badge badge-danger fw-bold">
-                                        {{ '1' }}
+                                        {{ subject.id|calculate_total_hours }} heure
                                     </div>
                                 </td>
                                 <td class="text-end">
@@ -363,10 +364,8 @@
                                                                 <select name="level" id=""
                                                                     class="form-select form-select-solid">
                                                                     {% for le in levels %}
-                                                                    <option value="{{ le.id }}"
-                                                                    {% if subject.level.id == le.id %}
-                                                                        selected
-                                                                    {% endif %}>
+                                                                    <option value="{{ le.id }}" 
+                                                                    {% if subject.level.id == le.id %} selected {% endif %}>
                                                                         {{ le.slug }}
                                                                     </option>
                                                                     {% endfor %}
