@@ -7,8 +7,7 @@
 
     $menuItems.forEach(($menuItem) => {
         const pathname = $pathname;
-        console.log(pathname);
-
+        
         if (pathname === $menuItem.getAttribute("data-web-link")) {
             $menuItem.classList.add("menu-active");
         }
