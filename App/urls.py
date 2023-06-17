@@ -9,6 +9,7 @@ urlpatterns = [
     path('classrooms', views.salles, name='classrooms'),
     path('levels', views.levels, name='levels'),
     path('helps', views.aides, name='helps'),
+    path('user/profile', views.profile, name='profile'),
     
     #Ajax routes
     

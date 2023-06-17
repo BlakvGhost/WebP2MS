@@ -313,6 +313,16 @@ def aides(request):
     return render(request, 'app/helps.html', context)
 
 
+@login_required
+def profile(request):
+
+    context = {
+        'levels': models.Levels.objects.all(),
+    }
+
+    return render(request, 'app/profile.html', context)
+
+
 @csrf_exempt
 @login_required
 def ajax_delete(request):
