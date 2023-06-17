@@ -78,11 +78,8 @@ WSGI_APPLICATION = 'TimeTable.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'webp2ms',
-        "USER": 'root',
-        "PASSWORD": '',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
