@@ -25,12 +25,6 @@ class MyUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-    def is_reset_token_valid(self, user, token):
-        return user.reset_token == token
-
-    def is_reset_token_expired(self, user):
-        return user.reset_token_expiration is not None and user.reset_token_expiration < timezone.now()
-
 
 class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)

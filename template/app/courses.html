@@ -81,14 +81,14 @@
                                 <div class="px-7 py-5" data-kt-user-table-filter="form">
                                     <!--begin::Input group-->
                                     <div class="mb-10">
-                                        <label class="form-label fs-6 fw-semibold">Capacité:</label>
+                                        <label class="form-label fs-6 fw-semibold">Niveau:</label>
                                         <select class="form-select form-select-solid fw-bold" data-kt-select2="true"
                                             data-placeholder="Selectionner" data-allow-clear="true"
-                                            data-kt-user-table-filter="capacité" data-hide-search="true">
+                                            data-kt-user-table-filter="niveau" data-hide-search="true">
                                             <option></option>
-                                            <option value=">200"> > 200 place</option>
-                                            <option value="<200">
-                                                < 200 place </option>
+                                            {% for level in levels %}
+                                            <option value="{{ level.slug }}"> {{ level.slug }} </option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <!--end::Input group-->
@@ -270,11 +270,6 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="badge badge-danger fw-bold">
-                                        {{ subject.code }}
-                                    </div>
-                                </td>
-                                <td>
                                     {{ subject.code }}
                                 </td>
                                 <td>
@@ -282,7 +277,7 @@
                                 </td>
                                 <td>
                                     <div class="badge badge-success fw-bold">
-                                        {{ subject.total_time }}
+                                        {{ subject.total_time }} heure
                                     </div>
                                 </td>
                                 <td>
@@ -299,7 +294,7 @@
                                         aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered mw-650px">
                                             <div class="modal-content">
-                                                <div class="modal-header" id="kt_modal_add_user_header">
+                                                <div class="modal-header" id="kt_modal_edit_user_header">
                                                     <h2 class="fw-bold">Editer {{ subject.slug }} </h2>
                                                     <div class="btn btn-icon btn-sm btn-active-icon-primary"
                                                         data-kt-users-modal-action="close">
@@ -367,10 +362,12 @@
                                                                 <!--begin::Input-->
                                                                 <select name="level" id=""
                                                                     class="form-select form-select-solid">
-                                                                    <option></option>
                                                                     {% for le in levels %}
-                                                                    <option value="{{ level.id }}" {% if level.id == le.id %} selected {% endif %}  >
-                                                                        {{ level.slug }}
+                                                                    <option value="{{ le.id }}"
+                                                                    {% if subject.level.id == le.id %}
+                                                                        selected
+                                                                    {% endif %}>
+                                                                        {{ le.slug }}
                                                                     </option>
                                                                     {% endfor %}
                                                                 </select>

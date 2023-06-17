@@ -141,42 +141,54 @@ def cours(request):
         slug = request.POST.get('slug')
         code = request.POST.get('code')
         level = request.POST.get('level')
-        level = request.POST.get('level')
+        total_time = request.POST.get('total_time')
         _method = request.POST.get('method')
 
         if _method == 'POST':
 
-            if slug:
-                if models.Levels.objects.filter(slug=slug).exists():
+            if slug and level and total_time:
+                if models.Subjects.objects.filter(slug=slug).exists():
                     exist = True
-                    errors.append("Une classe existe déjà avec cet slug")
+                    errors.append("Une matière existe déjà avec cet slug")
             else:
                 errors.append("Veuillez remplir tous les champs obligatoires")
 
             if not exist:
                 created_by = User.objects.get(id=request.user.id)
+                level = models.Levels.objects.get(id=level)
 
-                models.Levels.objects.create(
+                models.Subjects.objects.create(
                     slug=slug,
-                    created_by=created_by
+                    code=code,
+                    level=level,
+                    total_time=total_time,
+                    created_by=created_by,
                 )
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
             object_id = request.POST.get('object_id')
-            classroom = models.Levels.objects.get(id=object_id)
+            subject = models.Subjects.objects.get(id=object_id)
 
             slug = request.POST.get('slug')
+            code = request.POST.get('code')
+            level = request.POST.get('level')
+            total_time = request.POST.get('total_time')
 
-            if slug:
+            if slug and level and total_time:
+                level = models.Levels.objects.get(id=level)
 
-                classroom.slug = slug
-                classroom.save()
+                subject.slug = slug
+                subject.code = code
+                subject.level = level
+                subject.total_time = total_time
+                subject.save()
 
         else:
             errors.append("Veuillez remplir tous les champs obligatoires")
 
     context = {
         'levels': models.Levels.objects.all(),
+        'subjects': models.Subjects.objects.all(),
         'errors': errors
     }
 
@@ -314,6 +326,8 @@ def ajax_delete(request):
                 objects = models.Classrooms
             elif model == 'levels':
                 objects = models.Levels
+            elif model == 'subjects':
+                objects = models.Subjects
             else:
                 return False
             try:
