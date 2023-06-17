@@ -311,6 +311,11 @@
                                             Collaborateur
                                         </div>
                                         {% endif %}
+                                        {% if not user.is_staff and not user.is_teacher %}
+                                        <div class="badge badge-danger fw-bold">
+                                            Etudiant
+                                        </div>
+                                        {% endif %}
                                     </a>
                                 </div>
                             </div>
