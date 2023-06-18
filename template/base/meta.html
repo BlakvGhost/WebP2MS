@@ -4,10 +4,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Plateforme web de gestion et de suivi des emplois du temps de l'Institut IFRI.">
-<meta name="keywords" content="IFRI, emploi du temps, gestion, suivi, plateforme web">
+<meta name="description"
+    content="Web Platform for Managing and Monitoring Schedules - Plateforme web de gestion et de suivi des emplois du temps de l'Institut IFRI.">
+<meta name="keywords" content="IFRI, emploi du temps, gestion, suivi, plateforme web, WebP2MS">
 <meta name="author" content="IFRI">
 <meta name="robots" content="index, follow">
+
+<link rel="manifest" href="{% static 'manifest.json' %}">
 
 <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
 <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
@@ -35,3 +38,16 @@
 <!-- beging:: Adding custom js files -->
 <script src="{% static 'js/app.js' %}" async></script>
 <!-- end:: Adding customjs files -->
+
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("{% static 'js/service-worker.js' %}")
+            .then(function (registration) {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(function (error) {
+                console.error('Service Worker registration failed:', error);
+            });
+    }
+
+</script>
