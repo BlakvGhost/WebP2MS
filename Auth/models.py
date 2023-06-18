@@ -27,6 +27,7 @@ class MyUserManager(BaseUserManager):
 
 class Level(models.Model):
     slug = models.CharField(max_length=100)
+    total_students = models.IntegerField(default=200)
     updated_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     

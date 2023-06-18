@@ -273,6 +273,7 @@ def levels(request):
 
     if request.method == 'POST':
         slug = request.POST.get('slug')
+        total_students = request.POST.get('total_students')
         _method = request.POST.get('method')
 
         if _method == 'POST':
@@ -287,6 +288,7 @@ def levels(request):
             if not exist:
                 Level.objects.create(
                     slug=slug,
+                    total_students=total_students
                 )
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
@@ -294,10 +296,12 @@ def levels(request):
             classroom = Level.objects.get(id=object_id)
 
             slug = request.POST.get('slug')
+            total_students = request.POST.get('total_students')
 
             if slug:
 
                 classroom.slug = slug
+                classroom.total_students = total_students
                 classroom.save()
 
         else:

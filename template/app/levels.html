@@ -154,7 +154,18 @@
                                                 <!--begin::Input-->
                                                 <input type="text" name="slug"
                                                     class="form-control form-control-solid mb-3 mb-lg-0"
-                                                    placeholder="Ex: Licence 1" />
+                                                    placeholder="Ex: Licence 1 SI" />
+                                                <!--end::Input-->
+                                            </div>
+                                            
+                                            <div class="fv-row mb-7">
+                                                <!--begin::Label-->
+                                                <label class="fw-semibold fs-6 mb-2">Nombre total d'etudiant: </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="number" name="total_students"
+                                                    class="form-control form-control-solid mb-3 mb-lg-0"
+                                                    placeholder="Ex: 300" />
                                                 <!--end::Input-->
                                             </div>
                                         </div>
@@ -193,6 +204,7 @@
                                     </div>
                                 </th>
                                 <th class="min-w-125px">Slug</th>
+                                <th class="min-w-125px">Nombre d'étudiant</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
                         </thead>
@@ -208,6 +220,11 @@
                                 <td class="align-items-center">
                                     <div class="badge badge-primary fw-bold">
                                         {{ level.slug }}
+                                    </div>
+                                </td>
+                                <td class="align-items-center">
+                                    <div class="badge badge-warning fw-bold">
+                                        {{ level.total_students }}
                                     </div>
                                 </td>
                                 <td class="text-end">
@@ -260,8 +277,19 @@
                                                                 <!--begin::Input-->
                                                                 <input type="text" name="slug"
                                                                     class="form-control form-control-solid mb-3 mb-lg-0"
-                                                                    placeholder="Ex: Licence 2"
+                                                                    placeholder="Ex: Licence 2 IA"
                                                                     value="{{ level.slug }}" />
+                                                                <!--end::Input-->
+                                                            </div>
+
+                                                            <div class="fv-row mb-7">
+                                                                <!--begin::Label-->
+                                                                <label class="fw-semibold fs-6 mb-2">Nombre total d'etudiant: </label>
+                                                                <!--end::Label-->
+                                                                <!--begin::Input-->
+                                                                <input type="number" name="total_students"
+                                                                    class="form-control form-control-solid mb-3 mb-lg-0"
+                                                                    placeholder="Ex: 300" value="{{ level.total_students }}"/>
                                                                 <!--end::Input-->
                                                             </div>
 
