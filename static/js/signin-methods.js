@@ -25,10 +25,10 @@ var KTAccountSettingsSigninMethods = function () {
     }
 
     // Private functions
-    var initSettings = function () {  
+    var initSettings = function () {
         if (!signInMainEl) {
             return;
-        }        
+        }
 
         // toggle UI
         signInChangeEmail.querySelector('button').addEventListener('click', function () {
@@ -49,7 +49,7 @@ var KTAccountSettingsSigninMethods = function () {
     }
 
     var handleChangeEmail = function (e) {
-        var validation;        
+        var validation;
 
         if (!signInForm) {
             return;
@@ -79,7 +79,7 @@ var KTAccountSettingsSigninMethods = function () {
                     }
                 },
 
-                plugins: { //Learn more: https://formvalidation.io/guide/plugins
+                plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
                     bootstrap: new FormValidation.plugins.Bootstrap5({
                         rowSelector: '.fv-row'
@@ -90,23 +90,36 @@ var KTAccountSettingsSigninMethods = function () {
 
         signInForm.querySelector('#kt_signin_submit').addEventListener('click', function (e) {
             e.preventDefault();
-            console.log('click');
+
 
             validation.validate().then(function (status) {
                 if (status == 'Valid') {
-                    swal.fire({
-                        text: "Sent password reset. Please check your email",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn font-weight-bold btn-light-primary"
-                        }
-                    }).then(function(){
-                        signInForm.reset();
-                        validation.resetForm(); // Reset formvalidation --- more info: https://formvalidation.io/guide/api/reset-form/
-                        toggleChangeEmail();
-                    });
+
+                    const newForm = new FormData(signInForm);
+                    
+                    axios.post(signInForm.getAttribute('action'), newForm).then(res => {
+
+                        swal.fire({
+                            text: res.data.success,
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, c'est compris!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-light-primary"
+                            }
+                        });
+                    }).catch(err => {
+                        swal.fire({
+                            text: err.response.data.error,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, c'est compris!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-light-primary"
+                            }
+                        });
+                    })
+
                 } else {
                     swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",
@@ -114,7 +127,7 @@ var KTAccountSettingsSigninMethods = function () {
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
                         customClass: {
-                            confirmButton: "btn font-weight-bold btn-light-primary"
+                            confirmButton: "btn fw-bold btn-light-primary"
                         }
                     });
                 }
@@ -158,7 +171,7 @@ var KTAccountSettingsSigninMethods = function () {
                                 message: 'Confirm Password is required'
                             },
                             identical: {
-                                compare: function() {
+                                compare: function () {
                                     return passwordForm.querySelector('[name="newpassword"]').value;
                                 },
                                 message: 'The password and its confirm are not the same'
@@ -178,23 +191,35 @@ var KTAccountSettingsSigninMethods = function () {
 
         passwordForm.querySelector('#kt_password_submit').addEventListener('click', function (e) {
             e.preventDefault();
-            console.log('click');
 
             validation.validate().then(function (status) {
                 if (status == 'Valid') {
-                    swal.fire({
-                        text: "Sent password reset. Please check your email",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn font-weight-bold btn-light-primary"
-                        }
-                    }).then(function(){
-                        passwordForm.reset();
-                        validation.resetForm(); // Reset formvalidation --- more info: https://formvalidation.io/guide/api/reset-form/
-                        toggleChangePassword();
-                    });
+
+                    const newForm = new FormData(passwordForm);
+
+                    axios.post(passwordForm.getAttribute('action'), newForm).then(res => {
+
+                        swal.fire({
+                            text: res.data.success,
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, c'est compris!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-light-primary"
+                            }
+                        });
+                    }).catch(err => {
+                        swal.fire({
+                            text: err.response.data.error,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, c'est compris!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-light-primary"
+                            }
+                        });
+                    })
+
                 } else {
                     swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",
@@ -202,7 +227,7 @@ var KTAccountSettingsSigninMethods = function () {
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
                         customClass: {
-                            confirmButton: "btn font-weight-bold btn-light-primary"
+                            confirmButton: "btn fw-bold btn-light-primary"
                         }
                     });
                 }
@@ -231,6 +256,6 @@ var KTAccountSettingsSigninMethods = function () {
 }();
 
 // On document ready
-KTUtil.onDOMContentLoaded(function() {
+KTUtil.onDOMContentLoaded(function () {
     KTAccountSettingsSigninMethods.init();
 });

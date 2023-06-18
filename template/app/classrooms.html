@@ -3,8 +3,8 @@
 
 {% block 'scripts' %}
 <script src="/static/plugins/custom/datatables/datatables.bundle.js"></script>
-<script src="/static/js/custom/apps/user-management/users/list/table.js"></script>
-<script src="/static/js/custom/apps/user-management/users/list/add.js"></script>
+<script src="/static/js/table.js"></script>
+<script src="/static/js/add.js"></script>
 {% endblock %}
 
 {% block 'title' %} Les Salles de Classe {% endblock %}
@@ -228,7 +228,8 @@
                         </thead>
                         <tbody class="text-gray-600 fw-semibold">
                             {% for cl in classrooms %}
-                            <tr data-user-id="{{ cl.id }}" data-route="{% url 'ajax.user.delete' %}" data-model="classrooms" data-desc="une salle de classe" data-name="{{ cl.slug }}">
+                            <tr data-user-id="{{ cl.id }}" data-route="{% url 'ajax.user.delete' %}"
+                                data-model="classrooms" data-desc="une salle de classe" data-name="{{ cl.slug }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                                         <input class="form-check-input" type="checkbox" value="1" />

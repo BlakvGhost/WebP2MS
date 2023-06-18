@@ -55,9 +55,9 @@ var KTAccountSettingsProfileDetails = function () {
                     const newForm = new FormData(form);
 
                     axios.post(form.getAttribute('action'), newForm).then(res => {
-                        //console.log(res);
+
                         swal.fire({
-                            text: "Thank you! You've updated your basic info",
+                            text: res.data.success,
                             icon: "success",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, c'est compris!",
@@ -66,7 +66,6 @@ var KTAccountSettingsProfileDetails = function () {
                             }
                         });
                     }).catch(err => {
-
                         swal.fire({
                             text: err.response.data.error,
                             icon: "error",

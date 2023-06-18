@@ -60,7 +60,8 @@ def _update_user(request, admin=None):
             user.level = level
         user.save()
 
-    return "Veuillez remplir tout les champs"
+    else:
+        return "Veuillez remplir tout les champs"
 
 
 @login_required
@@ -380,8 +381,8 @@ def update_user(request):
             return JsonResponse({'error': error}, status=400)
         elif action == 'EMAIL':
 
-            password = request.POST.get('password')
-            new_email = request.POST.get('new_email')
+            password = request.POST.get('confirmemailpassword')
+            new_email = request.POST.get('emailaddress')
 
             if password and new_email:
                 if request.user.check_password(password):
@@ -393,12 +394,12 @@ def update_user(request):
                     return JsonResponse({'success': 'Email mis à jour avec succès'})
                 else:
                     return JsonResponse({'error': 'Mot de passe incorrect'}, status=400)
-                
+
         elif action == 'PASSWORD':
-            current_password = request.POST.get('current_password')
-            new_password = request.POST.get('new_password')
-            confirm_password = request.POST.get('confirm_password')
-            
+            current_password = request.POST.get('currentpassword')
+            new_password = request.POST.get('newpassword')
+            confirm_password = request.POST.get('confirmpassword')
+
             if current_password:
                 if not check_password(current_password, request.user.password):
                     return JsonResponse({'error': 'Mot de passe actuel incorrect'}, status=400)
@@ -411,6 +412,6 @@ def update_user(request):
 
             request.user.save()
             update_session_auth_hash(request, request.user)
-
+            return JsonResponse({'success': 'Votre mot de passe mis a été jour avec succès'})
 
     return JsonResponse({'error': 'Invalid HTTP method'}, status=400)
