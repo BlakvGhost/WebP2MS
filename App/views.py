@@ -7,17 +7,60 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, update_session_auth_hash
+from django.contrib.auth.hashers import check_password
 from django.db.models import Q
 from django.core.files.storage import default_storage
 from django.urls import reverse
 from django.db.models import Sum
 from django.template import RequestContext
 from Auth.mail import send_html_email
+from Auth.models import Level
 from . import models
 
 
 User = get_user_model()
+
+
+def _update_user(request, admin=None):
+    user_id = request.POST.get('user_id')
+    user = User.objects.get(id=user_id)
+
+    email = request.POST.get('email')
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
+    phone_num = request.POST.get('phone_num')
+    level = request.POST.get('classroom')
+    is_teacher = bool(request.POST.get('is_teacher'))
+    is_staff = bool(request.POST.get('is_staff'))
+
+    avatar = request.FILES.get('avatar')
+
+    if email and first_name and last_name:
+        if User.objects.filter(email=email).exclude(id=user_id).exists():
+            return "Un utilisateur existe déjà avec cet email"
+
+        if avatar:
+            file_extension = avatar.name.split('.')[-1]
+            avatar_name = f'{first_name}-{last_name}-{uuid.uuid4().hex}.{file_extension}'
+
+            file_path = f'avatars/{avatar_name}'
+            default_storage.save(file_path, avatar)
+            user.avatar = file_path
+
+        user.first_name = first_name
+        user.last_name = last_name
+        user.phone_num = phone_num
+        if admin is not None:
+            user.email = email
+            user.is_teacher = is_teacher
+            user.is_staff = is_staff
+        else:
+            level = Level.objects.get(id=level)
+            user.level = level
+        user.save()
+
+    return "Veuillez remplir tout les champs"
 
 
 @login_required
@@ -92,36 +135,9 @@ def teachers(request):
                     )
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
-            user_id = request.POST.get('user_id')
-            user = User.objects.get(id=user_id)
-
-            email = request.POST.get('email')
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            is_teacher = bool(request.POST.get('is_teacher'))
-            is_staff = bool(request.POST.get('is_staff'))
-
-            avatar = request.FILES.get('avatar')
-
-            if email and first_name and last_name:
-                if User.objects.filter(email=email).exclude(id=user_id).exists():
-                    exist = True
-                    errors.append("Un utilisateur existe déjà avec cet email")
-
-                if avatar:
-                    file_extension = avatar.name.split('.')[-1]
-                    avatar_name = f'{first_name}-{last_name}-{uuid.uuid4().hex}.{file_extension}'
-
-                    file_path = f'avatars/{avatar_name}'
-                    default_storage.save(file_path, avatar)
-                    user.avatar = file_path
-
-                user.email = email
-                user.first_name = first_name
-                user.last_name = last_name
-                user.is_teacher = is_teacher
-                user.is_staff = is_staff
-                user.save()
+            error = _update_user(request, True)
+            if error:
+                errors.append(error)
 
         else:
             errors.append("Veuillez remplir tous les champs obligatoires")
@@ -149,7 +165,7 @@ def cours(request):
         if _method == 'POST':
 
             if slug and level and total_time:
-                if models.Subjects.objects.filter(slug=slug).exists():
+                if models.Subject.objects.filter(slug=slug).exists():
                     exist = True
                     errors.append("Une matière existe déjà avec cet slug")
             else:
@@ -157,9 +173,9 @@ def cours(request):
 
             if not exist:
                 created_by = User.objects.get(id=request.user.id)
-                level = models.Levels.objects.get(id=level)
+                level = Level.objects.get(id=level)
 
-                models.Subjects.objects.create(
+                models.Subject.objects.create(
                     slug=slug,
                     code=code,
                     level=level,
@@ -169,7 +185,7 @@ def cours(request):
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
             object_id = request.POST.get('object_id')
-            subject = models.Subjects.objects.get(id=object_id)
+            subject = models.Subject.objects.get(id=object_id)
 
             slug = request.POST.get('slug')
             code = request.POST.get('code')
@@ -177,7 +193,7 @@ def cours(request):
             total_time = request.POST.get('total_time')
 
             if slug and level and total_time:
-                level = models.Levels.objects.get(id=level)
+                level = Level.objects.get(id=level)
 
                 subject.slug = slug
                 subject.code = code
@@ -189,8 +205,8 @@ def cours(request):
             errors.append("Veuillez remplir tous les champs obligatoires")
 
     context = {
-        'levels': models.Levels.objects.all(),
-        'subjects': models.Subjects.objects.all(),
+        'levels': Level.objects.all(),
+        'subjects': models.Subject.objects.all(),
         'errors': errors
     }
 
@@ -210,7 +226,7 @@ def salles(request):
         if _method == 'POST':
 
             if slug and capacity:
-                if models.Classrooms.objects.filter(slug=slug).exists():
+                if models.Classroom.objects.filter(slug=slug).exists():
                     exist = True
                     errors.append("Une classe existe déjà avec cet slug")
             else:
@@ -219,7 +235,7 @@ def salles(request):
             if not exist:
                 created_by = User.objects.get(id=request.user.id)
 
-                models.Classrooms.objects.create(
+                models.Classroom.objects.create(
                     slug=slug,
                     capacity=capacity,
                     created_by=created_by
@@ -227,7 +243,7 @@ def salles(request):
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
             object_id = request.POST.get('object_id')
-            classroom = models.Classrooms.objects.get(id=object_id)
+            classroom = models.Classroom.objects.get(id=object_id)
 
             slug = request.POST.get('slug')
             capacity = request.POST.get('capacity')
@@ -242,7 +258,7 @@ def salles(request):
             errors.append("Veuillez remplir tous les champs obligatoires")
 
     context = {
-        'classrooms': models.Classrooms.objects.all(),
+        'classrooms': models.Classroom.objects.all(),
         'errors': errors
     }
 
@@ -261,23 +277,20 @@ def levels(request):
         if _method == 'POST':
 
             if slug:
-                if models.Levels.objects.filter(slug=slug).exists():
+                if Level.objects.filter(slug=slug).exists():
                     exist = True
                     errors.append("Une classe existe déjà avec cet slug")
             else:
                 errors.append("Veuillez remplir tous les champs obligatoires")
 
             if not exist:
-                created_by = User.objects.get(id=request.user.id)
-
-                models.Levels.objects.create(
+                Level.objects.create(
                     slug=slug,
-                    created_by=created_by
                 )
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
             object_id = request.POST.get('object_id')
-            classroom = models.Levels.objects.get(id=object_id)
+            classroom = Level.objects.get(id=object_id)
 
             slug = request.POST.get('slug')
 
@@ -290,7 +303,7 @@ def levels(request):
             errors.append("Veuillez remplir tous les champs obligatoires")
 
     context = {
-        'levels': models.Levels.objects.all(),
+        'levels': Level.objects.all(),
         'errors': errors
     }
 
@@ -317,7 +330,7 @@ def aides(request):
 def profile(request):
 
     context = {
-        'levels': models.Levels.objects.all(),
+        'levels': Level.objects.all(),
     }
 
     return render(request, 'app/profile.html', context)
@@ -335,11 +348,11 @@ def ajax_delete(request):
             if model == 'users':
                 objects = User
             elif model == 'classrooms':
-                objects = models.Classrooms
+                objects = models.Classroom
             elif model == 'levels':
-                objects = models.Levels
+                objects = Level
             elif model == 'subjects':
-                objects = models.Subjects
+                objects = models.Subject
             else:
                 return False
             try:
@@ -357,11 +370,47 @@ def ajax_delete(request):
 @csrf_exempt
 @login_required
 def update_user(request):
-    if(request.method == 'POST'):
+    if (request.method == 'POST'):
         action = request.POST.get('action')
 
         if action == 'DETAILS':
-            #first_name = 
-            pass
+            error = _update_user(request)
+            if not error:
+                return JsonResponse({'success': 'Votre compte a été mis à jour avec succès'})
+            return JsonResponse({'error': error}, status=400)
+        elif action == 'EMAIL':
+
+            password = request.POST.get('password')
+            new_email = request.POST.get('new_email')
+
+            if password and new_email:
+                if request.user.check_password(password):
+                    request.user.email = new_email
+                    request.user.save()
+
+                    update_session_auth_hash(request, request.user)
+
+                    return JsonResponse({'success': 'Email mis à jour avec succès'})
+                else:
+                    return JsonResponse({'error': 'Mot de passe incorrect'}, status=400)
+                
+        elif action == 'PASSWORD':
+            current_password = request.POST.get('current_password')
+            new_password = request.POST.get('new_password')
+            confirm_password = request.POST.get('confirm_password')
             
-    return JsonResponse({'error': 'Invalid HTTP method'}, status=400) 
+            if current_password:
+                if not check_password(current_password, request.user.password):
+                    return JsonResponse({'error': 'Mot de passe actuel incorrect'}, status=400)
+
+            if new_password and confirm_password:
+                if new_password != confirm_password:
+                    return JsonResponse({'error': 'Les nouveaux mots de passe ne correspondent pas'}, status=400)
+
+                request.user.set_password(new_password)
+
+            request.user.save()
+            update_session_auth_hash(request, request.user)
+
+
+    return JsonResponse({'error': 'Invalid HTTP method'}, status=400)

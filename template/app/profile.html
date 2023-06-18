@@ -54,6 +54,9 @@
                     <form id="kt_account_profile_details_form" class="form" method="POST"
                         action="{% url 'ajax.user.update' %}" enctype="multipart/form-data">
                         <!--begin::Card body-->
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <input type="hidden" name="email" value="{{ user.email }}">
+                        <input type="hidden" name="action" value="DETAILS">
                         <div class="card-body border-top p-9">
                             <!--begin::Input group-->
                             <div class="row mb-6">

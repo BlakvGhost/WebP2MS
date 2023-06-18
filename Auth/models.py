@@ -25,11 +25,19 @@ class MyUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
+class Level(models.Model):
+    slug = models.CharField(max_length=100)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return self.slug
 
 class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=50, null=True, blank=True)
+    phone_num = models.CharField(max_length=50, null=True, blank=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
@@ -37,6 +45,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     is_two_factor = models.BooleanField(default=False)
     two_factor_code = models.CharField(max_length=255, null=True, blank=True)
     created_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
     reset_token = models.CharField(max_length=255, null=True, blank=True)
     reset_token_expiration = models.DateTimeField(null=True, blank=True)
 

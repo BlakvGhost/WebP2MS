@@ -54,24 +54,24 @@ var KTAccountSettingsProfileDetails = function () {
 
                     const newForm = new FormData(form);
 
-                    axios.post(form.action, newForm).then(res => {
+                    axios.post(form.getAttribute('action'), newForm).then(res => {
                         //console.log(res);
                         swal.fire({
                             text: "Thank you! You've updated your basic info",
                             icon: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "Ok, c'est compris!",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-light-primary"
                             }
                         });
                     }).catch(err => {
-                        console.error(err);
+
                         swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: err.response.data.error,
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "Ok, c'est compris!",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-light-primary"
                             }

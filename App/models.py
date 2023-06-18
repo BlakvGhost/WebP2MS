@@ -1,9 +1,9 @@
 from django.db import models
 
-from Auth.models import MyUser
+from Auth.models import MyUser, Level
 
 
-class Classrooms(models.Model):
+class Classroom(models.Model):
     
     slug = models.CharField(max_length=200)
     capacity = models.IntegerField()
@@ -15,21 +15,12 @@ class Classrooms(models.Model):
         return self.slug
     
 
-class Levels(models.Model):
-    slug = models.CharField(max_length=100)
-    created_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self) -> str:
-        return self.slug
-
-class Subjects(models.Model):
+class Subject(models.Model):
     
     slug = models.CharField(max_length=200)
     code = models.CharField(max_length=200, null=True, blank=True)
     total_time = models.IntegerField()
-    level = models.ForeignKey(Levels, on_delete=models.SET_NULL, null=True)
+    level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
     created_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -37,12 +28,12 @@ class Subjects(models.Model):
     def __str__(self) -> str:
         return self.slug
     
-class Timetables(models.Model):
+class Timetable(models.Model):
     
     teach_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
-    subject = models.ForeignKey(Subjects, on_delete=models.SET_NULL, null=True)
-    classroom = models.ForeignKey(Classrooms, on_delete=models.SET_NULL, null=True)
-    level = models.ForeignKey(Levels, on_delete=models.SET_NULL, null=True)
+    subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True)
+    classroom = models.ForeignKey(Classroom, on_delete=models.SET_NULL, null=True)
+    level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
     week = models.IntegerField()
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
