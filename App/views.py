@@ -352,3 +352,16 @@ def ajax_delete(request):
             return JsonResponse({'error': 'Missing object_id'}, status=400)
     else:
         return JsonResponse({'error': 'Invalid HTTP method'}, status=400)
+
+
+@csrf_exempt
+@login_required
+def update_user(request):
+    if(request.method == 'POST'):
+        action = request.POST.get('action')
+
+        if action == 'DETAILS':
+            #first_name = 
+            pass
+            
+    return JsonResponse({'error': 'Invalid HTTP method'}, status=400) 
