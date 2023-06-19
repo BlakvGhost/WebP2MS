@@ -160,6 +160,7 @@ def cours(request):
         slug = request.POST.get('slug')
         code = request.POST.get('code')
         level = request.POST.get('level')
+        desc = request.POST.get('desc')
         total_time = request.POST.get('total_time')
         _method = request.POST.get('method')
 
@@ -180,6 +181,7 @@ def cours(request):
                     slug=slug,
                     code=code,
                     level=level,
+                    desc=desc,
                     total_time=total_time,
                     created_by=created_by,
                 )
@@ -190,6 +192,7 @@ def cours(request):
 
             slug = request.POST.get('slug')
             code = request.POST.get('code')
+            desc = request.POST.get('desc')
             level = request.POST.get('level')
             total_time = request.POST.get('total_time')
 
@@ -199,6 +202,7 @@ def cours(request):
                 subject.slug = slug
                 subject.code = code
                 subject.level = level
+                subject.desc = desc
                 subject.total_time = total_time
                 subject.save()
 
@@ -222,6 +226,7 @@ def salles(request):
     if request.method == 'POST':
         slug = request.POST.get('slug')
         capacity = request.POST.get('capacity')
+        desc = request.POST.get('desc')
         _method = request.POST.get('method')
 
         if _method == 'POST':
@@ -239,6 +244,7 @@ def salles(request):
                 models.Classroom.objects.create(
                     slug=slug,
                     capacity=capacity,
+                    desc=desc,
                     created_by=created_by
                 )
 
@@ -252,6 +258,7 @@ def salles(request):
             if slug and capacity:
 
                 classroom.slug = slug
+                classroom.desc = desc
                 classroom.capacity = capacity
                 classroom.save()
 
@@ -293,16 +300,16 @@ def levels(request):
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
             object_id = request.POST.get('object_id')
-            classroom = Level.objects.get(id=object_id)
+            level = Level.objects.get(id=object_id)
 
             slug = request.POST.get('slug')
             total_students = request.POST.get('total_students')
 
             if slug:
 
-                classroom.slug = slug
-                classroom.total_students = total_students
-                classroom.save()
+                level.slug = slug
+                level.total_students = total_students
+                level.save()
 
         else:
             errors.append("Veuillez remplir tous les champs obligatoires")
