@@ -51,6 +51,7 @@
     }
 
     let deferredPrompt;
+    let installBar;
 
     window.addEventListener('beforeinstallprompt', (event) => {
         event.preventDefault();
@@ -59,17 +60,31 @@
     });
 
     function showInstallPrompt() {
-        const installBar = document.createElement('div');
+        if (localStorage.getItem('installPromptRejected')) {
+            return;
+        }
+
+        installBar = document.createElement('div');
         installBar.classList.add('install-bar');
         installBar.innerHTML = `
-    <p>Installez notre application pour profiter d'une meilleure expérience.</p>
-    <button class="install-button">Installer</button>
-  `;
+            <div style="z-index:50000" class="bg-dark text-light text-center py-4 shadow position-fixed bottom-0 w-100">
+                <div class="my-3">
+                    <h3 class="text-light my-3">Installez notre application pour profiter d'une meilleure expérience.</h3>
+                    <button class="btn btn-success install-button">Installer</button>
+                    <button class="btn btn-danger refuse-button">Refuser</button>    
+                </div>    
+            </div>
+        `;
         document.body.appendChild(installBar);
 
-        const installButton = document.querySelector('.install-button');
+        const installButton = installBar.querySelector('.install-button');
         installButton.addEventListener('click', () => {
             installPWA();
+        });
+
+        const refuseButton = installBar.querySelector('.refuse-button');
+        refuseButton.addEventListener('click', () => {
+            refuseInstall();
         });
     }
 
@@ -78,39 +93,48 @@
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                    // console.log('L\'utilisateur a accepté l\'installation');
+                    console.log('L\'utilisateur a accepté l\'installation');
                 } else {
-                    // console.log('L\'utilisateur a refusé l\'installation');
+                    console.log('L\'utilisateur a refusé l\'installation');
+                    refuseInstall();
                 }
                 deferredPrompt = null;
             });
+        }
+
+        hideInstallPrompt();
+    }
+
+    function refuseInstall() {
+        localStorage.setItem('installPromptRejected', true);
+        hideInstallPrompt();
+    }
+
+    function hideInstallPrompt() {
+        if (installBar) {
+            installBar.remove();
+            installBar = null;
         }
     }
 
 </script>
 <style>
     .install-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #3367D6;
-        color: #ffffff;
-        padding: 10px;
-        text-align: center;
+        animation-name: slideInDown;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
     }
 
-    .install-button {
-        background-color: #ffffff;
-        color: #3367D6;
-        border: none;
-        padding: 8px 16px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 4px;
-    }
+    @keyframes slideInDown {
+        0% {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
 
-    .install-button:hover {
-        background-color: #e0e0e0;
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 </style>
