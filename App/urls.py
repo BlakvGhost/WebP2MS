@@ -3,13 +3,14 @@ from . import views
 
 urlpatterns = [
     path('', views.default, name='default'),
-    path('teachers-staff', views.teachers, name='teachers'),
-    path('shedules', views.shedules, name='shedules'),
-    path('courses', views.cours, name='courses'),
-    path('classrooms', views.salles, name='classrooms'),
-    path('levels', views.levels, name='levels'),
-    path('helps', views.aides, name='helps'),
-    path('user/profile', views.profile, name='profile'),
+    path('gestion/les-enseignants-et-collaborateurs', views.teachers, name='teachers'),
+    path('gestion/les-emplois-temps', views.shedules, name='shedules'),
+    path('gestion/les-matieres', views.cours, name='courses'),
+    path('gestion/les-salles-de-cours', views.salles, name='classrooms'),
+    path('gestion/les-niveaux', views.levels, name='levels'),
+    path('vous/vos-notifications', views.notifications, name='notifications'),
+    path('cendre-d-aides', views.aides, name='helps'),
+    path('vous/votre-profile', views.profile, name='profile'),
     
     #Ajax routes
     

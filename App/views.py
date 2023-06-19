@@ -329,6 +329,13 @@ def shedules(request):
 
     return render(request, 'app/shedules.html', context)
 
+@login_required
+def notifications(request):
+
+    context = {}
+
+    return render(request, 'app/notifications.html', context)
+
 
 @login_required
 def aides(request):

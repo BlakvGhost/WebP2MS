@@ -27,6 +27,7 @@
                 data-kt-swapper-mode="{default: 'append', lg: 'prepend'}"
                 data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
                 <!--begin::Menu-->
+                {% if user.is_staff or user.is_superuser %}
                 <div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0"
                     id="kt_app_header_menu" data-kt-menu="true">
                     <!--begin:Menu item-->
@@ -72,20 +73,21 @@
                                         </span>
                                         Creer un Empoi du temps
                                     </a>
-                                </div>                                
+                                </div>
                             </div>
                             <!--end:Pages menu-->
                         </div>
                         <!--end:Menu sub-->
                     </div>
                 </div>
+                {% endif %}
                 <!--end::Menu-->
             </div>
             <div class="app-navbar flex-shrink-0">
                 <div class="app-navbar-item ms-1 ms-md-3">
                     <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px"
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
-                        data-kt-menu-placement="bottom-end">
+                        data-kt-menu-placement="bottom">
                         <span class="svg-icon svg-icon-2 svg-icon-md-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -117,9 +119,9 @@
                                                 </span>
                                             </div>
                                             <div class="mb-0 me-2">
-                                                <a href="#"
-                                                    class="fs-6 text-gray-800 text-hover-primary fw-bold">Reponse à
-                                                    votre ticket</a>
+                                                <a href="javascript:void(0)" class="fs-6 text-gray-800 text-hover-primary fw-bold">
+                                                    l'emploi de cette semaine à été modifier
+                                                </a>
                                             </div>
                                         </div>
                                         <span class="badge badge-light fs-8">3min déjà</span>

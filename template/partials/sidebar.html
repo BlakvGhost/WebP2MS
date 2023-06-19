@@ -28,6 +28,7 @@
             data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
                 data-kt-menu="true" data-kt-menu-expand="false">
+                {% if user.is_staff or user.is_superuser %}
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                     <a href="{% url 'default' %}">
                         <span class="menu-link" data-web-link="{% url 'default' %}">
@@ -47,6 +48,7 @@
                         </span>
                     </a>
                 </div>
+                {% endif %}
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                     <a href="{% url 'shedules' %}">
                         <span class="menu-link" data-web-link="{% url 'shedules' %}">
@@ -67,6 +69,7 @@
                         </span>
                     </a>
                 </div>
+                {% if user.is_staff or user.is_superuser %}
                 <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start"
                     class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention">
                     <a href="{% url 'teachers' %}">
@@ -131,12 +134,31 @@
                         <span class="menu-link" data-web-link="{% url 'levels' %}">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor"></path>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
+                                            fill="currentColor"></path>
                                     </svg>
                                 </span>
                             </span>
                             <span class="menu-title fw-bold ms-2">Les Niveaux</span>
+                        </span>
+                    </a>
+                </div>
+                {% endif %}
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="{% url 'notifications' %}">
+                        <span class="menu-link" data-web-link="{% url 'notifications' %}">
+                            <span class="svg-icon menu-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-bell icon">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                </svg>
+                            </span>
+                            <span class="menu-title fw-bold ms-2">Notifications</span>
                         </span>
                     </a>
                 </div>
