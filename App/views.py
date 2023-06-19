@@ -5,18 +5,25 @@ import secrets
 import uuid
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.hashers import check_password
 from django.db.models import Q
 from django.core.files.storage import default_storage
 from django.urls import reverse
-from django.db.models import Sum
-from django.template import RequestContext
 from Auth.mail import send_html_email
 from Auth.models import Level
 from . import models
+
+
+def superuser_or_staff_required(view_func):
+    def check_user(request, *args, **kwargs):
+        if not request.user.is_authenticated or (not request.user.is_superuser and not request.user.is_staff):
+            return redirect('shedules')
+        return view_func(request, *args, **kwargs)
+
+    return check_user
 
 
 User = get_user_model()
@@ -56,8 +63,9 @@ def _update_user(request, admin=None):
             user.is_teacher = is_teacher
             user.is_staff = is_staff
         else:
-            level = Level.objects.get(id=level)
-            user.level = level
+            if not user.is_teacher and not user.is_staff and not user.is_superuser:
+                level = Level.objects.get(id=level)
+                user.level = level
         user.save()
 
     else:
@@ -65,6 +73,7 @@ def _update_user(request, admin=None):
 
 
 @login_required
+@superuser_or_staff_required
 def default(request):
 
     context = {}
@@ -73,6 +82,7 @@ def default(request):
 
 
 @login_required
+@superuser_or_staff_required
 def teachers(request):
     errors, exist = [], False
 
@@ -152,6 +162,7 @@ def teachers(request):
 
 
 @login_required
+@superuser_or_staff_required
 def cours(request):
 
     errors, exist = [], False
@@ -219,6 +230,7 @@ def cours(request):
 
 
 @login_required
+@superuser_or_staff_required
 def salles(request):
 
     errors, exist = [], False
@@ -274,6 +286,7 @@ def salles(request):
 
 
 @login_required
+@superuser_or_staff_required
 def levels(request):
 
     errors, exist = [], False
@@ -329,6 +342,7 @@ def shedules(request):
 
     return render(request, 'app/shedules.html', context)
 
+
 @login_required
 def notifications(request):
 
@@ -357,6 +371,7 @@ def profile(request):
 
 @csrf_exempt
 @login_required
+@superuser_or_staff_required
 def ajax_delete(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))

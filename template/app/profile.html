@@ -156,6 +156,7 @@
                                 </div>
                                 <!--end::Col-->
                             </div>
+                            {% if not user.is_superuser and not user.is_teacher and not user.is_staff %}
                             <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
@@ -165,6 +166,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
+                                
                                 <div class="col-lg-8 fv-row">
                                     <select name="classroom" aria-label="Selectionner une classe" data-control="select2"
                                         data-placeholder="Selectionner une classe..."
@@ -175,8 +177,9 @@
                                         </option>
                                         {% endfor %}
                                     </select>
-                                </div>
+                                </div>                                
                             </div>
+                            {% endif %}
                             <!--end::Card body-->
                             <!--begin::Actions-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
