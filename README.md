@@ -49,6 +49,11 @@ python manage.py runserver
 
 9. N'importez rien d'externe comme fichiers `images, polices ou bootstrap`, tout est deja inclus, commencez juste à ecrire votre code et utiliser le fichier `static/css/master.css` pour ecrire votre css
 
+10. Connectez vous avec un compte admin pour une vue générale
+    - email: `exemple@exemple.com`
+    - password: `passme`
+
+
 Maintenant, vous pouvez commencer à travailler sur le projet localement et utiliser les commandes Git pour effectuer des commits, etc.
 
 ## Commandes Git de base

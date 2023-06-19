@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 import secrets
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
-from .models import MyUser as User
+from .models import Level, MyUser as User
 from .mail import send_html_email
 
 
@@ -31,7 +31,9 @@ def login(request):
 @anonymous_required
 def register(request):
 
-    context = {}
+    context = {
+        'levels': Level.objects.all(),
+    }
 
     return render(request, 'auth/register.html', context)
 
@@ -91,18 +93,21 @@ def ajax_register(request):
         first_name = data.get('first_name')
         last_name = data.get('last_name')
         password = data.get('password')
+        level = data.get('level')
         password_confirm = data.get('confirm_password')
 
-        if email and password and first_name and last_name:
+        if email and password and first_name and last_name and level:
             if password == password_confirm:
                 try:
                     user = User.objects.get(email=email)
                     return JsonResponse({'error': 'User with this email already exists'}, status=400)
                 except User.DoesNotExist:
+                    level = Level.objects.get(id=level)
                     user = User.objects.create_user(
                         email=email, password=password)
                     user.first_name = first_name
                     user.last_name = last_name
+                    user.level = level
                     user.save()
 
                     user = authenticate(

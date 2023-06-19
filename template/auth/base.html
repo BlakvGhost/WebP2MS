@@ -73,7 +73,10 @@
                 return this.error = "Veuillez remplir tout les champs ci dessous"
             },
             register: function () {
-                if (this.user.email && this.user.first_name && this.user.last_name && this.user.password) {
+                this.user.level = document.querySelector('#level').value;
+
+                if (this.user.email && this.user.first_name
+                    && this.user.last_name && this.user.password && this.user.level) {
                     if (this.user.password === this.user.confirm_password) {
                         return this.base("{% url 'ajax.register' %}")
                     }
