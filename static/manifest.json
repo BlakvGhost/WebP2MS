@@ -4,8 +4,8 @@
     "description": "Plateforme web de gestion et de suivi des emplois du temps de l'Institut IFRI.",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#3367D6",
+    "background_color": "#2e4053",
+    "theme_color": "#2e4053",
     "icons": [
       {
         "src": "/static/android-chrome-192x192.png",
