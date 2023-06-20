@@ -1,0 +1,22 @@
+{
+    "name": "WebP2MS",
+    "short_name": "WebP2MS",
+    "description": "Plateforme web de gestion et de suivi des emplois du temps de l'Institut IFRI.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2e4053",
+    "theme_color": "#2e4053",
+    "icons": [
+      {
+        "src": "/static/logo-color.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/static/logo-color.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

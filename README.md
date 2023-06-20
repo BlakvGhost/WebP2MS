@@ -1,8 +1,7 @@
 
-# PIL1_2223_34
+# WebP2MS
 
-Ce projet est une application web de gestion des emplois du temps pour
-un établissement d’enseignement supérieur, notamment l’IFRI.
+WebP2MS (Web Platform for Managing and Monitoring Schedules) est une application web de gestion des emplois du temps pour le compte de l’IFRI.
 
 ## Fonctionnalités
 
@@ -49,6 +48,11 @@ python manage.py runserver
 8. Dirigez vous dans le dossier `template` et travailler sur le fichier qui vous concerne
 
 9. N'importez rien d'externe comme fichiers `images, polices ou bootstrap`, tout est deja inclus, commencez juste à ecrire votre code et utiliser le fichier `static/css/master.css` pour ecrire votre css
+
+10. Connectez vous avec un compte admin pour une vue générale
+    - email: `exemple@exemple.com`
+    - password: `passme`
+
 
 Maintenant, vous pouvez commencer à travailler sur le projet localement et utiliser les commandes Git pour effectuer des commits, etc.
 

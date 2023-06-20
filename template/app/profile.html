@@ -1,0 +1,342 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+
+{% block 'scripts' %}
+
+<script src="/static/js/signin-methods.js"></script>
+<script src="/static/js/profile-details.js"></script>
+
+{% endblock %}
+
+{% block 'title' %} Votre Profile {% endblock %}
+
+{% block 'main' %}
+<div class="d-flex flex-column flex-column-fluid">
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+        <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                    Modifier votre profile et vos préférences
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div id="kt_app_content" class="app-content flex-column-fluid">
+        <div id="kt_app_content_container" class="app-container container-xxl">
+            <div class="card mb-5 mb-xl-10">
+                <!--begin::Card header-->
+                {% if errors %}
+                <div class="alert alert-dismissible alert-danger text-center w-100 w-lg-75 mx-auto my-2" role="alert"
+                    id="liveAlert">
+                    <div class="msg-alert">
+                        {% for error in errors %}
+                        <p class="fw-bold">
+                            {{ error }}
+                        </p>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
+                    data-bs-target="#kt_account_profile_details" aria-expanded="true"
+                    aria-controls="kt_account_profile_details">
+                    <!--begin::Card title-->
+                    <div class="card-title m-0">
+                        <h3 class="fw-bold m-0">Les Detailes du Profile</h3>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--begin::Card header-->
+                <!--begin::Content-->
+                <div id="kt_account_settings_profile_details" class="collapse show">
+                    <!--begin::Form-->
+                    <form id="kt_account_profile_details_form" class="form" method="POST"
+                        action="{% url 'ajax.user.update' %}" enctype="multipart/form-data">
+                        <!--begin::Card body-->
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <input type="hidden" name="email" value="{{ user.email }}">
+                        <input type="hidden" name="action" value="DETAILS">
+                        <div class="card-body border-top p-9">
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Avatar</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true"
+                                        style="background-image: url('/static/media/svg/avatars/blank.svg')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                            style="background-image: url('{% if user.avatar %}{{ MEDIA_URL|add:user.avatar.url }}{% else %}/static/media/avatars/blank.png{% endif %}')">
+                                        </div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="avatar_remove" />
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text">Formats authorisés: png, jpg, jpeg.</div>
+                                    <!--end::Hint-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nom complet</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" name="first_name"
+                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Prénom" value="{{ user.first_name }}" />
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" name="last_name"
+                                                class="form-control form-control-lg form-control-solid"
+                                                placeholder="NOM" value="{{ user.last_name }}" />
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                    <span>Numero de Téléphone</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                        title="Le numéro doit etre valide"></i>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="tel" name="phone_num"
+                                        class="form-control form-control-lg form-control-solid"
+                                        placeholder="Numero de téléphone" value="{{ user.phone_num }}" />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            {% if not user.is_superuser and not user.is_teacher and not user.is_staff %}
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                    <span class="required">La classe</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                        title="Permettra de vous afficher un emploi du temps spécifique"></i>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                
+                                <div class="col-lg-8 fv-row">
+                                    <select name="classroom" aria-label="Selectionner une classe" data-control="select2"
+                                        data-placeholder="Selectionner une classe..."
+                                        class="form-select form-select-solid form-select-lg fw-semibold">
+                                        {% for level in levels %}
+                                        <option value="{{ level.id }}" {% if level.id == user.level.id %} selected {% endif %}>
+                                            {{ level.slug }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>                                
+                            </div>
+                            {% endif %}
+                            <!--end::Card body-->
+                            <!--begin::Actions-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button type="reset"
+                                    class="btn btn-light btn-active-light-primary me-2">Annuler</button>
+                                <button type="submit" class="btn btn-primary"
+                                    id="kt_account_profile_details_submit">Changer</button>
+                            </div>
+                            <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Content-->
+            </div>
+        </div>
+        <!--end::Basic info-->
+        <!--begin::Sign-in Method-->
+        <div class="card mb-5 mb-xl-10">
+            <!--begin::Card header-->
+            <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
+                data-bs-target="#kt_account_signin_method">
+                <div class="card-title m-0">
+                    <h3 class="fw-bold m-0">Méthode de connexion</h3>
+                </div>
+            </div>
+            <!--end::Card header-->
+            <!--begin::Content-->
+            <div id="kt_account_settings_signin_method" class="collapse show">
+                <!--begin::Card body-->
+                <div class="card-body border-top p-9">
+                    <!--begin::Email Address-->
+                    <div class="d-flex flex-wrap align-items-center">
+                        <!--begin::Label-->
+                        <div id="kt_signin_email">
+                            <div class="fs-6 fw-bold mb-1">Adresse Email</div>
+                            <div class="fw-semibold text-gray-600">
+                                {{ user.email }}
+                            </div>
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Edit-->
+                        <div id="kt_signin_email_edit" class="flex-row-fluid d-none">
+                            <!--begin::Form-->
+                            <form id="kt_signin_change_email" class="form" novalidate="novalidate"
+                                action="{% url 'ajax.user.update' %}">
+                                <input type="hidden" name="action" value="EMAIL">
+                                <div class="row mb-6">
+                                    <div class="col-lg-6 mb-4 mb-lg-0">
+                                        <div class="fv-row mb-0">
+                                            <label for="emailaddress" class="form-label fs-6 fw-bold mb-3">
+                                                Entrer un nouveau email
+                                            </label>
+                                            <input type="email" class="form-control form-control-lg form-control-solid"
+                                                id="emailaddress" placeholder="Ex: johndoe@exemple.com"
+                                                name="emailaddress" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="fv-row mb-0">
+                                            <label for="confirmemailpassword"
+                                                class="form-label fs-6 fw-bold mb-3">Confirmer votre mot de
+                                                passe</label>
+                                            <input type="password"
+                                                class="form-control form-control-lg form-control-solid"
+                                                name="confirmemailpassword" id="confirmemailpassword" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button id="kt_signin_submit" type="button" class="btn btn-primary me-2 px-6">Mise à
+                                        jour Email</button>
+                                    <button id="kt_signin_cancel" type="button"
+                                        class="btn btn-color-gray-400 btn-active-light-primary px-6">Annuler</button>
+                                </div>
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Edit-->
+                        <!--begin::Action-->
+                        <div id="kt_signin_email_button" class="ms-auto">
+                            <button class="btn btn-light btn-active-light-primary">Changer Email</button>
+                        </div>
+                        <!--end::Action-->
+                    </div>
+                    <!--end::Email Address-->
+                    <!--begin::Separator-->
+                    <div class="separator separator-dashed my-6"></div>
+                    <!--end::Separator-->
+                    <!--begin::Password-->
+                    <div class="d-flex flex-wrap align-items-center mb-10">
+                        <!--begin::Label-->
+                        <div id="kt_signin_password">
+                            <div class="fs-6 fw-bold mb-1">Mot de Passe</div>
+                            <div class="fw-semibold text-gray-600">************</div>
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Edit-->
+                        <div id="kt_signin_password_edit" class="flex-row-fluid d-none">
+                            <!--begin::Form-->
+                            <form id="kt_signin_change_password" class="form" novalidate="novalidate"
+                                action="{% url 'ajax.user.update' %}">
+                                <input type="hidden" name="action" value="PASSWORD">
+                                <div class="row mb-1">
+                                    <div class="col-lg-4">
+                                        <div class="fv-row mb-0">
+                                            <label for="currentpassword" class="form-label fs-6 fw-bold mb-3">Current
+                                                Password</label>
+                                            <input type="password"
+                                                class="form-control form-control-lg form-control-solid"
+                                                name="currentpassword" id="currentpassword" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="fv-row mb-0">
+                                            <label for="newpassword" class="form-label fs-6 fw-bold mb-3">New
+                                                Password</label>
+                                            <input type="password"
+                                                class="form-control form-control-lg form-control-solid"
+                                                name="newpassword" id="newpassword" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="fv-row mb-0">
+                                            <label for="confirmpassword" class="form-label fs-6 fw-bold mb-3">Confirm
+                                                New Password</label>
+                                            <input type="password"
+                                                class="form-control form-control-lg form-control-solid"
+                                                name="confirmpassword" id="confirmpassword" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-text mb-5">Password must be at least 8 character and contain
+                                    symbols</div>
+                                <div class="d-flex">
+                                    <button id="kt_password_submit" type="button" class="btn btn-primary me-2 px-6">Mise
+                                        à jour Password</button>
+                                    <button id="kt_password_cancel" type="button"
+                                        class="btn btn-color-gray-400 btn-active-light-primary px-6">Anner</button>
+                                </div>
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Edit-->
+                        <!--begin::Action-->
+                        <div id="kt_signin_password_button" class="ms-auto">
+                            <button class="btn btn-light btn-active-light-primary">Reset Password</button>
+                        </div>
+                        <!--end::Action-->
+                    </div>
+                    <!--end::Password-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Content-->
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

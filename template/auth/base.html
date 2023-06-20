@@ -4,7 +4,12 @@
 
 <head>
     {% include 'base/meta.html' %}
-    <title> {% block 'title' %} {% endblock %} - TimeTable Plateform</title>
+    <title> {% block 'title' %} {% endblock %} - WebP2MS</title>
+    <style>
+        .text-light {
+            color: white !important;
+        }
+    </style>
 </head>
 </head>
 
@@ -14,11 +19,13 @@
             <div class="row justify-content-center w-100">
                 <div class="col col-12 col-lg-7 px-4 text-center text-light mb-3">
                     <div class="mx-auto" style="height: 250px; width: 300px;">
-                        <img src="{% static 'img/logo.svg' %}" alt="logo timetable" class="w-100 h-100">
+                        <a href="/">
+                            <img src="{% static 'img/logo.svg' %}" alt="logo WebP2MS" class="w-100 h-100">
+                        </a>
                     </div>
-                    <div class="mx-auto text-light">
-                        <h3 class="text-white fw-normal m-0"> Plateforme web de gestion et de suivi des emplois du temps
-                            à IFRI </h3>
+                    <div class="mx-auto">
+                        <h1 class="fw-normal m-0 text-light"> Plateforme web de Gestion et de Suivi des Emploi du Temps
+                            à IFRI </h1>
                     </div>
                 </div>
                 <div class="col col-12 col-lg-5 card shadow rounded">
@@ -63,22 +70,35 @@
                 if (this.user.email && this.user.password) {
                     return this.base("{% url 'ajax.login' %}")
                 }
-                return this.error = "Veillez remplir tout les champs ci dessous"
+                return this.error = "Veuillez remplir tout les champs ci dessous"
             },
             register: function () {
-                if (this.user.email && this.user.first_name && this.user.last_name && this.user.password) {
+                this.user.level = document.querySelector('#level').value;
+
+                if (this.user.email && this.user.first_name
+                    && this.user.last_name && this.user.password && this.user.level) {
                     if (this.user.password === this.user.confirm_password) {
                         return this.base("{% url 'ajax.register' %}")
                     }
                     return this.error = "Vos deux mots de passe ne sont pas identiques"
                 }
-                return this.error = "Veillez remplir tout les champs ci dessous"
+                return this.error = "Veuillez remplir tout les champs ci dessous"
             },
             forgotPassword: function () {
                 if (this.user.email) {
                     return this.base("{% url 'ajax.password.forgot' %}")
                 }
-                return this.error = "Veillez saisi votre email"
+                return this.error = "Veuillez saisir votre email"
+            },
+            newPassword: function () {
+                this.user.token = "{{ token }}"
+                if (this.user.password && this.user.token) {
+                    if (this.user.password === this.user.confirm_password) {
+                        return this.base("{% url 'ajax.password.new' %}")
+                    }
+                    return this.error = "Vos deux mots de passe ne sont pas identiques"
+                }
+                return this.error = "Veuillez saisir un nouveau mot de passe valide"
             },
         },
         mounted() {

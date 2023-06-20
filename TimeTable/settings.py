@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%#cys#p5lm=mwh7&6*(j@$_k*houfztz$(@e2(pnuk41$a@!5&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["pil-12223-34.kabirou-alassane.com", 'localhost', '127.0.0.1']
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'Auth',
     'App',
 ]
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'TimeTable.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
@@ -120,6 +121,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static/']
 MEDIA_ROOT = BASE_DIR / 'assets'
+MEDIA_URL = '/assets/'
 
 AUTH_USER_MODEL = 'Auth.MyUser'
 LOGIN_URL = '/auth/login'
@@ -129,7 +131,8 @@ EMAIL_HOST = 'mail.kabirou-alassane.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'no-reply@kabirou-alassane.com'
 EMAIL_HOST_PASSWORD = 'jQ0yiv~!Y;&='
-EMAIL_USE_TLS = True
+#EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'no-reply@kabirou-alassane.com'
 
 
