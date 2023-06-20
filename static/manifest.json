@@ -1,5 +1,5 @@
 {
-    "name": "WebP2MS - Web Platform for Managing and Monitoring Schedules",
+    "name": "WebP2MS",
     "short_name": "WebP2MS",
     "description": "Plateforme web de gestion et de suivi des emplois du temps de l'Institut IFRI.",
     "start_url": "/",
@@ -13,7 +13,7 @@
         "type": "image/png"
       },
       {
-        "src": "/static/android-chrome-512x512.png",
+        "src": "/static/logo.png",
         "sizes": "512x512",
         "type": "image/png"
       }
