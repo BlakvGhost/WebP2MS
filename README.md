@@ -1,4 +1,3 @@
-
 # WebP2MS
 
 WebP2MS (Web Platform for Managing and Monitoring Schedules) est une application web de gestion des emplois du temps pour le compte de l’IFRI.
