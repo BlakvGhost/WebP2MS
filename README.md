@@ -113,7 +113,7 @@ Si vous avez des questions ou des doutes, n'hésitez pas à demander en cliquant
 
 **Client:** HTML5, CSS3, Bootstrap 5
 
-**Server:** à decider
+**Server:** Django
 
 ## Authors
 
