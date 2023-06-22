@@ -59,7 +59,7 @@
                     <!--begin::Modal content-->
                     <div class="modal-content">
                         <!--begin::Form-->
-                        <form class="form" action="{% url 'shedules' %}" id="kt_modal_add_event_form">
+                        <form class="form" action="{% url 'ajax.shedules.add' %}" id="kt_modal_add_event_form" method="POST" data-get-url="{% url 'ajax.shedules.get' %}">
                             <!--begin::Modal header-->
                             <div class="modal-header">
                                 <!--begin::Modal title-->
@@ -80,30 +80,30 @@
                             </div>
                             <!--end::Modal header-->
                             <!--begin::Modal body-->
-                            <div class="modal-body py-10 px-lg-17">
-                                <!--begin::Input group-->
+                            <div class="modal-body py-10 px-lg-17">                               
                                 <div class="fv-row mb-9">
                                     <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold required mb-2">Nom de L'enseignant</label>
+                                    <label class="fs-6 fw-semibold mb-2">Nom de L'enseignant</label>
                                     <!--end::Label-->
+                                    <!--begin::Input-->
                                     <select name="teach_by" aria-label="Selectionner un enseignant" data-control="select2"
                                             data-placeholder="Selectionner un enseignant..."
                                             class="form-select form-select-solid form-select-lg fw-semibold">
+                                        <option>Selectionner un enseignant</option>
                                         {% for teacher in teachers %}
                                             <option value="{{ teacher.id }}">
                                                 {{ teacher.first_name }} {{ teacher.last_name }}
                                             </option>
                                         {% endfor %}
                                     </select>
+                                    <!--end::Input-->
                                 </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
                                 <div class="fv-row mb-9">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold mb-2">Selectionner la matière</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <select name="subject" aria-label="Selectionner une matière" data-control="select2"
+                                    <select name="subject" aria-label="Selectionner une matière" data-control="select"
                                             data-placeholder="La matière"
                                             class="form-select form-select-solid form-select-lg fw-semibold">
                                         {% for subject in subjects %}
@@ -120,7 +120,7 @@
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold mb-2">Selectionner Une salle de classe</label>
                                     <!--end::Label-->
-                                    <select name="classroom" aria-label="Selectionner une salle de classe" data-control="select2"
+                                    <select name="classroom" aria-label="Selectionner une salle de classe" data-control="select"
                                             data-placeholder="Selectionner une salle de classe..."
                                             class="form-select form-select-solid form-select-lg fw-semibold">
                                         {% for cl in classrooms %}
@@ -135,7 +135,7 @@
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold mb-2">Selectionner un niveau</label>
                                     <!--end::Label-->
-                                    <select name="level" aria-label="Selectionner un niveau" data-control="select2"
+                                    <select name="level" aria-label="Selectionner un niveau" data-control="select"
                                             data-placeholder="Selectionner un niveau..."
                                             class="form-select form-select-solid form-select-lg fw-semibold">
                                         {% for level in levels %}
@@ -151,7 +151,7 @@
                                     <div class="col">
                                         <div class="fv-row mb-9">
                                             <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2 required">Date de début</label>
+                                            <label class="fs-6 fw-semibold mb-2">Date de début</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <input class="form-control form-control-solid" name="calendar_event_start_date" placeholder="Picker la date de début" id="kt_calendar_datepicker_start_date" />
@@ -175,7 +175,7 @@
                                     <div class="col">
                                         <div class="fv-row mb-9">
                                             <!--begin::Label-->
-                                            <label class="fs-6 fw-semibold mb-2 required">Date de Fin</label>
+                                            <label class="fs-6 fw-semibold mb-2">Date de Fin</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <input class="form-control form-control-solid" name="calendar_event_end_date" placeholder="Picker la date de fin" id="kt_calendar_datepicker_end_date" />

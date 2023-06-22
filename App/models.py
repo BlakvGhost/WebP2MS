@@ -35,7 +35,6 @@ class Timetable(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True)
     classroom = models.ForeignKey(Classroom, on_delete=models.SET_NULL, null=True)
     level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
-    week = models.IntegerField()
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(auto_now_add=True)

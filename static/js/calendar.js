@@ -31,6 +31,7 @@ var KTAppCalendar = function () {
     var modal;
     var modalTitle;
     var form;
+    var getUrl;
     var validator;
     var addButton;
     var submitButton;
@@ -58,6 +59,13 @@ var KTAppCalendar = function () {
         var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
         var TODAY = todayDate.format('YYYY-MM-DD');
         var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
+
+        axios.get(getUrl).then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.error(err);
+        })
 
         // Init calendar --- more info: https://fullcalendar.io/docs/initialize-globals
         calendar = new FullCalendar.Calendar(calendarEl, {
@@ -352,6 +360,20 @@ var KTAppCalendar = function () {
 
             const formData = new FormData(form)
 
+            let startDateTime = `${form.calendar_event_start_date.value}:${form.calendar_event_start_time.value}`;
+            let endDateTime = `${form.calendar_event_end_date.value}:${form.calendar_event_end_time.value}`;
+            
+            data = {
+                teacher: form.teach_by.value,
+                classroom: form.classroom.value,
+                subject: form.subject.value,
+                level: form.level.value,
+                start_time: startDateTime,
+                end_time: endDateTime
+            }
+
+            //console.log(data);
+
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function (status) {
@@ -362,14 +384,13 @@ var KTAppCalendar = function () {
                         submitButton.setAttribute('data-kt-indicator', 'on');
 
                         // Disable submit button whilst loading
-                        submitButton.disabled = true;
+                        //submitButton.disabled = true;
 
-                        axios.post(url, form).then(res => {
+                        axios.post(url, data).then(res => {
                             console.log(res);
+                        }).catch(err => {
+                            console.error(err);
                         })
-                            .catch(err => {
-                                console.error(err);
-                            })
 
                         // Simulate form submission
                         // setTimeout(function () {
@@ -793,6 +814,7 @@ var KTAppCalendar = function () {
             // Add event modal
             const element = document.getElementById('kt_modal_add_event');
             form = element.querySelector('#kt_modal_add_event_form');
+            getUrl = form.dataset.getUrl;
             eventTeacher = form.querySelector('[name="teach_by"]');
             eventClassroom = form.querySelector('[name="classroom"]');
             eventLevel = form.querySelector('[name="level"]');

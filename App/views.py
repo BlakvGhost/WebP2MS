@@ -3,6 +3,7 @@ from django.utils import timezone
 import json
 import secrets
 import uuid
+from django.core import serializers
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
@@ -453,3 +454,46 @@ def update_user(request):
             return JsonResponse({'success': 'Votre mot de passe mis a été jour avec succès'})
 
     return JsonResponse({'error': 'Invalid HTTP method'}, status=400)
+
+@csrf_exempt
+@login_required
+@superuser_or_staff_required
+def ajax_get_shedules(request):
+
+    timetables = models.Timetable.objects.all()
+    serialized_timetables = serializers.serialize('json', timetables)
+    return JsonResponse(serialized_timetables, safe=False)
+
+@csrf_exempt
+@login_required
+@superuser_or_staff_required
+def ajax_set_shedule(request):
+    
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+
+        teach_byId = data.get('teacher')
+        classroomId = data.get('classroom')
+        levelId = data.get('level')
+        subjectId = data.get('subject')
+        start_time = data.get('start_time')
+        end_time = data.get('end_time')
+
+        if teach_byId and classroomId and levelId and subjectId and start_time and end_time:
+
+            timetable = models.Timetable.objects.create(
+                classroom=models.Classroom.objects.get(id=classroomId),
+                level=Level.objects.get(id=levelId),
+                subject=models.Subject.objects.get(id=subjectId),
+                teach_by=User.objects.get(id=teach_byId),
+                start_time=start_time,
+                end_time=end_time,
+            )
+
+            return JsonResponse({'success': "Un nouveau programme ajouté avec sucess"})
+
+        else:
+            return JsonResponse({'error': 'Veuillez bien remplir tout les champs'}, status=400)
+        
+    else:
+        return JsonResponse({'error': 'Methode HTTP invalid'}, status=400)
