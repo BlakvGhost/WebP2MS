@@ -338,7 +338,12 @@ def levels(request):
 @login_required
 def shedules(request):
 
-    context = {}
+    context = {
+        'subjects': models.Subject.objects.all(),
+        'levels': Level.objects.all(),
+        'classrooms': models.Classroom.objects.all(),
+        'teachers': User.objects.filter(is_teacher=True),
+    }
 
     return render(request, 'app/shedules.html', context)
 
