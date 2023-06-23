@@ -111,7 +111,7 @@ Si vous avez des questions ou des doutes, n'hésitez pas à demander en cliquant
 
 ## Tech Stack
 
-**Client:** HTML5, CSS3, Bootstrap 5
+**Client:** HTML5, CSS3, Bootstrap 5, Vue.js3
 
 **Server:** Django
 
