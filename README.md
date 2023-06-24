@@ -127,4 +127,4 @@ Ce projet est distribué sous la licence
 
 ## Restriction d'accès
 
-Ce projet est destiné à être édité et consulté uniquement par les membres du groupe de travail avec lesquels il est élaboré.
+Ce projet est destiné à être éditer et consulter uniquement par les membres du groupe de travail avec lesquels il est élaboré.
