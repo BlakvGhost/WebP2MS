@@ -29,12 +29,21 @@ class Subject(models.Model):
     def __str__(self) -> str:
         return self.slug
     
+    def serialize(self):
+        return {
+            'id': self.id,
+            'slug': self.start_date,
+            'total_time': self.total_time,
+            'end_time': self.end_time,
+            'end_date': self.end_date,
+        }
+    
 class Timetable(models.Model):
     
     teacher = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True)
     classroom = models.ForeignKey(Classroom, on_delete=models.SET_NULL, null=True)
-    level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
+
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
     start_time = models.TimeField(null=True)
@@ -44,4 +53,13 @@ class Timetable(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self) -> str:
-        return f"semaine {self.week}"
+        return f"du {self.start_date} au {self.end_date}"
+    
+    def serialize(self):
+        return {
+            'id': self.id,
+            'start_date': self.start_date,
+            'start_time': self.start_time,
+            'end_time': self.end_time,
+            'end_date': self.end_date,
+        }

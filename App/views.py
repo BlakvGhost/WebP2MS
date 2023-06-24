@@ -483,19 +483,18 @@ def ajax_set_shedule(request):
 
         teacher = data.get('teacher')
         classroom = data.get('classroom')
-        level = data.get('level')
+
         subject = data.get('subject')
         start_time = data.get('start_time')
         end_time = data.get('end_time')
         start_date = data.get('start_date')
         end_date = data.get('end_date')
 
-        if teacher and classroom and level and subject and start_time and end_time and start_date and end_date:
-            
+        if teacher and classroom and subject and start_time and end_time and start_date and end_date:
+
             try:
                 models.Timetable.objects.create(
                     classroom=models.Classroom.objects.get(id=classroom),
-                    level=Level.objects.get(id=level),
                     subject=models.Subject.objects.get(id=subject),
                     teacher=User.objects.get(id=teacher),
                     start_time=start_time,

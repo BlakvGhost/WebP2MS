@@ -119,7 +119,7 @@
                                     </div>
                                     <!--end::Input group-->
                                 </div>
-                                <div class="row row-cols-1 row-cols-lg-2">
+                                <div class="row row-cols-1">
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-9">
                                         <!--begin::Label-->
@@ -136,22 +136,6 @@
                                             {% endfor %}
                                         </select>
                                     </div>
-
-                                    <div class="fv-row mb-9">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold mb-2">Selectionner un niveau</label>
-                                        <!--end::Label-->
-                                        <select required name="level" aria-label="Selectionner un niveau"
-                                            data-control="select2-custom" data-placeholder="Selectionner un niveau..."
-                                            class="form-select form-select-solid form-select-lg fw-semibold">
-                                            {% for level in levels %}
-                                            <option value="{{ level.id }}">
-                                                {{ level.slug }}
-                                            </option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
                                 </div>
                                 <!--begin::Input group-->
                                 <div class="row row-cols-lg-2 g-10">
