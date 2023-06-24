@@ -184,6 +184,17 @@
                                                     placeholder="Ex: 1AK34" />
                                                 <!--end::Input-->
                                             </div>
+                                            
+                                            <div class="fv-row mb-7">
+                                                <!--begin::Label-->
+                                                <label class="fw-semibold fs-6 mb-2">Couleur de la matière: </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="color" name="bgColor"
+                                                    class="form-control form-control-solid mb-3 mb-lg-0"
+                                                    placeholder="Selectionner une couleur" />
+                                                <!--end::Input-->
+                                            </div>
 
                                             <div class="fv-row mb-7">
                                                 <!--begin::Label-->
@@ -281,7 +292,7 @@
                                     </div>
                                 </td>
                                 <td class="align-items-center" data-bs-toggle="modal" data-bs-target="#show_ct{{ subject.id }}">
-                                    <div class="badge badge-primary fw-bold">
+                                    <div class="badge fw-bold {% if subject.bgColor %} text-light {% endif %}" style="background-color: {{ subject.bgColor }};">
                                         {{ subject.slug }}
                                     </div>
                                 </td>
@@ -368,7 +379,16 @@
                                                                     value="{{ subject.code }}" />
                                                                 <!--end::Input-->
                                                             </div>
-
+                                                            <div class="fv-row mb-7">
+                                                                <!--begin::Label-->
+                                                                <label class="fw-semibold fs-6 mb-2">Couleur de la matière: </label>
+                                                                <!--end::Label-->
+                                                                <!--begin::Input-->
+                                                                <input type="color" name="bgColor"
+                                                                    class="form-control form-control-solid mb-3 mb-lg-0"
+                                                                    placeholder="Selectionner une couleur" value="{{ subject.bgColor }}" />
+                                                                <!--end::Input-->
+                                                            </div>
                                                             <div class="fv-row mb-7">
                                                                 <!--begin::Label-->
                                                                 <label class="required fw-semibold fs-6 mb-2">Associée à

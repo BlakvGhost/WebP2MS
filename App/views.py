@@ -173,6 +173,7 @@ def cours(request):
         code = request.POST.get('code')
         level = request.POST.get('level')
         desc = request.POST.get('desc')
+        bgColor = request.POST.get('bgColor')
         total_time = request.POST.get('total_time')
         _method = request.POST.get('method')
 
@@ -194,6 +195,7 @@ def cours(request):
                     code=code,
                     level=level,
                     desc=desc,
+                    bgColor=bgColor,
                     total_time=total_time,
                     created_by=created_by,
                 )
@@ -205,6 +207,7 @@ def cours(request):
             slug = request.POST.get('slug')
             code = request.POST.get('code')
             desc = request.POST.get('desc')
+            bgColor = request.POST.get('bgColor')
             level = request.POST.get('level')
             total_time = request.POST.get('total_time')
 
@@ -215,6 +218,7 @@ def cours(request):
                 subject.code = code
                 subject.level = level
                 subject.desc = desc
+                subject.bgColor = bgColor
                 subject.total_time = total_time
                 subject.save()
 

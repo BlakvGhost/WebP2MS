@@ -31,7 +31,7 @@ class Subject(models.Model):
     total_time = models.IntegerField()
     level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
     desc = models.TextField(null=True, blank=True)
-    bgColor = models.CharField(max_length=20, null=True)
+    bgColor = models.CharField(max_length=255, null=True, blank=True)
     created_by = models.ForeignKey(
         MyUser, on_delete=models.SET_NULL, null=True)
     updated_at = models.DateTimeField(auto_now_add=True)
