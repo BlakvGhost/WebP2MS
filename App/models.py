@@ -31,6 +31,7 @@ class Subject(models.Model):
     total_time = models.IntegerField()
     level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
     desc = models.TextField(null=True, blank=True)
+    bgColor = models.CharField(max_length=20, null=True)
     created_by = models.ForeignKey(
         MyUser, on_delete=models.SET_NULL, null=True)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -71,11 +72,11 @@ class Timetable(models.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'start_date': self.start_date,
-            'start_time': self.start_time,
-            'end_time': self.end_time,
-            'end_date': self.end_date,
+            'title': self.subject.slug,
+            'start': f"{self.start_date}T{self.start_time}",
+            'end': f"{self.end_date}T{self.start_time}",
             'teacher': self.teacher.serialize(),
             'subject': self.subject.serialize(),
             'classroom': self.classroom.serialize(),
+            'className': "fc-event-danger",
         }
