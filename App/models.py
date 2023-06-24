@@ -31,7 +31,7 @@ class Subject(models.Model):
     
 class Timetable(models.Model):
     
-    teach_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
+    teacher = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True)
     classroom = models.ForeignKey(Classroom, on_delete=models.SET_NULL, null=True)
     level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
@@ -39,6 +39,7 @@ class Timetable(models.Model):
     end_date = models.DateField(null=True)
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
+    
     updated_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
