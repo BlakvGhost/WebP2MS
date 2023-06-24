@@ -461,14 +461,9 @@ def update_user(request):
 @superuser_or_staff_required
 def ajax_get_shedules(request):
 
-    data, shedules = [], models.Timetable.objects.all()
+    shedules = models.Timetable.objects.all()
 
-    for shedule in shedules:
-        data.append({
-            'level': shedule.level.slug,
-            'start': shedule.start_time,
-            'end': shedule.end_time,
-        })
+    data = [shedule.serialize() for shedule in shedules]
 
     return JsonResponse(data, safe=False)
 

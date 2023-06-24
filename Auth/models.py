@@ -25,14 +25,23 @@ class MyUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
+
 class Level(models.Model):
     slug = models.CharField(max_length=100)
     total_students = models.IntegerField(default=200)
     updated_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self) -> str:
         return self.slug
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'slug': self.slug,
+            'total_students': self.total_students
+        }
+
 
 class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
@@ -59,3 +68,13 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     def is_reset_token_expired(self):
         return self.reset_token_expiration is not None and self.reset_token_expiration < timezone.now()
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'phone_num': self.phone_num,
+            'email': self.email,
+            'avatar': self.avatar.url,
+        }
