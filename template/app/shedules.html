@@ -1,17 +1,11 @@
 {% extends 'base/base.html' %}
 {% load humanize %}
 
-{% block 'scripts' %}
-<script src="/static/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-<script src="/static/plugins/custom/datatables/datatables.bundle.js"></script>
-<script src="/static/js/calendar.js"></script>
-{% endblock %}
-
 {% block 'title' %} Emplois du temps {% endblock %}
 
 {% block 'main' %}
 <link href="/static/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-<div class="d-flex flex-column flex-column-fluid">
+<div class="d-flex flex-column flex-column-fluid" id="main">
     <div id="kt_app_toolbar" class="app-toolbar py-4 py-lg-8">
         <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -357,5 +351,73 @@
         <!--end::Content container-->
     </div>
 </div>
+{% endblock %}
 
+{% block 'scripts' %}
+<script src="/static/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+<script src="/static/plugins/custom/datatables/datatables.bundle.js"></script>
+<script>
+    Vue.createApp({
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                shedules: [],
+            }
+        },
+        methods: {
+            getShedules: function() {
+                axios.get("{% url 'ajax.shedules.get' %}").then(res => {
+                    console.log(res);
+                    this.shedules = res.data;
+                    this.initCalendar();
+                }).catch(err => {
+                    console.error(err);
+                })
+            },
+            initCalendar: function() {
+                let calendarEl = document.getElementById('kt_calendar_app');
+                let todayDate = moment().startOf('day');
+                let YM = todayDate.format('YYYY-MM');
+                let YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
+                let TODAY = todayDate.format('YYYY-MM-DD');
+                let TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
+
+                const self = this;
+
+                calendar = new FullCalendar.Calendar(calendarEl, {
+
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                initialDate: TODAY,
+                navLinks: true,
+                selectable: true,
+                selectMirror: true,
+    
+                select: function(arg) {
+                    self.handleNewEvent(arg);
+                },
+    
+                eventClick: function (arg) {
+                },
+    
+                editable: true,
+                dayMaxEvents: true,
+                events: this.shedules,
+            });
+    
+            calendar.render();
+            },
+            handleNewEvent: function(ev) {
+                console.log(ev);
+            },
+        },        
+        mounted() {
+            this.getShedules();
+        },
+
+    }).mount('#main')
+</script>
 {% endblock %}

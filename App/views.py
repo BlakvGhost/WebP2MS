@@ -3,7 +3,6 @@ from django.utils import timezone
 import json
 import secrets
 import uuid
-from django.core import serializers
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
@@ -460,9 +459,16 @@ def update_user(request):
 @superuser_or_staff_required
 def ajax_get_shedules(request):
 
-    timetables = models.Timetable.objects.all()
-    serialized_timetables = serializers.serialize('json', timetables)
-    return JsonResponse(serialized_timetables, safe=False)
+    data, shedules = [], models.Timetable.objects.all()
+
+    for shedule in shedules:
+        data.append({
+            'level': shedule.level.slug,
+            'start': shedule.start_time,
+            'end': shedule.end_time,
+        })
+
+    return JsonResponse(data, safe=False)
 
 @csrf_exempt
 @login_required
