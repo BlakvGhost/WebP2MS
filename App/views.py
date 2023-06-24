@@ -474,9 +474,9 @@ def ajax_get_shedules(request):
 @login_required
 @superuser_or_staff_required
 def ajax_set_shedule(request):
-    
+
     if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
+        data = request.POST
 
         teach_byId = data.get('teacher')
         classroomId = data.get('classroom')
