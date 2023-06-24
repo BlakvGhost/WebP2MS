@@ -101,7 +101,8 @@ def teachers(request):
             if email or first_name or last_name:
                 if User.objects.filter(email=email).exists():
                     exist = True
-                    errors.append("Un utilisateur existe déjà avec cet email")
+                    errors.append(
+                        "Un utilisateur existe déjà avec cet email")
 
                 if avatar and not exist:
                     file_extension = avatar.name.split('.')[-1]
@@ -337,7 +338,7 @@ def levels(request):
 
 @login_required
 def shedules(request):
-
+    #models.Timetable.objects.all().delete()
     context = {
         'subjects': models.Subject.objects.all(),
         'levels': Level.objects.all(),
@@ -454,6 +455,7 @@ def update_user(request):
 
     return JsonResponse({'error': 'Invalid HTTP method'}, status=400)
 
+
 @csrf_exempt
 @login_required
 @superuser_or_staff_required
@@ -470,6 +472,7 @@ def ajax_get_shedules(request):
 
     return JsonResponse(data, safe=False)
 
+
 @csrf_exempt
 @login_required
 @superuser_or_staff_required
@@ -478,28 +481,35 @@ def ajax_set_shedule(request):
     if request.method == 'POST':
         data = request.POST
 
-        teach_byId = data.get('teacher')
-        classroomId = data.get('classroom')
-        levelId = data.get('level')
-        subjectId = data.get('subject')
+        teacher = data.get('teacher')
+        classroom = data.get('classroom')
+        level = data.get('level')
+        subject = data.get('subject')
         start_time = data.get('start_time')
         end_time = data.get('end_time')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
 
-        if teach_byId and classroomId and levelId and subjectId and start_time and end_time:
-
-            timetable = models.Timetable.objects.create(
-                classroom=models.Classroom.objects.get(id=classroomId),
-                level=Level.objects.get(id=levelId),
-                subject=models.Subject.objects.get(id=subjectId),
-                teach_by=User.objects.get(id=teach_byId),
-                start_time=start_time,
-                end_time=end_time,
-            )
+        if teacher and classroom and level and subject and start_time and end_time and start_date and end_date:
+            
+            try:
+                models.Timetable.objects.create(
+                    classroom=models.Classroom.objects.get(id=classroom),
+                    level=Level.objects.get(id=level),
+                    subject=models.Subject.objects.get(id=subject),
+                    teacher=User.objects.get(id=teacher),
+                    start_time=start_time,
+                    end_time=end_time,
+                    start_date=start_date,
+                    end_date=end_date,
+                )
+            except:
+                return JsonResponse({'error': 'Erreur lors de la création du programme, vérifiez tout vos champs'}, status=400)
 
             return JsonResponse({'success': "Un nouveau programme ajouté avec sucess"})
 
         else:
             return JsonResponse({'error': 'Veuillez bien remplir tout les champs'}, status=400)
-        
+
     else:
         return JsonResponse({'error': 'Methode HTTP invalid'}, status=400)

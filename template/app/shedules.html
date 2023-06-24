@@ -88,7 +88,7 @@
                                         <label class="fs-6 fw-semibold mb-2">Nom de L'enseignant</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select required name="teach_by" aria-label="Selectionner un enseignant"
+                                        <select required name="teacher" aria-label="Selectionner un enseignant"
                                             data-control="select2-custom"
                                             data-placeholder="Selectionner un enseignant..."
                                             class="form-select form-select-solid form-select-lg fw-semibold">
@@ -218,13 +218,13 @@
                                     data-bs-dismiss="modal">Annuler</button>
                                 <!--end::Button-->
                                 <!--begin::Button-->
-                                <button v-if="!checking" type="submit" id="kt_modal_add_event_submit" class="btn btn-primary">
+                                <button v-if="!checking" type="submit" id="kt_modal_add_event_submit"
+                                    class="btn btn-primary">
                                     <span class="indicator-label">Enregistrer</span>
                                     <span class="indicator-progress">Patientez...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
-                                <button v-if="checking"
-                                    class="btn btn-success bg-app-secondary mx-2 fw-bold text-light"
+                                <button v-if="checking" class="btn btn-success bg-app-secondary mx-2 fw-bold text-light"
                                     type="button" disabled id="checkingBtn">
                                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                     Patientez...
@@ -435,15 +435,24 @@
                 axios.post("{% url 'ajax.shedules.add' %}", data).then(res => {
                     console.log(res);
 
+                    this.swall({
+                        type: 'success',
+                        text: res.data.success,
+                    })
                     return this.checking = false;
                 }).catch(err => {
-                    console.error(err);
+                    this.swall({
+                        type: 'error',
+                        text: err.response.data.error,
+                    })
+                    return this.checking = !false;
                 })
             },
             getShedules: function () {
                 axios.get("{% url 'ajax.shedules.get' %}").then(res => {
                     this.shedules = res.data;
                     this.initCalendar();
+                    console.log(res.data);
                 }).catch(err => {
                     console.error(err);
                 })
@@ -509,6 +518,17 @@
                     noCalendar: true,
                     dateFormat: "H:i",
                 }).setDate(new Date());
+            },
+            swall: function (options) {
+                Swal.fire({
+                    text: options.text,
+                    icon: options.type,
+                    buttonsStyling: false,
+                    confirmButtonText: "D'accord, c'est compris!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
             },
         },
         mounted() {
