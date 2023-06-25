@@ -560,7 +560,7 @@ def ajax_del_shedule(request):
 @csrf_exempt
 @login_required
 def get_all_notifications(request):
-    notifications = request.user.notifications.all()
+    notifications = request.user.notifications.filter(is_opened=False)
 
     data = [n.serialize() for n in notifications]
 
