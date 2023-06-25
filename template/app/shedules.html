@@ -232,7 +232,7 @@
                         <div class="modal-header border-0 justify-content-end">
                             <!--begin::Edit-->
                             <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2"
-                                data-bs-toggle="tooltip" data-bs-dismiss="click" title="Edit Event"
+                                data-bs-toggle="tooltip" data-bs-dismiss="click" title="Editer ce programme"
                                 id="kt_modal_view_event_edit">
                                 <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -251,7 +251,7 @@
                             <!--end::Edit-->
                             <!--begin::Edit-->
                             <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2"
-                                data-bs-toggle="tooltip" data-bs-dismiss="click" title="Delete Event"
+                                data-bs-toggle="tooltip" data-bs-dismiss="click" title="Supprimer ce programme"
                                 id="kt_modal_view_event_delete">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -273,7 +273,7 @@
                             <!--end::Edit-->
                             <!--begin::Close-->
                             <div class="btn btn-icon btn-sm btn-color-gray-500 btn-active-icon-primary"
-                                data-bs-toggle="tooltip" title="Hide Event" data-bs-dismiss="modal">
+                                data-bs-toggle="tooltip" title="Fermer ce programme" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -314,12 +314,11 @@
                                 <div class="mb-9">
                                     <!--begin::Event name-->
                                     <div class="d-flex align-items-center mb-2">
-                                        <span class="fs-3 fw-bold me-3" data-kt-calendar="event_name"></span>
-                                        <span class="badge badge-light-success" data-kt-calendar="all_day"></span>
+                                        <span class="fs-3 fw-bold me-3" id="viewTitle"></span>
                                     </div>
                                     <!--end::Event name-->
                                     <!--begin::Event description-->
-                                    <div class="fs-6" data-kt-calendar="event_description"></div>
+                                    <div class="fs-6" id="viewDesc"></div>
                                     <!--end::Event description-->
                                 </div>
                             </div>
@@ -338,8 +337,8 @@
                                 <!--end::Icon-->
                                 <!--begin::Event start date/time-->
                                 <div class="fs-6">
-                                    <span class="fw-bold">Starts</span>
-                                    <span data-kt-calendar="event_start_date"></span>
+                                    <span class="fw-bold">Commence: </span>
+                                    <span data-kt-calendar="event_start_date" id="viewStart"></span>
                                 </div>
                                 <!--end::Event start date/time-->
                             </div>
@@ -358,12 +357,51 @@
                                 <!--end::Icon-->
                                 <!--begin::Event end date/time-->
                                 <div class="fs-6">
-                                    <span class="fw-bold">Ends</span>
-                                    <span data-kt-calendar="event_end_date"></span>
+                                    <span class="fw-bold">Fin: </span>
+                                    <span data-kt-calendar="event_end_date" id="viewEnd"></span>
+                                </div>
+                                <!--end::Event end date/time-->
+                            </div>
+
+                            <div class="d-flex align-items-center mb-9">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
+                                <span class="svg-icon svg-icon-1 svg-icon-danger me-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                        viewBox="0 0 24 24" version="1.1">
+                                        <circle fill="currentColor" cx="12" cy="12" r="8" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Event end date/time-->
+                                <div class="fs-6">
+                                    <span class="fw-bold">Details Cours: </span>
+                                    <span id="viewSubject"></span>
                                 </div>
                                 <!--end::Event end date/time-->
                             </div>
                             <!--end::Row-->
+                            <!--begin::Row-->
+                            <div class="d-flex align-items-center">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
+                                <span class="svg-icon svg-icon-1 svg-icon-muted me-5">
+                                    <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3" d="M16.5 9C16.5 13.125 13.125 16.5 9 16.5C4.875 16.5 1.5 13.125 1.5 9C1.5 4.875 4.875 1.5 9 1.5C13.125 1.5 16.5 4.875 16.5 9Z" fill="currentColor"></path>
+                                        <path d="M9 16.5C10.95 16.5 12.75 15.75 14.025 14.55C13.425 12.675 11.4 11.25 9 11.25C6.6 11.25 4.57499 12.675 3.97499 14.55C5.24999 15.75 7.05 16.5 9 16.5Z" fill="currentColor"></path>
+                                        <rect x="7" y="6" width="4" height="4" rx="2" fill="currentColor"></rect>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <div class="fs-6">
+                                    <span class="fw-bold">Details Professeur: </span>
+                                    <span id="viewTeacher"></span>
+                                </div>
+                            </div>
+                            <!--end::Row-->
+                            
                             <!--begin::Row-->
                             <div class="d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -382,7 +420,7 @@
                                 <!--end::Svg Icon-->
                                 <!--end::Icon-->
                                 <!--begin::Event location-->
-                                <div class="fs-6" data-kt-calendar="event_location"></div>
+                                <div class="fs-6" id="viewLocation"></div>
                                 <!--end::Event location-->
                             </div>
                             <!--end::Row-->
@@ -438,8 +476,6 @@
                 axios.get("{% url 'ajax.shedules.get' %}").then(res => {
                     this.shedules = res.data;
                     this.initCalendar();
-                }).catch(err => {
-                    console.error(err);
                 })
             },
             initCalendar: function () {
@@ -472,6 +508,7 @@
                     },
 
                     eventClick: function (arg) {
+                        self.handleViewEvent(arg)
                     },
 
                     editable: true,
@@ -485,6 +522,10 @@
 
                 this.initDatepickers(ev.start, ev.end)
                 addModal.show();
+            },
+            handleViewEvent: function (ev) {
+
+                viewModal.show();
             },
             initDatepickers: function (start = null, end = null) {
                 flatpickr(startDatepicker, {
@@ -529,6 +570,7 @@
                 startTimepicker = form.querySelector('#kt_calendar_datepicker_start_time');
                 endTimepicker = form.querySelector('#kt_calendar_datepicker_end_time');
                 addModal = new bootstrap.Modal($('#kt_modal_add_event'));
+                viewModal = new bootstrap.Modal($('#kt_modal_view_event'));
 
                 this.initDatepickers();
 
