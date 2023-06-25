@@ -173,6 +173,7 @@ var KTUsersList = function () {
         toolbarSelected = document.querySelector('[data-kt-user-table-toolbar="selected"]');
         selectedCount = document.querySelector('[data-kt-user-table-select="selected_count"]');
         const deleteSelected = document.querySelector('[data-kt-user-table-select="delete_selected"]');
+        const desc = table.getAttribute('data-desc');
 
         // Toggle delete selected toolbar
         checkboxes.forEach(c => {
@@ -186,6 +187,7 @@ var KTUsersList = function () {
 
         // Deleted selected rows
         deleteSelected.addEventListener('click', function () {
+            
             // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
             Swal.fire({
                 text: "Voulez-vous vraiment supprimer les " + desc + " sélectionnés ?",
@@ -241,7 +243,7 @@ var KTUsersList = function () {
     // Toggle toolbars
     const toggleToolbars = () => {
         // Select refreshed checkbox DOM elements 
-        const allCheckboxes = table.querySelectorAll('tbody [type="checkbox"]');
+        const allCheckboxes = table.querySelectorAll('tbody .form-check-action');
 
         // Detect checkboxes state & count
         let checkedState = false;
