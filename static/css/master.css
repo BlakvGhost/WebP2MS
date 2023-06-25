@@ -3,7 +3,8 @@
 
 :root {
     --app-primary-color: #2e4053;
-    --jma-primary-color: #2e4053
+    --jma-primary-color: #2e4053;
+    --custom-dark: #181C32;
 }
 
 *:not(.fa, .fas, .fad) {
@@ -13,6 +14,10 @@
 html,
 body {
     overflow-x: hidden !important;
+}
+
+.bg-dark-custom {
+    background-color: var(--custom-dark)!important;
 }
 
 .text-app-secondary {
@@ -44,7 +49,7 @@ body {
 
 .app-sidebar-menu .menu-item .menu-link:hover,
 .menu-active {
-    background-color: var(--bs-text-dark);
+    background-color: var(--custom-dark)!important;
     transition: .5s all;
     color: white;
 }
