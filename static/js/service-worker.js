@@ -32,7 +32,7 @@ self.addEventListener('activate', function(event) {
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.filter(function(cacheName) {
-          return cacheName.startsWith('my-app-cache') && cacheName !== CACHE_NAME;
+          return cacheName.startsWith(CACHE_NAME) && cacheName !== CACHE_NAME;
         }).map(function(cacheName) {
           return caches.delete(cacheName);
         })
