@@ -74,10 +74,19 @@ def _update_user(request, admin=None):
 
 
 @login_required
-@superuser_or_staff_required
 def default(request):
 
-    context = {}
+    context = {
+        'total_students': User.objects.filter().count(),
+        'total_teachers': User.objects.filter(is_teacher=True).count(),
+        'total_subjects': models.Subject.objects.all().count(),
+        'total_classroom': models.Classroom.objects.all().count(),
+        'notifications': request.user.notifications.filter(is_opened=False),
+        'total_subject_student': models.Subject.objects.filter(level_id=request.user.level.id).count(),
+        'total_subject_w': 2,
+        'total_subject_week': 3,
+        'total_subject_week_w': 1,
+    }
 
     return render(request, 'app/default.html', context)
 

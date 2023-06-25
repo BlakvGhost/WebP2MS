@@ -15,7 +15,7 @@ from .mail import send_html_email
 def anonymous_required(view_func):
     def wrapped_view(request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('teachers')
+            return redirect('default')
         return view_func(request, *args, **kwargs)
     return wrapped_view
 
