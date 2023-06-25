@@ -4,8 +4,12 @@
 var KTUsersAddUser = function () {
     // Shared variables
     const element = document.getElementById('kt_modal_add_user');
-    const form = element.querySelector('#kt_modal_add_user_form');
-    const modal = new bootstrap.Modal(element);
+    const form = element?.querySelector('#kt_modal_add_user_form');
+    var modal;
+    
+    if (form) {
+        modal = new bootstrap.Modal(element);
+    }
 
     // Init add schedule modal
     var initAddUser = () => {
