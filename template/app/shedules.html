@@ -23,6 +23,7 @@
             <div class="card">
                 <!--begin::Card header-->
                 <div class="card-header">
+                    {% if user.is_staff or user.is_superuser %}
                     <div class="align-self-center">
                         <select v-model="filterLevel" @change="switchLevel" id="switchLevel"
                             aria-label="Selectionner une salle de classe"
@@ -48,8 +49,10 @@
                                     <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                                 </svg>
                             </span>
-                            <!--end::Svg Icon-->Ajouter Un Evernement</button>
+                            <!--end::Svg Icon-->
+                            Ajouter Un Evernement</button>
                     </div>
+                    {% endif %}
                 </div>
                 <!--end::Card header-->
                 <!--begin::Card body-->
@@ -457,6 +460,7 @@
                             <!-- <h3> [[ clickedElt.title ]] </h3> -->
                             <div class="d-flex justify-content-end">
                                 <!--begin::Edit-->
+                                {% if user.is_staff or user.is_superuser %}
                                 <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2"
                                     data-bs-dismiss="click" title="Editer ce programme" data-bs-toggle="modal"
                                     data-bs-target="#kt_modal_edit_event">
@@ -497,6 +501,7 @@
                                     <!--end::Svg Icon-->
                                 </div>
                                 <!--end::Edit-->
+                                {% endif %}
                                 <!--begin::Close-->
                                 <div class="btn btn-icon btn-sm btn-color-gray-500 btn-active-icon-primary"
                                     data-bs-toggle="tooltip" title="Fermer ce programme" data-bs-dismiss="modal">
@@ -959,9 +964,9 @@
                     locale: 'fr',
                     initialDate: TODAY,
                     initialView: 'listWeek',
-                    navLinks: true,
-                    selectable: true,
-                    selectMirror: true,
+                    navLinks: Boolean("{% if user.is_staff or user.is_superuser %} 1 {% endif %}"),
+                    selectable: Boolean("{% if user.is_staff or user.is_superuser %} 1 {% endif %}"),
+                    selectMirror: Boolean("{% if user.is_staff or user.is_superuser %} 1 {% endif %}"),
                     weekNumbers: true,
 
                     select: function (arg) {

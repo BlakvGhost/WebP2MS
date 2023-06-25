@@ -462,16 +462,20 @@ def update_user(request):
 
 @csrf_exempt
 @login_required
-@superuser_or_staff_required
 def ajax_get_shedules(request):
 
-    level_id = request.GET.get('level')
+    if request.user.is_staff or request.user.is_superuser:
+        level_id = request.GET.get('level')
 
-    if level_id and level_id != 'default':
-        shedules = models.Timetable.objects.filter(subject__level_id=level_id)
+        if level_id and level_id != 'default':
+            shedules = models.Timetable.objects.filter(
+                subject__level_id=level_id)
+        else:
+            shedules = models.Timetable.objects.all()
+
     else:
-        shedules = models.Timetable.objects.all()
-
+        shedules = models.Timetable.objects.filter(
+            subject__level_id=request.user.level.id)
     data = [shedule.serialize() for shedule in shedules]
 
     return JsonResponse(data, safe=False)
@@ -480,7 +484,7 @@ def ajax_get_shedules(request):
 @csrf_exempt
 @login_required
 @superuser_or_staff_required
-def ajax_set_shedule(request, pk = None):
+def ajax_set_shedule(request, pk=None):
 
     if request.method == 'POST':
         data = request.POST
@@ -510,7 +514,8 @@ def ajax_set_shedule(request, pk = None):
                 else:
                     shedule = models.Timetable.objects.get(id=pk)
 
-                    shedule.classroom=models.Classroom.objects.get(id=classroom)
+                    shedule.classroom = models.Classroom.objects.get(
+                        id=classroom)
                     shedule.subject = models.Subject.objects.get(id=subject)
                     shedule.teacher = User.objects.get(id=teacher)
                     shedule.start_time = start_time
@@ -530,6 +535,7 @@ def ajax_set_shedule(request, pk = None):
     else:
         return JsonResponse({'error': 'Methode HTTP invalid'}, status=400)
 
+
 @csrf_exempt
 @login_required
 @superuser_or_staff_required
@@ -546,4 +552,3 @@ def ajax_del_shedule(request):
         return JsonResponse({'error': 'Erreur lors de la suppression du programme'}, status=400)
 
     return JsonResponse({'success': "Le programme a été supprimé avec sucess", 'shedule': shedule.serialize()})
-
