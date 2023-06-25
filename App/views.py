@@ -15,6 +15,7 @@ from django.urls import reverse
 from Auth.mail import send_html_email
 from Auth.models import Level
 from . import models
+from .notifications import new_shedule, update_shedule
 
 
 def superuser_or_staff_required(view_func):
@@ -511,6 +512,7 @@ def ajax_set_shedule(request, pk=None):
                         start_date=start_date,
                         end_date=end_date,
                     )
+                    new_shedule(shedule)
                 else:
                     shedule = models.Timetable.objects.get(id=pk)
 
@@ -524,6 +526,7 @@ def ajax_set_shedule(request, pk=None):
                     shedule.end_date = end_date
 
                     shedule.save()
+                    update_shedule(shedule)
             except:
                 return JsonResponse({'error': 'Erreur lors de la création/mise à jour du programme, vérifiez tout vos champs'}, status=400)
 

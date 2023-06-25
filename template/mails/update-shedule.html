@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Emploi du Temps</title>
+</head>
+
+<body>
+    <h1>Mise à jour d'un Emploi du Temps</h1>
+    <p>Bonjour {{ to.first_name }} {{ to.last_name }},</p>
+    <p>
+        Nous vous informons que {{ message }}, <a style="color: #008bcb" href="{% url 'shedules' %}">{{ Suivez ce lien
+            pour acceder au programme complet }} </a>
+    </p>
+    <p style="color: red"> <span style="font-weight: bold;">Attention</span>, Cet programme est susceptible de connaitre
+        des changements/modifications. </p>
+    <p>Si vous n'êtes pas concerner par ce mail, veuillez supprimer ce message.</p>
+    <p>Merci,</p>
+    <p>L'équipe Technique de WebP2MS</p>
+</body>
+
+</html>
