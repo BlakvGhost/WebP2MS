@@ -55,7 +55,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     is_two_factor = models.BooleanField(default=False)
     two_factor_code = models.CharField(max_length=255, null=True, blank=True)
     created_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
-    level = models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE, null=True, blank=True)
     reset_token = models.CharField(max_length=255, null=True, blank=True)
     reset_token_expiration = models.DateTimeField(null=True, blank=True)
 
