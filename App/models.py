@@ -72,11 +72,11 @@ class Timetable(models.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'title': self.subject.slug,
+            'title': f"{self.subject.slug} de {self.subject.level.slug}",
             'start': f"{self.start_date}T{self.start_time}",
-            'end': f"{self.end_date}T{self.start_time}",
+            'end': f"{self.end_date}T{self.end_time}",
             'teacher': self.teacher.serialize(),
             'subject': self.subject.serialize(),
             'classroom': self.classroom.serialize(),
-            'className': "fc-event-danger",
+            'color': f"{self.subject.bgColor}",
         }

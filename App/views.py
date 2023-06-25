@@ -342,7 +342,7 @@ def levels(request):
 
 @login_required
 def shedules(request):
-    #models.Timetable.objects.all().delete()
+    # models.Timetable.objects.all().delete()
     context = {
         'subjects': models.Subject.objects.all(),
         'levels': Level.objects.all(),
@@ -492,7 +492,7 @@ def ajax_set_shedule(request):
         if teacher and classroom and subject and start_time and end_time and start_date and end_date:
 
             try:
-                models.Timetable.objects.create(
+                shedule = models.Timetable.objects.create(
                     classroom=models.Classroom.objects.get(id=classroom),
                     subject=models.Subject.objects.get(id=subject),
                     teacher=User.objects.get(id=teacher),
@@ -504,7 +504,7 @@ def ajax_set_shedule(request):
             except:
                 return JsonResponse({'error': 'Erreur lors de la création du programme, vérifiez tout vos champs'}, status=400)
 
-            return JsonResponse({'success': "Un nouveau programme ajouté avec sucess"})
+            return JsonResponse({'success': "Un nouveau programme ajouté avec sucess", 'shedule': shedule.serialize()})
 
         else:
             return JsonResponse({'error': 'Veuillez bien remplir tout les champs'}, status=400)

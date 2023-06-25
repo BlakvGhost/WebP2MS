@@ -111,7 +111,7 @@
                                             class="form-select form-select-solid form-select-lg fw-semibold">
                                             {% for subject in subjects %}
                                             <option value="{{ subject.id }}">
-                                                {{ subject.slug }}
+                                                {{ subject.slug }} de {{ subject.level.slug }}
                                             </option>
                                             {% endfor %}
                                         </select>
@@ -409,6 +409,7 @@
             return {
                 shedules: [],
                 checking: 0,
+                calendar: null,
             }
         },
         methods: {
@@ -417,7 +418,8 @@
                 const data = new FormData(e.target);
 
                 axios.post("{% url 'ajax.shedules.add' %}", data).then(res => {
-                    console.log(res);
+                    this.calendar.addEvent(res.data.shedule);
+                    this.calendar.render();
 
                     this.swall({
                         type: 'success',
@@ -436,7 +438,6 @@
                 axios.get("{% url 'ajax.shedules.get' %}").then(res => {
                     this.shedules = res.data;
                     this.initCalendar();
-                    console.log(res.data);
                 }).catch(err => {
                     console.error(err);
                 })
@@ -451,17 +452,20 @@
 
                 const self = this;
 
-                calendar = new FullCalendar.Calendar(calendarEl, {
+                this.calendar = new FullCalendar.Calendar(calendarEl, {
 
                     headerToolbar: {
                         left: 'prev,next today',
                         center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                     },
+                    locale: 'fr',
                     initialDate: TODAY,
+                    initialView: 'listWeek',
                     navLinks: true,
                     selectable: true,
                     selectMirror: true,
+                    weekNumbers: true,
 
                     select: function (arg) {
                         self.handleNewEvent(arg);
@@ -475,33 +479,35 @@
                     events: this.shedules,
                 });
 
-                calendar.render();
+                this.calendar.render();
             },
             handleNewEvent: function (ev) {
-                console.log(ev);
+
+                this.initDatepickers(ev.start, ev.end)
+                addModal.show();
             },
-            initDatepickers: function () {
+            initDatepickers: function (start = null, end = null) {
                 flatpickr(startDatepicker, {
                     enableTime: false,
                     dateFormat: "Y-m-d",
-                }).setDate(new Date());
+                }).setDate(start ?? new Date());
 
                 flatpickr(endDatepicker, {
                     enableTime: false,
                     dateFormat: "Y-m-d",
-                }).setDate(new Date());
+                }).setDate(start ?? new Date());
 
                 flatpickr(startTimepicker, {
                     enableTime: true,
                     noCalendar: true,
                     dateFormat: "H:i",
-                }).setDate(new Date());
+                }).setDate(end ?? new Date());
 
                 flatpickr(endTimepicker, {
                     enableTime: true,
                     noCalendar: true,
                     dateFormat: "H:i",
-                }).setDate(new Date());
+                }).setDate(end ?? new Date());
             },
             swall: function (options) {
                 Swal.fire({
@@ -522,6 +528,7 @@
                 endDatepicker = form.querySelector('#kt_calendar_datepicker_end_date');
                 startTimepicker = form.querySelector('#kt_calendar_datepicker_start_time');
                 endTimepicker = form.querySelector('#kt_calendar_datepicker_end_time');
+                addModal = new bootstrap.Modal($('#kt_modal_add_event'));
 
                 this.initDatepickers();
 
