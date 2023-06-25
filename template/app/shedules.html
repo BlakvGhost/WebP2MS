@@ -10,7 +10,8 @@
         <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                    Vos Emploi du temps
+                    {% if user.is_staff or user.is_superuser %} Programmer/Editer des Emplois du temps {% else %} Vos
+                    Emplois du temps {% endif %}
                 </h1>
             </div>
         </div>
@@ -22,7 +23,19 @@
             <div class="card">
                 <!--begin::Card header-->
                 <div class="card-header">
-                    <h2 class="card-title fw-bold">Calendrier</h2>
+                    <div class="align-self-center">
+                        <select v-model="filterLevel" @change="switchLevel" id="switchLevel"
+                            aria-label="Selectionner une salle de classe"
+                            data-placeholder="Selectionner une salle de classe..."
+                            class="form-select form-select-solid form-select-lg fw-semibold">
+                            <option value="default"> Toutes les classes </option>
+                            {% for cl in levels %}
+                            <option value="{{ cl.id }}">
+                                {{ cl.slug }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
                     <div class="card-toolbar">
                         <button class="btn btn-flex btn-primary" data-kt-calendar="add" data-bs-toggle="modal"
                             data-bs-target="#kt_modal_add_event">
@@ -42,7 +55,42 @@
                 <!--begin::Card body-->
                 <div class="card-body">
                     <!--begin::Calendar-->
-                    <div id="kt_calendar_app"></div>
+                    <div v-if="loadingCalendar">
+                        <div class="card-header mt-2 placeholder-glow justify-content-start">
+                            <button class="btn col col-md-6 col-lg-3 me-3 btn-primary bg-jma disabled placeholder">
+                            </button>
+                            <button class="btn col col-md-6 col-lg-3 me-3 btn-primary bg-jma disabled placeholder">
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                                <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                                <span class="placeholder col-8"></span>
+                            </p>
+                            <a href="#" tabindex="-1" class="btn btn-primary disabled placeholder col-6"></a>
+                        </div>
+                        <div class="card-footer">
+                            <h5 class="card-title placeholder-glow">
+                                <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                                <span class="placeholder col-8"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="kt_calendar_app">
+
+                    </div>
                     <!--end::Calendar-->
                 </div>
                 <!--end::Card body-->
@@ -774,9 +822,17 @@
                 checking: 0,
                 calendar: null,
                 clickedElt: {},
+                filterLevel: 'default',
+                loadingCalendar: 1,
             }
         },
         methods: {
+            switchLevel: function () {
+                this.loadingCalendar = true;
+                $('body').addClass('overflow-hidden');
+
+                this.getShedules();
+            },
             addShedule: function (e) {
                 this.checking = 1;
                 const data = new FormData(e.target);
@@ -826,8 +882,11 @@
                 })
             },
             getShedules: function () {
-                axios.get("{% url 'ajax.shedules.get' %}").then(res => {
+                axios.get(`{% url 'ajax.shedules.get' %}?level=${this.filterLevel}`).then(res => {
                     this.shedules = res.data;
+                    this.loadingCalendar = 0;
+                    $('body').removeClass('overflow-hidden');
+
                     this.initCalendar();
                 })
             },

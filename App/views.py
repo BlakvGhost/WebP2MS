@@ -465,7 +465,12 @@ def update_user(request):
 @superuser_or_staff_required
 def ajax_get_shedules(request):
 
-    shedules = models.Timetable.objects.all()
+    level_id = request.GET.get('level')
+
+    if level_id and level_id != 'default':
+        shedules = models.Timetable.objects.filter(subject__level_id=level_id)
+    else:
+        shedules = models.Timetable.objects.all()
 
     data = [shedule.serialize() for shedule in shedules]
 
