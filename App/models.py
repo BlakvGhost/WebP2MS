@@ -96,3 +96,10 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.message
+    
+    def serialize(self):
+        return {
+            'id': self.id,
+            'user': self.user.serialize(),
+            'created_at': self.created_at,
+        }

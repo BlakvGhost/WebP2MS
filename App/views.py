@@ -555,3 +555,13 @@ def ajax_del_shedule(request):
         return JsonResponse({'error': 'Erreur lors de la suppression du programme'}, status=400)
 
     return JsonResponse({'success': "Le programme a été supprimé avec sucess", 'shedule': shedule.serialize()})
+
+
+@csrf_exempt
+@login_required
+def get_all_notifications(request):
+    notifications = request.user.notifications.all()
+
+    data = [n.serialize() for n in notifications]
+
+    return JsonResponse(data, safe=False)

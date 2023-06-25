@@ -20,4 +20,5 @@ urlpatterns = [
     path('get-shedules', views.ajax_get_shedules, name='ajax.shedules.get'),
     path('set-shedules/<int:pk>', views.ajax_set_shedule, name='ajax.shedules.update'),
     path('del-shedules', views.ajax_del_shedule, name='ajax.shedules.destroy'),
+    path('notifications', views.get_all_notifications, name='ajax.notifications.get'),
 ]
