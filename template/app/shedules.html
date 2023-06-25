@@ -230,63 +230,66 @@
                     <div class="modal-content">
                         <!--begin::Modal header-->
                         <div class="modal-header border-0 justify-content-end">
-                            <!--begin::Edit-->
-                            <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2"
-                                data-bs-toggle="tooltip" data-bs-dismiss="click" title="Editer ce programme"
-                                id="kt_modal_view_event_edit">
-                                <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.3"
-                                            d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z"
-                                            fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
+                            <!-- <h3> [[ clickedElt.title ]] </h3> -->
+                            <div class="d-flex justify-content-end">
+                                <!--begin::Edit-->
+                                <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2"
+                                    data-bs-toggle="tooltip" data-bs-dismiss="click" title="Editer ce programme"
+                                    id="kt_modal_view_event_edit">
+                                    <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.3"
+                                                d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z"
+                                                fill="currentColor" />
+                                            <path
+                                                d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                                <!--end::Edit-->
+                                <!--begin::Edit-->
+                                <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2"
+                                    data-bs-toggle="tooltip" data-bs-dismiss="click" title="Supprimer ce programme"
+                                    id="kt_modal_view_event_delete">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
+                                                fill="currentColor" />
+                                            <path opacity="0.5"
+                                                d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
+                                                fill="currentColor" />
+                                            <path opacity="0.5"
+                                                d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                                <!--end::Edit-->
+                                <!--begin::Close-->
+                                <div class="btn btn-icon btn-sm btn-color-gray-500 btn-active-icon-primary"
+                                    data-bs-toggle="tooltip" title="Fermer ce programme" data-bs-dismiss="modal">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                    <span class="svg-icon svg-icon-1">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                                transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                                <!--end::Close-->
                             </div>
-                            <!--end::Edit-->
-                            <!--begin::Edit-->
-                            <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2"
-                                data-bs-toggle="tooltip" data-bs-dismiss="click" title="Supprimer ce programme"
-                                id="kt_modal_view_event_delete">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
-                                            fill="currentColor" />
-                                        <path opacity="0.5"
-                                            d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
-                                            fill="currentColor" />
-                                        <path opacity="0.5"
-                                            d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
-                                            fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                            </div>
-                            <!--end::Edit-->
-                            <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-color-gray-500 btn-active-icon-primary"
-                                data-bs-toggle="tooltip" title="Fermer ce programme" data-bs-dismiss="modal">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                <span class="svg-icon svg-icon-1">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                            transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                            transform="rotate(45 7.41422 6)" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                            </div>
-                            <!--end::Close-->
                         </div>
                         <!--end::Modal header-->
                         <!--begin::Modal body-->
@@ -314,17 +317,19 @@
                                 <div class="mb-9">
                                     <!--begin::Event name-->
                                     <div class="d-flex align-items-center mb-2">
-                                        <span class="fs-3 fw-bold me-3" id="viewTitle"></span>
+                                        <span class="fs-3 fw-bold me-3" id="viewTitle"> [[ clickedElt.title ]] </span>
                                     </div>
                                     <!--end::Event name-->
                                     <!--begin::Event description-->
-                                    <div class="fs-6" id="viewDesc"></div>
+                                    <div class="fs-6" id="viewDesc">
+                                        [[ clickedElt?.subject?.desc ]]
+                                    </div>
                                     <!--end::Event description-->
                                 </div>
                             </div>
                             <!--end::Row-->
                             <!--begin::Row-->
-                            <div class="d-flex align-items-center mb-2">
+                            <div class="d-flex mb-2">
                                 <!--begin::Icon-->
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
                                 <span class="svg-icon svg-icon-1 svg-icon-success me-5">
@@ -338,18 +343,55 @@
                                 <!--begin::Event start date/time-->
                                 <div class="fs-6">
                                     <span class="fw-bold">Commence: </span>
-                                    <span data-kt-calendar="event_start_date" id="viewStart"></span>
+                                    <div class="p-3">
+
+                                        <div class="timeline-label">
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Date</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-warning fs-1"> </i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.start_date ]]
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Heure</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-success fs-1"></i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <!--begin::Content-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.start_time ]]
+                                                    </span>
+                                                </div>
+                                                <!--end::Content-->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end::Event start date/time-->
                             </div>
                             <!--end::Row-->
                             <!--begin::Row-->
-                            <div class="d-flex align-items-center mb-9">
+                            <div class="d-flex mb-9">
                                 <!--begin::Icon-->
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
                                 <span class="svg-icon svg-icon-1 svg-icon-danger me-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                        viewBox="0 0 24 24" version="1.1">
+                                    <svg class="text-danger" xmlns="http://www.w3.org/2000/svg" width="24px"
+                                        height="24px" viewBox="0 0 24 24" version="1.1">
                                         <circle fill="currentColor" cx="12" cy="12" r="8" />
                                     </svg>
                                 </span>
@@ -358,38 +400,115 @@
                                 <!--begin::Event end date/time-->
                                 <div class="fs-6">
                                     <span class="fw-bold">Fin: </span>
-                                    <span data-kt-calendar="event_end_date" id="viewEnd"></span>
+                                    <div class="p-3">
+                                        <div class="timeline-label">
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Date</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-warning fs-1"> </i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.end_date ]]
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Heure</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-success fs-1"></i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <!--begin::Content-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.end_time ]]
+                                                    </span>
+                                                </div>
+                                                <!--end::Content-->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end::Event end date/time-->
                             </div>
 
-                            <div class="d-flex align-items-center mb-9">
+                            <div class="d-flex mb-9">
                                 <!--begin::Icon-->
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
                                 <span class="svg-icon svg-icon-1 svg-icon-danger me-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                        viewBox="0 0 24 24" version="1.1">
-                                        <circle fill="currentColor" cx="12" cy="12" r="8" />
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3" d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z" fill="currentColor"></path>
+                                        <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="currentColor"></path>
                                     </svg>
                                 </span>
                                 <!--end::Svg Icon-->
                                 <!--end::Icon-->
                                 <!--begin::Event end date/time-->
                                 <div class="fs-6">
-                                    <span class="fw-bold">Details Cours: </span>
-                                    <span id="viewSubject"></span>
+                                    <span class="fw-bold">Totale d'heure: </span>
+                                    
+                                    <div class="p-3">
+                                        
+                                        <div class="timeline-label">
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Total</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-warning fs-1"> </i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.subject?.total_time ]] </span>
+                                                </div>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Faite</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-success fs-1"></i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <!--begin::Content-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.subject?.total_time ]] </span>
+                                                </div>
+                                                <!--end::Content-->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end::Event end date/time-->
                             </div>
                             <!--end::Row-->
                             <!--begin::Row-->
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex mb-3">
                                 <!--begin::Icon-->
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                                 <span class="svg-icon svg-icon-1 svg-icon-muted me-5">
-                                    <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.3" d="M16.5 9C16.5 13.125 13.125 16.5 9 16.5C4.875 16.5 1.5 13.125 1.5 9C1.5 4.875 4.875 1.5 9 1.5C13.125 1.5 16.5 4.875 16.5 9Z" fill="currentColor"></path>
-                                        <path d="M9 16.5C10.95 16.5 12.75 15.75 14.025 14.55C13.425 12.675 11.4 11.25 9 11.25C6.6 11.25 4.57499 12.675 3.97499 14.55C5.24999 15.75 7.05 16.5 9 16.5Z" fill="currentColor"></path>
+                                    <svg width="24" height="24" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3"
+                                            d="M16.5 9C16.5 13.125 13.125 16.5 9 16.5C4.875 16.5 1.5 13.125 1.5 9C1.5 4.875 4.875 1.5 9 1.5C13.125 1.5 16.5 4.875 16.5 9Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M9 16.5C10.95 16.5 12.75 15.75 14.025 14.55C13.425 12.675 11.4 11.25 9 11.25C6.6 11.25 4.57499 12.675 3.97499 14.55C5.24999 15.75 7.05 16.5 9 16.5Z"
+                                            fill="currentColor"></path>
                                         <rect x="7" y="6" width="4" height="4" rx="2" fill="currentColor"></rect>
                                     </svg>
                                 </span>
@@ -397,11 +516,25 @@
                                 <!--end::Icon-->
                                 <div class="fs-6">
                                     <span class="fw-bold">Details Professeur: </span>
-                                    <span id="viewTeacher"></span>
+                                    <div class="p-3">
+                                        <div class="d-flex align-items-center mb-7">
+                                            <!--begin::Avatar-->
+                                            <div class="symbol symbol-50px me-5">
+                                                <img :src="clickedElt?.teacher?.avatar ?? '/static/media/avatars/blank.png'" class="" :alt="clickedElt?.teacher?.first_name">
+                                            </div>
+                                            <!--end::Avatar-->
+                                            <!--begin::Text-->
+                                            <div class="flex-grow-1">
+                                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6"> [[ clickedElt?.teacher?.first_name ]]  [[ clickedElt?.teacher?.last_name ]] </a>
+                                                <span class="text-muted d-block fw-bold"> [[ clickedElt?.teacher?.email ]] </span>
+                                            </div>
+                                            <!--end::Text-->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Row-->
-                            
+
                             <!--begin::Row-->
                             <div class="d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -420,7 +553,12 @@
                                 <!--end::Svg Icon-->
                                 <!--end::Icon-->
                                 <!--begin::Event location-->
-                                <div class="fs-6" id="viewLocation"></div>
+                                <div class="fs-6" id="viewLocation">
+                                    <span class="fw-bold"> [[ clickedElt?.classroom?.slug ]] </span>
+                                    <span class="p-3">
+                                        [[ clickedElt?.classroom?.desc ]]
+                                    </span>
+                                </div>
                                 <!--end::Event location-->
                             </div>
                             <!--end::Row-->
@@ -448,6 +586,7 @@
                 shedules: [],
                 checking: 0,
                 calendar: null,
+                clickedElt: {},
             }
         },
         methods: {
@@ -458,6 +597,7 @@
                 axios.post("{% url 'ajax.shedules.add' %}", data).then(res => {
                     this.calendar.addEvent(res.data.shedule);
                     this.calendar.render();
+                    this.shedules.push(res.data.shedule);
 
                     this.swall({
                         type: 'success',
@@ -524,6 +664,10 @@
                 addModal.show();
             },
             handleViewEvent: function (ev) {
+                elt = this.shedules.find(elt => elt.id == ev.event.id)
+
+                //$()
+                this.clickedElt = elt;
 
                 viewModal.show();
             },
