@@ -24,11 +24,10 @@
                 <!--begin::Card header-->
                 <div class="card-header">
                     {% if user.is_staff or user.is_superuser %}
-                    <div class="align-self-center">
+                    <div class="align-self-center w-lg-auto w-100 my-2">
                         <select v-model="filterLevel" @change="switchLevel" id="switchLevel"
                             aria-label="Selectionner une salle de classe"
-                            data-placeholder="Selectionner une salle de classe..."
-                            class="form-select form-select-solid form-select-lg fw-semibold">
+                            data-placeholder="Selectionner une salle de classe..." class="form-select form-control">
                             <option value="default"> Toutes les classes </option>
                             {% for cl in levels %}
                             <option value="{{ cl.id }}">
@@ -37,9 +36,9 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="card-toolbar">
-                        <button class="btn btn-flex btn-primary" data-kt-calendar="add" data-bs-toggle="modal"
-                            data-bs-target="#kt_modal_add_event">
+                    <div class="card-toolbar w-lg-auto w-100 my-2">
+                        <button class="btn btn-flex btn-primary bg-app-secondary w-lg-auto w-100 justify-content-center"
+                            data-kt-calendar="add" data-bs-toggle="modal" data-bs-target="#kt_modal_add_event">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                             <span class="svg-icon svg-icon-2 svg-light">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
