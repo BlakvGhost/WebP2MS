@@ -221,6 +221,182 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="kt_modal_edit_event" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-750px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Form-->
+                        <form class="form" id="kt_modal_edit_event_form" method="POST" @submit.prevent="updateShedule">
+                            <!--begin::Modal header-->
+                            <div class="modal-header">
+                                <!--begin::Modal title-->
+                                <h2 class="fw-bold" data-kt-calendar="title"> Editer [[ clickedElt?.title ]] </h2>
+                                <!--end::Modal title-->
+                                <!--begin::Close-->
+                                <div data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary"
+                                    id="kt_modal_add_event_close">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                    <span class="svg-icon svg-icon-1">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                                transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--end::Modal header-->
+                            <!--begin::Modal body-->
+                            <div class="modal-body py-10 px-lg-17">
+                                <div class="row row-cols-1 row-cols-lg-2">
+                                    <div class="fv-row mb-9">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Nom de L'enseignant</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select required name="teacher" aria-label="Selectionner un enseignant"
+                                            data-control="select3-custom"
+                                            data-placeholder="Selectionner un enseignant..."
+                                            class="form-select form-select-solid form-select-lg fw-semibold">
+                                            <option>Selectionner un enseignant</option>
+                                            {% for teacher in teachers %}
+                                            <option value="{{ teacher.id }}"
+                                                :selected="clickedElt?.teacher?.id == {{ teacher.id }}">
+                                                {{ teacher.first_name }} {{ teacher.last_name }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <div class="fv-row mb-9">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Selectionner la matière</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select required name="subject" aria-label="Selectionner une matière"
+                                            data-control="select3-custom" data-placeholder="La matière"
+                                            class="form-select form-select-solid form-select-lg fw-semibold">
+                                            {% for subject in subjects %}
+                                            <option value="{{ subject.id }}"
+                                                :selected="clickedElt?.subject?.id == {{ subject.id }}">
+                                                {{ subject.slug }} de {{ subject.level.slug }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <div class="row row-cols-1">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-9">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Selectionner Une salle de classe</label>
+                                        <!--end::Label-->
+                                        <select required name="classroom" aria-label="Selectionner une salle de classe"
+                                            data-control="select3-custom"
+                                            data-placeholder="Selectionner une salle de classe..."
+                                            class="form-select form-select-solid form-select-lg fw-semibold">
+                                            {% for cl in classrooms %}
+                                            <option value="{{ cl.id }}"
+                                                :selected="clickedElt?.classroom?.id == {{ cl.id }}">
+                                                {{ cl.slug }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--begin::Input group-->
+                                <div class="row row-cols-lg-2 g-10">
+                                    <div class="col">
+                                        <div class="fv-row mb-9">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-semibold mb-2">Date de début</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input class="form-control form-control-solid" name="start_date"
+                                                placeholder="Picker la date de début"
+                                                id="kt_calendar_datepicker_start_date"
+                                                :value="[[ clickedElt?.start_date ]]" />
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+                                    <div class="col" data-kt-calendar="datepicker">
+                                        <div class="fv-row mb-9">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-semibold mb-2">heure de début</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input class="form-control form-control-solid" name="start_time"
+                                                placeholder="Picker l'heure de début"
+                                                id="kt_calendar_datepicker_start_time"
+                                                :value="[[ clickedElt?.start_time ]]" />
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row row-cols-lg-2 g-10">
+                                    <div class="col">
+                                        <div class="fv-row mb-9">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-semibold mb-2">Date de Fin</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input required class="form-control form-control-solid" name="end_date"
+                                                placeholder="Picker la date de fin" id="kt_calendar_datepicker_end_date"
+                                                :value="[[ clickedElt?.end_date ]]" />
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+                                    <div class="col" data-kt-calendar="datepicker">
+                                        <div class="fv-row mb-9">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-semibold mb-2">Heure de Fin</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input required class="form-control form-control-solid" name="end_time"
+                                                placeholder="Picker l'heure de fin" id="kt_calendar_datepicker_end_time"
+                                                :value="[[ clickedElt?.end_time ]]" />
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Modal body-->
+                            <!--begin::Modal footer-->
+                            <div class="modal-footer flex-center">
+                                <!--begin::Button-->
+                                <button type="reset" id="kt_modal_add_event_cancel" class="btn btn-light me-3"
+                                    data-bs-dismiss="modal">Annuler</button>
+                                <!--end::Button-->
+                                <!--begin::Button-->
+                                <button v-if="!checking" type="submit" id="kt_modal_add_event_submit"
+                                    class="btn btn-primary">
+                                    <span class="indicator-label">Editer</span>
+                                    <span class="indicator-progress">Patientez...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                                <button v-if="checking" class="btn btn-success bg-app-secondary mx-2 fw-bold text-light"
+                                    type="button" disabled id="checkingBtn">
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                    Patientez...
+                                </button>
+                                <!--end::Button-->
+                            </div>
+                            <!--end::Modal footer-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                </div>
+            </div>
             <!--end::Modal - New Product-->
             <!--begin::Modal - New Product-->
             <div class="modal fade" id="kt_modal_view_event" tabindex="-1" aria-hidden="true">
@@ -234,8 +410,8 @@
                             <div class="d-flex justify-content-end">
                                 <!--begin::Edit-->
                                 <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2"
-                                    data-bs-toggle="tooltip" data-bs-dismiss="click" title="Editer ce programme"
-                                    id="kt_modal_view_event_edit">
+                                    data-bs-dismiss="click" title="Editer ce programme" data-bs-toggle="modal"
+                                    data-bs-target="#kt_modal_edit_event">
                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -254,7 +430,7 @@
                                 <!--begin::Edit-->
                                 <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2"
                                     data-bs-toggle="tooltip" data-bs-dismiss="click" title="Supprimer ce programme"
-                                    id="kt_modal_view_event_delete">
+                                    id="kt_modal_view_event_delete" @click.prevent="handleDeleteEvent">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -445,9 +621,14 @@
                                 <!--begin::Icon-->
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
                                 <span class="svg-icon svg-icon-1 svg-icon-danger me-5">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.3" d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z" fill="currentColor"></path>
-                                        <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="currentColor"></path>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3"
+                                            d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z"
+                                            fill="currentColor"></path>
                                     </svg>
                                 </span>
                                 <!--end::Svg Icon-->
@@ -455,9 +636,9 @@
                                 <!--begin::Event end date/time-->
                                 <div class="fs-6">
                                     <span class="fw-bold">Totale d'heure: </span>
-                                    
+
                                     <div class="p-3">
-                                        
+
                                         <div class="timeline-label">
                                             <!--begin::Item-->
                                             <div class="timeline-item">
@@ -470,7 +651,8 @@
                                                 </div>
                                                 <!--end::Badge-->
                                                 <div class="timeline-content d-flex">
-                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.subject?.total_time ]] </span>
+                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.subject?.total_time
+                                                        ]] </span>
                                                 </div>
                                             </div>
                                             <!--end::Item-->
@@ -486,7 +668,8 @@
                                                 <!--end::Badge-->
                                                 <!--begin::Content-->
                                                 <div class="timeline-content d-flex">
-                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.subject?.total_time ]] </span>
+                                                    <span class="text-gray-800 ps-3"> [[ clickedElt?.subject?.total_time
+                                                        ]] </span>
                                                 </div>
                                                 <!--end::Content-->
                                             </div>
@@ -520,13 +703,17 @@
                                         <div class="d-flex align-items-center mb-7">
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-50px me-5">
-                                                <img :src="clickedElt?.teacher?.avatar ?? '/static/media/avatars/blank.png'" class="" :alt="clickedElt?.teacher?.first_name">
+                                                <img :src="clickedElt?.teacher?.avatar ?? '/static/media/avatars/blank.png'"
+                                                    class="" :alt="clickedElt?.teacher?.first_name">
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Text-->
                                             <div class="flex-grow-1">
-                                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6"> [[ clickedElt?.teacher?.first_name ]]  [[ clickedElt?.teacher?.last_name ]] </a>
-                                                <span class="text-muted d-block fw-bold"> [[ clickedElt?.teacher?.email ]] </span>
+                                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6"> [[
+                                                    clickedElt?.teacher?.first_name ]] [[ clickedElt?.teacher?.last_name
+                                                    ]] </a>
+                                                <span class="text-muted d-block fw-bold"> [[ clickedElt?.teacher?.email
+                                                    ]] </span>
                                             </div>
                                             <!--end::Text-->
                                         </div>
@@ -602,7 +789,33 @@
                     this.swall({
                         type: 'success',
                         text: res.data.success,
+                    });
+                    addModal.hide();
+                    return this.checking = false;
+                }).catch(err => {
+                    this.swall({
+                        type: 'error',
+                        text: err.response.data.error,
                     })
+                    return this.checking = !false;
+                })
+            },
+            updateShedule: function (e) {
+                this.checking = 1;
+                const data = new FormData(e.target);
+                const id = this.clickedElt.id;
+
+                axios.post(`{% url 'ajax.shedules.add' %}/${id}`, data).then(res => {
+
+                    this.shedules = this.shedules.map(elt => elt.id == id ? res.data.shedule : elt);
+
+                    this.initCalendar();
+
+                    this.swall({
+                        type: 'success',
+                        text: res.data.success,
+                    })
+                    editModal.hide();
                     return this.checking = false;
                 }).catch(err => {
                     this.swall({
@@ -617,6 +830,55 @@
                     this.shedules = res.data;
                     this.initCalendar();
                 })
+            },
+            handleDeleteEvent: function () {
+                Swal.fire({
+                    text: "Etes vous sûr de vouloir supprimer ce programme?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: "Oui, supprimez!",
+                    cancelButtonText: "Non, annulez",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-active-light"
+                    }
+                }).then((result) => {
+                    if (result.value) {
+
+                        const data = {
+                            shedule_id: this.clickedElt.id,
+                        };
+
+                        axios.post(`{% url 'ajax.shedules.destroy' %}`, data).then(res => {
+
+                            this.swall({
+                                type: 'success',
+                                text: res.data.success,
+                            })
+
+                            this.calendar.getEventById(this.clickedElt.id).remove();
+                            editModal.hide();
+                        }).catch(err => {
+                            this.swall({
+                                type: 'error',
+                                text: err.response.data.error,
+                            })
+                        })
+
+                        viewModal.hide();
+                    } else if (result.dismiss === 'cancel') {
+                        Swal.fire({
+                            text: "Your event was not deleted!.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        });
+                    }
+                });
             },
             initCalendar: function () {
                 let calendarEl = document.getElementById('kt_calendar_app');
@@ -714,13 +976,16 @@
                 startTimepicker = form.querySelector('#kt_calendar_datepicker_start_time');
                 endTimepicker = form.querySelector('#kt_calendar_datepicker_end_time');
                 addModal = new bootstrap.Modal($('#kt_modal_add_event'));
+                editModal = new bootstrap.Modal($('#kt_modal_edit_event'));
                 viewModal = new bootstrap.Modal($('#kt_modal_view_event'));
 
                 this.initDatepickers();
 
-
                 $("[data-control='select2-custom']").select2({
                     dropdownParent: $("#kt_modal_add_event")
+                });
+                $("[data-control='select3-custom']").select2({
+                    dropdownParent: $("#kt_modal_edit_event")
                 });
 
             });

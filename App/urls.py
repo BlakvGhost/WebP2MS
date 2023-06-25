@@ -18,4 +18,6 @@ urlpatterns = [
     path('update-user-details', views.update_user, name='ajax.user.update'),
     path('set-shedules', views.ajax_set_shedule, name='ajax.shedules.add'),
     path('get-shedules', views.ajax_get_shedules, name='ajax.shedules.get'),
+    path('set-shedules/<int:pk>', views.ajax_set_shedule, name='ajax.shedules.update'),
+    path('del-shedules', views.ajax_del_shedule, name='ajax.shedules.destroy'),
 ]

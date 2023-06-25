@@ -475,7 +475,7 @@ def ajax_get_shedules(request):
 @csrf_exempt
 @login_required
 @superuser_or_staff_required
-def ajax_set_shedule(request):
+def ajax_set_shedule(request, pk = None):
 
     if request.method == 'POST':
         data = request.POST
@@ -492,22 +492,53 @@ def ajax_set_shedule(request):
         if teacher and classroom and subject and start_time and end_time and start_date and end_date:
 
             try:
-                shedule = models.Timetable.objects.create(
-                    classroom=models.Classroom.objects.get(id=classroom),
-                    subject=models.Subject.objects.get(id=subject),
-                    teacher=User.objects.get(id=teacher),
-                    start_time=start_time,
-                    end_time=end_time,
-                    start_date=start_date,
-                    end_date=end_date,
-                )
-            except:
-                return JsonResponse({'error': 'Erreur lors de la création du programme, vérifiez tout vos champs'}, status=400)
+                if pk is None:
+                    shedule = models.Timetable.objects.create(
+                        classroom=models.Classroom.objects.get(id=classroom),
+                        subject=models.Subject.objects.get(id=subject),
+                        teacher=User.objects.get(id=teacher),
+                        start_time=start_time,
+                        end_time=end_time,
+                        start_date=start_date,
+                        end_date=end_date,
+                    )
+                else:
+                    shedule = models.Timetable.objects.get(id=pk)
 
-            return JsonResponse({'success': "Un nouveau programme ajouté avec sucess", 'shedule': shedule.serialize()})
+                    shedule.classroom=models.Classroom.objects.get(id=classroom)
+                    shedule.subject = models.Subject.objects.get(id=subject)
+                    shedule.teacher = User.objects.get(id=teacher)
+                    shedule.start_time = start_time
+                    shedule.end_time = end_time
+                    shedule.start_date = start_date
+                    shedule.end_date = end_date
+
+                    shedule.save()
+            except:
+                return JsonResponse({'error': 'Erreur lors de la création/mise à jour du programme, vérifiez tout vos champs'}, status=400)
+
+            return JsonResponse({'success': "Un nouveau programme ajouté/mise à jour avec sucess", 'shedule': shedule.serialize()})
 
         else:
             return JsonResponse({'error': 'Veuillez bien remplir tout les champs'}, status=400)
 
     else:
         return JsonResponse({'error': 'Methode HTTP invalid'}, status=400)
+
+@csrf_exempt
+@login_required
+@superuser_or_staff_required
+def ajax_del_shedule(request):
+
+    data = json.loads(request.body.decode('utf-8'))
+    shedule = data.get('shedule_id')
+
+    try:
+        shedule = models.Timetable.objects.get(id=shedule)
+
+        shedule.delete()
+    except:
+        return JsonResponse({'error': 'Erreur lors de la suppression du programme'}, status=400)
+
+    return JsonResponse({'success': "Le programme a été supprimé avec sucess", 'shedule': shedule.serialize()})
+
