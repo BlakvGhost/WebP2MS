@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .chats import chats
 
 urlpatterns = [
     path('', views.default, name='default'),
@@ -12,6 +13,9 @@ urlpatterns = [
     path('vous/vos-notifications/<int:pk>', views.mark_notification, name='notifications.mark'),
     path('cendre-d-aides', views.aides, name='helps'),
     path('vous/votre-profile', views.profile, name='profile'),
+
+    #Chat routes
+    path('discussions', chats, name='chats'),
     
     #Ajax routes
     

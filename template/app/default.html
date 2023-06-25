@@ -28,6 +28,8 @@
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
                     {% if user.is_staff or user.is_superuser and not user.is_teacher %}
                     Tableau de Bord
+                    {% elif user.is_teacher %}
+                        Récaputilatif de vos programme de la semaine
                     {% else %}
                     Page récaputilative de la {{ user.level.slug }}
                     {% endif %}

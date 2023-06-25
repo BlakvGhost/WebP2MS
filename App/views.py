@@ -76,13 +76,18 @@ def _update_user(request, admin=None):
 @login_required
 def default(request):
 
+    try:
+        total_subject_student = models.Subject.objects.filter(level_id=request.user.level.id).count()
+    except:
+        total_subject_student = 0
+
     context = {
         'total_students': User.objects.filter().count(),
         'total_teachers': User.objects.filter(is_teacher=True).count(),
         'total_subjects': models.Subject.objects.all().count(),
         'total_classroom': models.Classroom.objects.all().count(),
         'notifications': request.user.notifications.filter(is_opened=False),
-        'total_subject_student': models.Subject.objects.filter(level_id=request.user.level.id).count(),
+        'total_subject_student': total_subject_student,
         'total_subject_w': 2,
         'total_subject_week': 3,
         'total_subject_week_w': 1,
@@ -489,7 +494,11 @@ def ajax_get_shedules(request):
             shedules = models.Timetable.objects.all()
 
     else:
-        shedules = models.Timetable.objects.filter(
+        if request.user.is_teacher:
+            shedules = models.Timetable.objects.filter(
+            teacher_id=request.user.id)
+        else:
+            shedules = models.Timetable.objects.filter(
             subject__level_id=request.user.level.id)
     data = [shedule.serialize() for shedule in shedules]
 
