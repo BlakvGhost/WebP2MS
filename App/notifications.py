@@ -33,18 +33,20 @@ def new_shedule(shedule):
 
 def update_shedule(shedule):
     student_message = f"un emploi du temps pour le {shedule.start_date} a été mis à jour"
-    teacher_message = f"Votre programme pour le {shedule.start_date} en {shedule.level.slug} a été mis à jour"
+    teacher_message = f"Votre programme pour le {shedule.start_date} en {shedule.objects.level.slug} a été mis à jour"
     message = ''
-    users = User.objects.all()
+    levelId = shedule.subject.level.id
+    users = User.objects.filter(Q(id=shedule.teacher_id) | Q(level=levelId))
 
     for user in users:
         if user.is_teacher:
             message = teacher_message
-        elif not user.is_staff and not user.is_superuser and user.is_teacher:
+        else:
             message = student_message
+            
         Notification.objects.create(
             user=user,
-            message=teacher_message
+            message=message
         )
         try:
             send_html_email("Mise à jour d'un Emploi du Temps", 'mails/update-shedule.html', {
@@ -52,4 +54,4 @@ def update_shedule(shedule):
                 'to': user
             })
         except:
-            pass
+            continue
