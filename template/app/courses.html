@@ -184,7 +184,7 @@
                                                     placeholder="Ex: 1AK34" />
                                                 <!--end::Input-->
                                             </div>
-                                            
+
                                             <div class="fv-row mb-7">
                                                 <!--begin::Label-->
                                                 <label class="fw-semibold fs-6 mb-2">Couleur de la matière: </label>
@@ -276,7 +276,6 @@
                                 <th class="min-w-125px">Slug</th>
                                 <th class="min-w-125px">Identifiant</th>
                                 <th class="min-w-125px">Niveau</th>
-                                <th class="min-w-125px">Total heure</th>
                                 <th class="min-w-125px">heure Faite</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
@@ -284,15 +283,16 @@
                         <tbody class="text-gray-600 fw-semibold">
                             {% for subject in subjects %}
                             <tr data-user-id="{{ subject.id }}" data-route="{% url 'ajax.user.delete' %}"
-                                data-model="subjects" data-desc="une matière" data-name="{{ subject.slug }}"
-                                 >
+                                data-model="subjects" data-desc="une matière" data-name="{{ subject.slug }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                                         <input class="form-check-input" type="checkbox" value="1" />
                                     </div>
                                 </td>
-                                <td class="align-items-center" data-bs-toggle="modal" data-bs-target="#show_ct{{ subject.id }}">
-                                    <div class="badge fw-bold {% if subject.bgColor %} text-light {% endif %}" style="background-color: {{ subject.bgColor }};">
+                                <td class="align-items-center" data-bs-toggle="modal"
+                                    data-bs-target="#show_ct{{ subject.id }}">
+                                    <div class="badge fw-bold {% if subject.bgColor %} text-light {% endif %}"
+                                        style="background-color: {{ subject.bgColor }};">
                                         {{ subject.slug }}
                                     </div>
                                 </td>
@@ -302,14 +302,15 @@
                                 <td data-bs-toggle="modal" data-bs-target="#show_ct{{ subject.id }}">
                                     {{ subject.level.slug }}
                                 </td>
-                                <td data-bs-toggle="modal" data-bs-target="#show_ct{{ subject.id }}">
-                                    <div class="badge badge-success fw-bold">
-                                        {{ subject.total_time }} heure
-                                    </div>
-                                </td>
-                                <td data-bs-toggle="modal" data-bs-target="#show_ct{{ subject.id }}">
-                                    <div class="badge badge-danger fw-bold">
-                                        {{ subject.id|calculate_total_hours }} heure
+                                <td class="text-end">
+                                    <div class="d-flex flex-column w-100 me-2">
+                                        <div class="d-flex flex-stack mb-2">
+                                            <span class="text-muted me-2 fs-7 fw-bold">{{ subject|calculate_total_percentage }}% | {{ subject.id|calculate_total_hours }} heure/{{ subject.total_time }}heure</span>
+                                        </div>
+                                        <div class="progress h-6px w-100">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 70%"
+                                                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="text-end">
@@ -381,12 +382,14 @@
                                                             </div>
                                                             <div class="fv-row mb-7">
                                                                 <!--begin::Label-->
-                                                                <label class="fw-semibold fs-6 mb-2">Couleur de la matière: </label>
+                                                                <label class="fw-semibold fs-6 mb-2">Couleur de la
+                                                                    matière: </label>
                                                                 <!--end::Label-->
                                                                 <!--begin::Input-->
                                                                 <input type="color" name="bgColor"
                                                                     class="form-control form-control-solid mb-3 mb-lg-0"
-                                                                    placeholder="Selectionner une couleur" value="{{ subject.bgColor }}" />
+                                                                    placeholder="Selectionner une couleur"
+                                                                    value="{{ subject.bgColor }}" />
                                                                 <!--end::Input-->
                                                             </div>
                                                             <div class="fv-row mb-7">
@@ -444,7 +447,8 @@
                                                         <!--begin::Actions-->
                                                         <div class="text-center pt-15">
                                                             <button type="reset" class="btn btn-light me-3"
-                                                                data-kt-users-modal-action="cancel" data-bs-dismiss="modal">Annuler</button>
+                                                                data-kt-users-modal-action="cancel"
+                                                                data-bs-dismiss="modal">Annuler</button>
                                                             <button type="submit" class="btn btn-primary"
                                                                 data-kt-users-modal-action="submit">
                                                                 <span class="indicator-label">Editer</span>
