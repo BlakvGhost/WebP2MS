@@ -344,6 +344,7 @@ def levels(request):
 @login_required
 def shedules(request):
     # models.Timetable.objects.all().delete()
+    # models.Notification.objects.all().delete()
     context = {
         'subjects': models.Subject.objects.all(),
         'levels': Level.objects.all(),
@@ -500,7 +501,7 @@ def ajax_set_shedule(request, pk=None):
         end_date = data.get('end_date')
 
         if teacher and classroom and subject and start_time and end_time and start_date and end_date:
-
+           
             try:
                 if pk is None:
                     shedule = models.Timetable.objects.create(
@@ -565,3 +566,12 @@ def get_all_notifications(request):
     data = [n.serialize() for n in notifications]
 
     return JsonResponse(data, safe=False)
+
+@login_required
+def mark_notification(request, pk):
+    notifications = request.user.notifications.get(id=pk)
+
+    notifications.is_opened = True
+    notifications.save()
+
+    return redirect('shedules')

@@ -1,30 +1,34 @@
-from .models import Timetable, Notification
+from .models import Notification
+from django.db.models import Q
 from Auth.models import MyUser as User
 from Auth.mail import send_html_email
 
+
 def new_shedule(shedule):
     student_message = f"Un nouveau emploi du temps programmé pour le {shedule.start_date}"
-    teacher_message = f"Vous êtes programmé pour le {shedule.start_date} en {shedule.level.slug}"
+    teacher_message = f"Vous êtes programmé pour le {shedule.start_date} en {shedule.subject.level.slug}"
     message = ''
-    users = User.objects.all()
+    levelId = shedule.subject.level.id
+    users = User.objects.filter(Q(id=shedule.teacher_id) | Q(level=levelId))
 
     for user in users:
         if user.is_teacher:
             message = teacher_message
-        elif not user.is_staff and not user.is_superuser and user.is_teacher:
+        else:
             message = student_message
+
         Notification.objects.create(
             user=user,
-            message=teacher_message
+            message=message,
         )
+
         try:
             send_html_email("Nouveau Emploi du Temps", 'mails/new-shedule.html', {
                 'message': message,
                 'to': user
             })
         except:
-            pass
-
+            continue
 
 
 def update_shedule(shedule):

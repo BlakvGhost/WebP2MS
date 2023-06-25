@@ -1,5 +1,6 @@
 from django.db import models
 from Auth.models import MyUser, Level
+from django.contrib.humanize.templatetags import humanize
 
 
 class Classroom(models.Model):
@@ -87,9 +88,10 @@ class Timetable(models.Model):
 
 
 class Notification(models.Model):
-    user = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='notifications')
+    user = models.ForeignKey(
+        MyUser, on_delete=models.CASCADE, related_name='notifications')
     message = models.CharField(max_length=255)
-    is_opened = models.BooleanField(default=False)
+    is_opened = models.BooleanField(default=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -97,10 +99,11 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.message
-    
+
     def serialize(self):
         return {
             'id': self.id,
             'user': self.user.serialize(),
-            'created_at': self.created_at,
+            'message': self.message,
+            'created_at': humanize.naturaltime(self.created_at),
         }
