@@ -15,6 +15,6 @@ def calculate_total_hours(subject_id):
 
 @register.filter
 def calculate_total_percentage(subject):
-    total_hours = (calculate_total_hours(subject.id) * 100) / timedelta(hours=subject.total_time)
-    return total_hours
+    #total_hours = (calculate_total_hours(subject.id) * 100) / timedelta(hours=subject.total_time)
+    return subject.total_time
 

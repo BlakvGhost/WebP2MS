@@ -570,6 +570,35 @@ def ajax_del_shedule(request):
 
     return JsonResponse({'success': "Le programme a été supprimé avec sucess", 'shedule': shedule.serialize()})
 
+@csrf_exempt
+@login_required
+@superuser_or_staff_required
+def ajax_check_shedule(request):
+    if request.method == 'POST':
+        data = request.POST
+
+        teacher = data.get('teacher')
+        classroom = data.get('classroom')
+
+        subject = data.get('subject')
+        start_time = data.get('start_time')
+        end_time = data.get('end_time')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+
+        if teacher and classroom and subject and start_time and end_time and start_date and end_date:
+
+            try:
+                teacher = User.objects.get(id=teacher)
+
+                models.Timetable.objects.filter()
+            except:
+                return JsonResponse({'error': 'Veuillez bien selectionner un nom de professeur'}, status=400)
+        else:
+            return JsonResponse({'error': 'Veuillez bien remplir tout les champs'}, status=400)
+
+    else:
+        return JsonResponse({'error': 'Methode HTTP invalid'}, status=400)
 
 @csrf_exempt
 @login_required
