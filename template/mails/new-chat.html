@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Emploi du Temps</title>
+</head>
+
+<body>
+    <h1>Un Nouveau Message</h1>
+    <p>Bonjour {{ to.first_name }} {{ to.last_name }},</p>
+    <p>
+        Nous vous informons que {{ message }}, <a style="color: #008bcb" href="{% url 'chats.details' chatId %}">{{ Suivez ce lien
+            pour acceder au message }} </a>
+    </p>
+    <p>Si vous n'êtes pas concerner par ce mail, veuillez supprimer ce message.</p>
+    <p>Merci,</p>
+    <p>L'équipe Technique de WebP2MS</p>
+</body>
+
+</html>

@@ -79,7 +79,8 @@ def new_chat(request, chat):
             try:
                 send_html_email("Nouveau Message sur votre Emploi du temps", 'mails/new-chat.html', {
                     'message': message,
-                    'to': teacher
+                    'to': teacher,
+                    'chatId': chat.timetable.id
                 })
             except:
                 return False
