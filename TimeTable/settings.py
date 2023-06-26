@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%#cys#p5lm=mwh7&6*(j@$_k*houfztz$(@e2(pnuk41$a@!5&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["pil-12223-34.kabirou-alassane.com", 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["webp2ms.kabirou-alassane.com", 'localhost', '127.0.0.1']
 
 
 # Application definition
