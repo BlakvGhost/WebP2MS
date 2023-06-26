@@ -52,7 +52,9 @@ py manage.py runserver
 10. Connectez vous avec un compte admin pour une vue générale
     - email: `exemple@exemple.com`
     - password: `passme`
-
+11. Pour un compte d'enseignant, utilisez:
+    - email: `aliyouousmane@exemple.com`
+    - password: `passme`
 
 Maintenant, vous pouvez commencer à travailler sur le projet localement et utiliser les commandes Git pour effectuer des commits, etc.
 
