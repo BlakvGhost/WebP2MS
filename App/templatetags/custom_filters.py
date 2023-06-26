@@ -18,3 +18,7 @@ def calculate_total_percentage(subject):
     #total_hours = (calculate_total_hours(subject.id) * 100) / timedelta(hours=subject.total_time)
     return subject.total_time
 
+@register.filter
+def one_chat(object, key):
+
+    return object[0].timetable.get(key)

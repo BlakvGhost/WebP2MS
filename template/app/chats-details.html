@@ -16,7 +16,8 @@
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                    Titre discussion
+                    {{ chat.timetable.subject.slug }} du
+                    {{ chat.timetable.start_date }} {{ chat.timetable.start_time }}
                 </h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
@@ -42,7 +43,7 @@
                     <!--end::Item-->
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">37</li>
+                    <li class="breadcrumb-item text-muted"> {{ chat.timetable.id }} </li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -74,8 +75,13 @@
                     <div class="card-title">
                         <!--begin::User-->
                         <div class="d-flex justify-content-center flex-column me-3">
-                            <a href="#" class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian
-                                Cox</a>
+                            <a href="javascript:void(0)" class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">
+                                {% if user.is_teacher %}
+                                IFRI
+                                {% else %}
+                                {{ chat.timetable.teacher.first_name }} {{ chat.timetable.teacher.last_name }}
+                                {% endif %}
+                            </a>
                             <!--begin::Info-->
                             <div class="mb-0 lh-1">
                                 <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
@@ -395,7 +401,7 @@
                     </div>
                 </div>
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <form id="add_new_chat_form" class="form" action="" method="POST">
+                    <form id="add_new_chat_form" class="form" action="{% url 'chats.start' %}" method="POST">
                         {% csrf_token %}
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
@@ -404,7 +410,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select name="shedule" aria-label="Selectionner un emploi" data-control="select2"
+                            <select name="shedule_id" aria-label="Selectionner un emploi" data-control="select2"
                                 data-placeholder="Selectionner un emploi`..."
                                 class="form-select form-select-solid form-select-lg fw-semibold">>
                                 {% for le in shedules %}

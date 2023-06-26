@@ -109,15 +109,14 @@
                                 <div class="px-7 py-5" data-kt-user-table-filter="form">
                                     <!--begin::Input group-->
                                     <div class="mb-10">
-                                        <label class="form-label fs-6 fw-semibold">Déjà vue:</label>
+                                        <label class="form-label fs-6 fw-semibold">Classe:</label>
                                         <select class="form-select form-select-solid fw-bold" data-kt-select2="true"
                                             data-placeholder="Selectionner" data-allow-clear="true"
                                             data-kt-user-table-filter="classe" data-hide-search="true">
                                             <option></option>
-                                            <option value="oui"> Oui </option>
-                                            <option value="non">
-                                                Non
-                                            </option>
+                                            {% for le in levels %}
+                                                <option value="{{ le.slug }}"> {{ le.slug }} </option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <!--end::Input group-->
@@ -167,36 +166,37 @@
                         </thead>
                         <tbody class="text-gray-600 fw-semibold">
                             {% for chat in chats %}
-                            <tr class="{% if not n.is_opened %} bg-light-warning {% endif %}" data-user-id="{{ n.id }}"
+                            {% if chat %}
+                            <tr class="{% if not chat.is_opened %} bg-light-warning {% endif %}" data-user-id="{{ chat.id }}"
                                 data-route="{% url 'ajax.user.delete' %}" data-model="chats"
-                                data-name="{{ chat.subject.slug }}">
+                                data-name="{{ chat.timetable.subject.slug }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                                         <input class="form-check-input form-check-action" type="checkbox" value="1" />
                                     </div>
                                 </td>
                                 <td class="align-items-center">
-                                    <div class="fw-bold">
-                                        {{ chat.subject.slug }}
-                                    </div>
+                                    <a href="{% url 'chats.details' chat.timetable.id %}" class="fw-bold text-decoration-underline">
+                                        {{ chat.timetable.subject.slug }} du 
+                                        {{ chat.timetable.start_date }} {{ chat.timetable.start_time }}
+                                    </a>
                                 </td>
                                 <td class="align-items-center">
                                     <div class="badge badge-warning fw-bold">
-                                        {{ chat.classroom.slug }}
+                                        {{ chat.timetable.subject.level.slug }}
                                     </div>
                                 </td>
                                 <td class="align-items-center">
                                     <div class="badge badge-success fw-bold">
-                                        {{ n.created_at|naturaltime }}
+                                        {{ chat.created_at|naturaltime }}
                                     </div>
                                 </td>
                                 <td class="text-end">
-                                    <a href="{% url 'notifications.mark' n.id %}" class="btn btn-success px-3">Marqué
-                                        Vue</a>
                                     <a href="#" class="btn btn-danger px-3"
                                         data-kt-users-table-filter="delete_row">Supprimer</a>
                                 </td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
@@ -225,7 +225,7 @@
                     </div>
                 </div>
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <form id="add_new_chat_form" class="form" action="" method="POST">
+                    <form id="add_new_chat_form" class="form" action="{% url 'chats.start' %}" method="POST">
                         {% csrf_token %}
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
@@ -234,7 +234,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select name="shedule" aria-label="Selectionner un emploi" data-control="select2"
+                            <select name="shedule_id" aria-label="Selectionner un emploi" data-control="select2"
                                 data-placeholder="Selectionner un emploi`..."
                                 class="form-select form-select-solid form-select-lg fw-semibold">>
                                 {% for le in shedules %}
