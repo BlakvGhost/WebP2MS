@@ -56,7 +56,8 @@ def new_password(request, token):
 
 @login_required
 def logout(request):
-
+    request.user.is_online = False
+    request.user.save()
     user_logout(request)
     return redirect('login')
 
@@ -73,6 +74,8 @@ def ajax_login(request):
         if email and password:
             user = authenticate(request, email=email, password=password)
             if user is not None:
+                user.is_online = True
+                user.save()
                 user_login(request, user)
                 return JsonResponse({'success': 'User logged in successfully'})
             else:
@@ -113,6 +116,8 @@ def ajax_register(request):
                     user = authenticate(
                         request, email=email, password=password)
                     if user is not None:
+                        user.is_online = True
+                        user.save()
                         user_login(request, user)
                         return JsonResponse({'success': 'User registered and logged in successfully'})
                     else:

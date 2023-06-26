@@ -49,6 +49,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=50, null=True, blank=True)
     phone_num = models.CharField(max_length=50, null=True, blank=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    is_online = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
