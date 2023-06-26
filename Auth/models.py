@@ -78,4 +78,5 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
             'phone_num': self.phone_num,
             'email': self.email,
             'avatar': self.avatar.url,
+            'is_online': self.is_online,
         }
