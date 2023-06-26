@@ -61,12 +61,12 @@ def update_shedule(shedule):
             continue
 
 
-def new_chat(chat):
+def new_chat(request, chat):
 
     message = f"Vous avez réçu un nouveau message"
 
-    if chat.user.is_teacher:
-        teacher = User.objects.get(id=chat.user.id)
+    if request.user.is_superuser or request.user.is_staff:
+        teacher = User.objects.get(id=chat.timetable.teacher.id)
 
         Notification.objects.create(
             user=teacher,
@@ -84,14 +84,13 @@ def new_chat(chat):
             except:
                 return False
 
-        return True
+    elif request.user.is_teacher:
+        users = User.objects.filter(Q(is_staff=True) | Q(is_superuser=True))
 
-    users = User.objects.filter(Q(is_staff=True) | Q(is_superuser=True))
-
-    for user in users:
-        Notification.objects.create(
-            user=user,
-            message=message,
-            category='chat',
-            elt=chat.timetable.id,
-        )
+        for user in users:
+            Notification.objects.create(
+                user=user,
+                message=message,
+                category='chat',
+                elt=chat.timetable.id,
+            )

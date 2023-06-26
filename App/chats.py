@@ -30,7 +30,7 @@ def correct_shedule(request):
 def chats(request):
     shedules = correct_shedule(request)
     chats = [shedule.chats.last() for shedule in shedules]
-    #Notification.objects.all().delete()
+    Notification.objects.all().delete()
 
     context = {
         'shedules': shedules,
@@ -96,7 +96,7 @@ def store_chat(request):
                 message=message,
                 user=request.user,
             )
-            new_chat(chat)
+            new_chat(request, chat)
             return JsonResponse(chat.serialize(), safe=False)
         except:
             return JsonResponse({'error': "Erreur lors de l'envoi du message"}, 400)
@@ -125,7 +125,7 @@ def begin_chat(request):
                 message=message,
                 user=request.user,
             )
-            new_chat(chat)
+            new_chat(request, chat)
         return redirect('chats.details', shedule.id)
     return redirect('chats')
 
@@ -137,8 +137,8 @@ def mark_chats(request):
     shedule_id = request.GET['shedule_id']
     shedule = Timetable.objects.get(id=shedule_id)
     chats = shedule.chats.filter(user=request.user.id)
-    notifs = Notification.objects.filter(elt=shedule_id)
+    notifs = request.user.notifications.filter(elt=shedule_id)
 
     chats.update(is_opened=True)
-    #notifs.update(is_opened=True)
+    notifs.update(is_opened=True)
     return JsonResponse({'success': "Message marqué comme vue avec success"})
