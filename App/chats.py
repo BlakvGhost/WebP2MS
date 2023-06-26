@@ -72,7 +72,7 @@ def get_all_chats(request):
     return JsonResponse({
         'chats': chats,
         'teacher': shedule.teacher.serialize(),
-        'shedule': shedule,
+        'shedule': shedule.serialize(),
     }, safe=False)
 
 

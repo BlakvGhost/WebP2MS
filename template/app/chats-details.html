@@ -79,8 +79,180 @@
                             </div>
                             <!--end::Title-->
                         </div>
-                        <div class="card-body">
-                            
+                        <div v-if="!chats.length" class="text-center card-body">
+                            <div class="spinner-grow text-warning"></div>
+                            <div class="spinner-grow text-primary m-2"></div>
+                            <div class="spinner-grow text-secondary"></div>
+                        </div>
+                        <div v-if="chats.length" class="card-body">
+                            <!--begin::Row-->
+                            <div class="d-flex mb-2">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
+                                <span class="svg-icon svg-icon-1 svg-icon-success me-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                        viewBox="0 0 24 24" version="1.1">
+                                        <circle fill="currentColor" cx="12" cy="12" r="8" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Event start date/time-->
+                                <div class="fs-6">
+                                    <span class="fw-bold">Commence: </span>
+                                    <div class="p-3">
+
+                                        <div class="timeline-label">
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Date</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-warning fs-1"> </i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ shedule?.start_date ]]
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Heure</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-success fs-1"></i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <!--begin::Content-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ shedule?.start_time ]]
+                                                    </span>
+                                                </div>
+                                                <!--end::Content-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Event start date/time-->
+                            </div>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <div class="d-flex mb-9">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
+                                <span class="svg-icon svg-icon-1 svg-icon-danger me-5">
+                                    <svg class="text-danger" xmlns="http://www.w3.org/2000/svg" width="24px"
+                                        height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <circle fill="currentColor" cx="12" cy="12" r="8" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Event end date/time-->
+                                <div class="fs-6">
+                                    <span class="fw-bold">Fin: </span>
+                                    <div class="p-3">
+                                        <div class="timeline-label">
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Heure</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-success fs-1"></i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <!--begin::Content-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ shedule?.end_time ]]
+                                                    </span>
+                                                </div>
+                                                <!--end::Content-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Event end date/time-->
+                            </div>
+
+                            <div class="d-flex mb-9">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
+                                <span class="svg-icon svg-icon-1 svg-icon-danger me-5">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3"
+                                            d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Event end date/time-->
+                                <div class="fs-6">
+                                    <span class="fw-bold">Totale d'heure: </span>
+
+                                    <div class="p-3">
+
+                                        <div class="timeline-label">
+                                            <!--begin::Item-->
+                                            <div class="timeline-item">
+                                                <!--begin::Label-->
+                                                <div class="timeline-label fw-bold text-gray-800 fs-6">Total</div>
+                                                <!--end::Label-->
+                                                <!--begin::Badge-->
+                                                <div class="timeline-badge">
+                                                    <i class="fa fa-genderless text-warning fs-1"> </i>
+                                                </div>
+                                                <!--end::Badge-->
+                                                <div class="timeline-content d-flex">
+                                                    <span class="text-gray-800 ps-3"> [[ shedule?.subject?.total_time
+                                                        ]] </span>
+                                                </div>
+                                            </div>
+                                            <!--end::Item-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Event end date/time-->
+                            </div>
+                            <!--begin::Row-->
+                            <div class="d-flex align-items-center">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
+                                <span class="svg-icon svg-icon-1 svg-icon-muted me-5">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3"
+                                            d="M18.0624 15.3453L13.1624 20.7453C12.5624 21.4453 11.5624 21.4453 10.9624 20.7453L6.06242 15.3453C4.56242 13.6453 3.76242 11.4453 4.06242 8.94534C4.56242 5.34534 7.46242 2.44534 11.0624 2.04534C15.8624 1.54534 19.9624 5.24534 19.9624 9.94534C20.0624 12.0453 19.2624 13.9453 18.0624 15.3453Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Event location-->
+                                <div class="fs-6" id="viewLocation">
+                                    <span class="fw-bold"> [[ shedule?.classroom?.slug ]] </span>
+                                    <span class="p-3">
+                                        [[ shedule?.classroom?.desc ]]
+                                    </span>
+                                </div>
+                                <!--end::Event location-->
+                            </div>
+                            <!--end::Row-->
                         </div>
                     </div>
                 </div>
@@ -130,7 +302,7 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer"
                                 data-kt-scroll-wrappers="#kt_content, #kt_app_content, #chat_messenger_body"
-                                data-kt-scroll-offset="5px" style="max-height: 200px;">
+                                data-kt-scroll-offset="5px" style="max-height: 180px;">
                                 <div v-for="chat in chats" :key="chat.id">
                                     <!--begin::Message(in)-->
                                     <div v-if="user_id != chat?.from.id" class="d-flex justify-content-start mb-10">
@@ -209,9 +381,8 @@
                         <!--begin::Card footer-->
                         <div class="card-footer pt-4 border" id="kt_chat_messenger_footer">
                             <!--begin::Input-->
-                            <textarea @keyup="handleSend" class="form-control form-control-flush mb-3 bg-secondary"
-                                rows="1" data-kt-element="input" placeholder="Entrer votre message"
-                                v-model="message"></textarea>
+                            <textarea @keyup="handleSend" class="form-control form-control-flush mb-3" rows="1"
+                                data-kt-element="input" placeholder="Entrer votre message" v-model="message"></textarea>
                             <!--end::Input-->
                             <!--begin:Toolbar-->
                             <div class="d-flex flex-end">
@@ -257,7 +428,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select name="shedule_id" aria-label="Selectionner un emploi" data-control="select2"
+                            <select name="shedule_id" aria-label="Selectionner un emploi" data-control="select2-custom"
                                 data-placeholder="Selectionner un emploi`..."
                                 class="form-select form-select-solid form-select-lg fw-semibold">>
                                 {% for le in shedules %}
@@ -348,11 +519,14 @@
             setInterval(() => {
                 this.get();
             }, 2000)
+            $("[data-control='select2-custom']").select2({
+                dropdownParent: $("#add_new_chat")
+            });
         },
         watch: {
             chats: {
                 deep: true,
-                handler() {
+                handler(old, newValue) {
                     this.scrollToLastMessage();
                 },
             },

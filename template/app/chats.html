@@ -5,6 +5,11 @@
 <script src="/static/plugins/custom/datatables/datatables.bundle.js"></script>
 <script src="/static/js/table.js"></script>
 <script src="/static/js/add.js"></script>
+<script>
+    $("[data-control='select2-custom']").select2({
+        dropdownParent: $("#add_new_chat")
+    });
+</script>
 {% endblock %}
 
 {% block 'title' %} Vos Discussions {% endblock %}
@@ -115,7 +120,7 @@
                                             data-kt-user-table-filter="classe" data-hide-search="true">
                                             <option></option>
                                             {% for le in levels %}
-                                                <option value="{{ le.slug }}"> {{ le.slug }} </option>
+                                            <option value="{{ le.slug }}"> {{ le.slug }} </option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -167,17 +172,18 @@
                         <tbody class="text-gray-600 fw-semibold">
                             {% for chat in chats %}
                             {% if chat %}
-                            <tr class="{% if not chat.is_opened %} bg-light-warning {% endif %}" data-user-id="{{ chat.id }}"
-                                data-route="{% url 'ajax.user.delete' %}" data-model="chats"
-                                data-name="{{ chat.timetable.subject.slug }}">
+                            <tr class="{% if not chat.is_opened %} bg-light-warning {% endif %}"
+                                data-user-id="{{ chat.id }}" data-route="{% url 'ajax.user.delete' %}"
+                                data-model="chats" data-name="{{ chat.timetable.subject.slug }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                                         <input class="form-check-input form-check-action" type="checkbox" value="1" />
                                     </div>
                                 </td>
                                 <td class="align-items-center">
-                                    <a href="{% url 'chats.details' chat.timetable.id %}" class="fw-bold text-decoration-underline">
-                                        {{ chat.timetable.subject.slug }} du 
+                                    <a href="{% url 'chats.details' chat.timetable.id %}"
+                                        class="fw-bold text-decoration-underline">
+                                        {{ chat.timetable.subject.slug }} du
                                         {{ chat.timetable.start_date }} {{ chat.timetable.start_time }}
                                     </a>
                                 </td>
@@ -234,7 +240,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select name="shedule_id" aria-label="Selectionner un emploi" data-control="select2"
+                            <select name="shedule_id" aria-label="Selectionner un emploi" data-control="select2-custom"
                                 data-placeholder="Selectionner un emploi`..."
                                 class="form-select form-select-solid form-select-lg fw-semibold">>
                                 {% for le in shedules %}
