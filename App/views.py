@@ -625,5 +625,5 @@ def mark_notification(request, pk):
 
     notifications.is_opened = True
     notifications.save()
-
+    
     return redirect('shedules')

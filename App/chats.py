@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from .models import Timetable, Chat
+from .models import Timetable, Chat, Notification
 from Auth.models import MyUser as User, Level
 from .notifications import new_chat
 
@@ -30,6 +30,7 @@ def correct_shedule(request):
 def chats(request):
     shedules = correct_shedule(request)
     chats = [shedule.chats.last() for shedule in shedules]
+    #Notification.objects.all().delete()
 
     context = {
         'shedules': shedules,
@@ -133,9 +134,11 @@ def begin_chat(request):
 @login_required
 @superuser_or_staff_or_teacher_required
 def mark_chats(request):
-    shedule = request.GET['shedule_id']
-    shedule = Timetable.objects.get(id=shedule)
+    shedule_id = request.GET['shedule_id']
+    shedule = Timetable.objects.get(id=shedule_id)
     chats = shedule.chats.filter(user=request.user.id)
+    notifs = Notification.objects.filter(elt=shedule_id)
 
     chats.update(is_opened=True)
+    #notifs.update(is_opened=True)
     return JsonResponse({'success': "Message marqué comme vue avec success"})

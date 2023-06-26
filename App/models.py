@@ -91,6 +91,7 @@ class Notification(models.Model):
     user = models.ForeignKey(
         MyUser, on_delete=models.CASCADE, related_name='notifications')
     message = models.CharField(max_length=255)
+    elt = models.IntegerField()
     category = models.CharField(max_length=50, default="shedule")
     is_opened = models.BooleanField(default=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -106,6 +107,8 @@ class Notification(models.Model):
             'id': self.id,
             'user': self.user.serialize(),
             'message': self.message,
+            'category': self.category,
+            'elt': self.elt,
             'created_at': humanize.naturaltime(self.created_at),
         }
 

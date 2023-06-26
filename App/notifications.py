@@ -20,6 +20,8 @@ def new_shedule(shedule):
         Notification.objects.create(
             user=user,
             message=message,
+            category='shedule',
+            elt=shedule.id,
         )
 
         try:
@@ -46,7 +48,9 @@ def update_shedule(shedule):
 
         Notification.objects.create(
             user=user,
-            message=message
+            message=message,
+            category='shedule',
+            elt=shedule.id,
         )
         try:
             send_html_email("Mise à jour d'un Emploi du Temps", 'mails/update-shedule.html', {
@@ -65,18 +69,20 @@ def new_chat(chat):
         teacher = User.objects.get(id=chat.user.id)
 
         Notification.objects.create(
-            user=chat.teacher,
+            user=teacher,
             message=message,
+            category='chat',
+            elt=chat.timetable.id,
         )
 
         if not teacher.is_online:
             try:
                 send_html_email("Nouveau Message sur votre Emploi du temps", 'mails/new-chat.html', {
                     'message': message,
-                    'to': user
+                    'to': teacher
                 })
             except:
-                pass
+                return False
 
         return True
 
@@ -86,4 +92,6 @@ def new_chat(chat):
         Notification.objects.create(
             user=user,
             message=message,
+            category='chat',
+            elt=chat.timetable.id,
         )
