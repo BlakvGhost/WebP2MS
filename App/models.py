@@ -91,6 +91,7 @@ class Notification(models.Model):
     user = models.ForeignKey(
         MyUser, on_delete=models.CASCADE, related_name='notifications')
     message = models.CharField(max_length=255)
+    category = models.CharField(max_length=50, default="shedule")
     is_opened = models.BooleanField(default=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
