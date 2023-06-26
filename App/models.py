@@ -107,3 +107,25 @@ class Notification(models.Model):
             'message': self.message,
             'created_at': humanize.naturaltime(self.created_at),
         }
+
+class Chat(models.Model):
+    timetable = models.ForeignKey(
+        Timetable, on_delete=models.CASCADE, related_name='chats')
+    message = models.CharField(max_length=255)
+    is_opened = models.BooleanField(default=False, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.message
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'shedule': self.timetable.serialize(),
+            'message': self.message,
+            'is_opened': self.is_opened,
+            'created_at': humanize.naturaltime(self.created_at),
+        }
