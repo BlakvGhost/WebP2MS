@@ -125,3 +125,15 @@ def begin_chat(request):
 
         return redirect('chats.details', shedule.id)
     return redirect('chats')
+
+
+@csrf_exempt
+@login_required
+@superuser_or_staff_or_teacher_required
+def mark_chats(request):
+    shedule = request.GET['shedule_id']
+    shedule = Timetable.objects.get(id=shedule)
+    chats = shedule.chats.filter(user=request.user.id)
+
+    chats.update(is_opened=True)
+    return JsonResponse({'success': "Message marqué comme vue avec success"})

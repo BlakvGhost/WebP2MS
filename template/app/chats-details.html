@@ -500,6 +500,9 @@
                         })
                 }
             },
+            markChat: function () {
+                axios.get("{% url 'ajax.chats.mark' %}?shedule_id={{ chat.timetable.id }}")
+            },
             handleSend: function (e) {
                 if (e.code == 'Enter') {
                     e.preventDefault();
@@ -528,6 +531,7 @@
                 deep: true,
                 handler(old, newValue) {
                     this.scrollToLastMessage();
+                    this.markChat();
                 },
             },
         },
