@@ -111,6 +111,8 @@ class Notification(models.Model):
 class Chat(models.Model):
     timetable = models.ForeignKey(
         Timetable, on_delete=models.CASCADE, related_name='chats')
+    user = models.ForeignKey(
+        MyUser, on_delete=models.CASCADE, related_name='chats')
     message = models.CharField(max_length=255)
     is_opened = models.BooleanField(default=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -125,6 +127,7 @@ class Chat(models.Model):
         return {
             'id': self.id,
             'shedule': self.timetable.serialize(),
+            'from': self.user.serialize(),
             'message': self.message,
             'is_opened': self.is_opened,
             'created_at': humanize.naturaltime(self.created_at),

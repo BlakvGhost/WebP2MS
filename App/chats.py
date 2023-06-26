@@ -43,6 +43,10 @@ def chat(request, spk):
     try:
         shedule = Timetable.objects.get(id=spk)
         chats = shedule.chats.last()
+
+        if not chats:
+            return redirect('chats')
+
     except Timetable.DoesNotExist:
         return redirect('chats')
 
@@ -81,7 +85,8 @@ def begin_chat(request):
 
             Chat.objects.create(
                 timetable=shedule,
-                message=message
+                message=message,
+                user=request.user,
             )
 
         return redirect('chats.details', shedule.id)
