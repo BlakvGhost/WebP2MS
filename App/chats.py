@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import Timetable, Chat
 from Auth.models import MyUser as User, Level
+from .notifications import new_chat
 
 
 def superuser_or_staff_or_teacher_required(view_func):
@@ -94,6 +95,7 @@ def store_chat(request):
                 message=message,
                 user=request.user,
             )
+            new_chat(chat)
             return JsonResponse(chat.serialize(), safe=False)
         except:
             return JsonResponse({'error': "Erreur lors de l'envoi du message"}, 400)
@@ -117,12 +119,12 @@ def begin_chat(request):
             else:
                 message = "Bonjour Professeur,"
 
-            Chat.objects.create(
+            chat = Chat.objects.create(
                 timetable=shedule,
                 message=message,
                 user=request.user,
             )
-
+            new_chat(chat)
         return redirect('chats.details', shedule.id)
     return redirect('chats')
 

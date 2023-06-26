@@ -43,7 +43,7 @@ def update_shedule(shedule):
             message = teacher_message
         else:
             message = student_message
-            
+
         Notification.objects.create(
             user=user,
             message=message
@@ -55,3 +55,35 @@ def update_shedule(shedule):
             })
         except:
             continue
+
+
+def new_chat(chat):
+
+    message = f"Vous avez réçu un nouveau message"
+
+    if chat.user.is_teacher:
+        teacher = User.objects.get(id=chat.user.id)
+
+        Notification.objects.create(
+            user=chat.teacher,
+            message=message,
+        )
+
+        if not teacher.is_online:
+            try:
+                send_html_email("Nouveau Message sur votre Emploi du temps", 'mails/new-chat.html', {
+                    'message': message,
+                    'to': user
+                })
+            except:
+                pass
+
+        return True
+
+    users = User.objects.filter(Q(is_staff=True) | Q(is_superuser=True))
+
+    for user in users:
+        Notification.objects.create(
+            user=user,
+            message=message,
+        )
