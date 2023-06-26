@@ -166,14 +166,16 @@
                                 <th class="min-w-125px">Matière</th>
                                 <th class="min-w-125px">Classe</th>
                                 <th class="min-w-125px">Dernier Message</th>
+                                {% if user.is_staff or user.is_superuser %}
                                 <th class="text-end min-w-100px">Actions</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 fw-semibold">
                             {% for chat in chats %}
                             {% if chat %}
                             <tr class="{% if not chat.is_opened %} bg-light-warning {% endif %}"
-                                data-user-id="{{ chat.id }}" data-route="{% url 'ajax.user.delete' %}"
+                                data-user-id="{{ chat.timetable.id }}" data-route="{% url 'ajax.user.delete' %}"
                                 data-model="chats" data-name="{{ chat.timetable.subject.slug }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -197,10 +199,12 @@
                                         {{ chat.created_at|naturaltime }}
                                     </div>
                                 </td>
+                                {% if user.is_staff or user.is_superuser %}
                                 <td class="text-end">
                                     <a href="#" class="btn btn-danger px-3"
                                         data-kt-users-table-filter="delete_row">Supprimer</a>
                                 </td>
+                                {% endif %}
                             </tr>
                             {% endif %}
                             {% endfor %}

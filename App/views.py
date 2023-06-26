@@ -417,6 +417,9 @@ def ajax_delete(request):
                 objects = models.Subject
             elif model == 'notifications':
                 object = models.Notification
+            elif model == 'chats':
+                models.Chat.objects.filter(timetable_id=object_id).delete()
+                return JsonResponse({'success': 'Object deleted successfully'})             
             else:
                 return False
             try:
