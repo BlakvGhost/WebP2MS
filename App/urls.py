@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .chats import chats, chat, get_all_chats, begin_chat
+from .chats import chats, chat, get_all_chats, begin_chat, store_chat
 
 urlpatterns = [
     path('', views.default, name='default'),
@@ -18,6 +18,7 @@ urlpatterns = [
     path('discussions', chats, name='chats'),
     path('discussions/<int:spk>', chat, name='chats.details'),
     path('discussions/start', begin_chat, name='chats.start'),
+    path('discussions/store', store_chat, name='chats.store'),
     path('get-all-chats', get_all_chats, name='ajax.chats.get'),
     
     #Ajax routes

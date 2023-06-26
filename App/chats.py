@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -14,6 +15,7 @@ def superuser_or_staff_or_teacher_required(view_func):
 
     return check_user
 
+
 def correct_shedule(request):
     if request.user.is_teacher:
         shedules = Timetable.objects.filter(teacher_id=request.user.id)
@@ -24,7 +26,7 @@ def correct_shedule(request):
 
 @login_required
 @superuser_or_staff_or_teacher_required
-def chats(request):    
+def chats(request):
     shedules = correct_shedule(request)
     chats = [shedule.chats.last() for shedule in shedules]
 
@@ -35,6 +37,7 @@ def chats(request):
     }
 
     return render(request, 'app/chats.html', context)
+
 
 @login_required
 @superuser_or_staff_or_teacher_required
@@ -57,6 +60,7 @@ def chat(request, spk):
 
     return render(request, 'app/chats-details.html', context)
 
+
 @csrf_exempt
 @login_required
 @superuser_or_staff_or_teacher_required
@@ -65,7 +69,37 @@ def get_all_chats(request):
     shedule = Timetable.objects.get(id=shedule)
     chats = shedule.chats.all()
     chats = [chat.serialize() for chat in chats]
-    return JsonResponse(chats, safe=False)
+    return JsonResponse({
+        'chats': chats,
+        'teacher': shedule.teacher.serialize(),
+        'shedule': shedule,
+    }, safe=False)
+
+
+@csrf_exempt
+@login_required
+@superuser_or_staff_or_teacher_required
+def store_chat(request):
+
+    data = json.loads(request.body.decode('utf-8'))
+
+    message = data.get('message')
+    shedule_id = data.get('shedule_id')
+
+    if message and shedule_id:
+        try:
+            shedule = Timetable.objects.get(id=shedule_id)
+            chat = Chat.objects.create(
+                timetable=shedule,
+                message=message,
+                user=request.user,
+            )
+            return JsonResponse(chat.serialize(), safe=False)
+        except:
+            return JsonResponse({'error': "Erreur lors de l'envoi du message"}, 400)
+
+    return JsonResponse({'error': 'Veuillez bien écrire un message'}, status=400)
+
 
 @login_required
 @superuser_or_staff_or_teacher_required

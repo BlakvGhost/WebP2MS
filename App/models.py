@@ -117,8 +117,6 @@ class Chat(models.Model):
     is_opened = models.BooleanField(default=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ['-created_at']
 
     def __str__(self):
         return self.message

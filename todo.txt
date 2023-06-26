@@ -1,2 +1,3 @@
 - Gerer les verifications de avant de stocker un emploi du temps
 - Gerer les filtres sur le front pour bien afficher les temps deja faites des matieres
+- spliter a 5 notifs

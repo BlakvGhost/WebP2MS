@@ -65,130 +65,166 @@
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
             <!--begin::Table-->
-            <div class="card" id="kt_chat_messenger">
-                <!--begin::Card header-->
-                <div class="card-header" id="kt_chat_messenger_header">
-                    <!--begin::Title-->
-                    <div class="card-title">
-                        <!--begin::User-->
-                        <div class="d-flex justify-content-center flex-column me-3">
-                            <a href="javascript:void(0)"
-                                class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">
-                                {% if user.is_teacher %}
-                                IFRI
-                                {% else %}
-                                {{ chat.timetable.teacher.first_name }} {{ chat.timetable.teacher.last_name }}
-                                {% endif %}
-                            </a>
-                            <!--begin::Info-->
-                            <div class="mb-0 lh-1">
-                                <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                                <span class="fs-7 fw-semibold text-muted">Active</span>
+            <div class="d-flex flex-column flex-lg-row">
+                <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
+                    <div class="card">
+                        <div class="card-header" id="kt_chat_messenger_header">
+                            <!--begin::Title-->
+                            <div class="card-title">
+                                <!--begin::User-->
+                                <div class="d-flex justify-content-center flex-column me-3">
+                                    <h5>Détails en temps réel du programme</h5>
+                                </div>
+                                <!--end::User-->
                             </div>
-                            <!--end::Info-->
+                            <!--end::Title-->
                         </div>
-                        <!--end::User-->
-                    </div>
-                    <!--end::Title-->
-                </div>
-                <!--end::Card header-->
-                <!--begin::Card body-->
-                <div class="card-body" id="kt_chat_messenger_body">
-                    <!--begin::Messages-->
-                    <div v-if="chats.length" class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true"
-                        data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-                        data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer"
-                        data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body"
-                        data-kt-scroll-offset="5px" style="max-height: 119px;">
-                        <div v-for="chat in chats" :key="chat.id">
-                            <!--begin::Message(in)-->
-                            <div v-if="user_id != chat?.from.id" class="d-flex justify-content-start mb-10">
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-column align-items-start">
-                                    <!--begin::User-->
-                                    <div class="d-flex align-items-center mb-2">
-                                        <!--begin::Avatar-->
-                                        <div class="symbol symbol-35px symbol-circle">
-                                            <img :alt="chat?.from?.first_name"
-                                            :src="chat?.from?.avatar ?? '/static/media/avatars/blank.png'">
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::Details-->
-                                        <div class="ms-3">
-                                            <a href="javascript:void(0)" class="fs-5 fw-bold text-gray-900 text-hover-primary me-1">
-                                                [[ chat?.from.first_name ]] [[ chat?.from.first_name ]]
-                                            </a>
-                                            <span class="text-muted fs-7 mb-1"> [[ chat?.created_at ]] </span>
-                                        </div>
-                                        <!--end::Details-->
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::Text-->
-                                    <div class="p-5 rounded bg-light-info text-dark fw-semibold mw-lg-400px text-start"
-                                        data-kt-element="message-text">
-                                        [[ chat?.message ]]
-                                    </div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div>
-                            <!--end::Message(in)-->
-                            <!--begin::Message(out)-->
-                            <div v-if="user_id == chat?.from.id" class="d-flex justify-content-end mb-10">
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-column align-items-end">
-                                    <!--begin::User-->
-                                    <div class="d-flex align-items-center mb-2">
-                                        <!--begin::Details-->
-                                        <div class="me-3">
-                                            <span class="text-muted fs-7 mb-1"> [[ chat?.created_at ]] </span>
-                                            <a href="{% url 'profile' %}"
-                                                class="fs-5 fw-bold text-gray-900 text-hover-primary ms-1">Vous</a>
-                                        </div>
-                                        <!--end::Details-->
-                                        <!--begin::Avatar-->
-                                        <div class="symbol symbol-35px symbol-circle">
-                                            <img :alt="chat?.from?.first_name"
-                                            :src="chat?.from?.avatar ?? '/static/media/avatars/blank.png'">
-                                        </div>
-                                        <!--end::Avatar-->
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::Text-->
-                                    <div class="p-5 rounded bg-light-primary text-dark fw-semibold mw-lg-400px text-end"
-                                        data-kt-element="message-text">
-                                        [[ chat?.message ]]
-                                    </div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div>
-                            <!--end::Message(out)-->
+                        <div class="card-body">
+                            
                         </div>
                     </div>
-                    <div v-if="!chats.length" class="text-center">
-                        <div class="spinner-grow text-warning"></div>
-                        <div class="spinner-grow text-primary m-2"></div>
-                        <div class="spinner-grow text-secondary"></div>
-                    </div>
-                    <!--end::Messages-->
                 </div>
-                <!--end::Card body-->
-                <!--begin::Card footer-->
-                <div class="card-footer pt-4" id="kt_chat_messenger_footer">
-                    <!--begin::Input-->
-                    <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input"
-                        placeholder="Type a message"></textarea>
-                    <!--end::Input-->
-                    <!--begin:Toolbar-->
-                    <div class="d-flex flex-end">
-                        <!--begin::Send-->
-                        <button class="btn btn-primary" type="button" data-kt-element="send">Envoyer</button>
-                        <!--end::Send-->
+                <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                    <div class="card" id="kt_chat_messenger">
+                        <!--begin::Card header-->
+                        <div class="card-header" id="kt_chat_messenger_header">
+                            <!--begin::Title-->
+                            <div class="card-title">
+                                <!--begin::User-->
+                                <div class="d-flex justify-content-center flex-column me-3">
+                                    <a href="javascript:void(0)"
+                                        class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">
+                                        {% if user.is_teacher %}
+                                        IFRI
+                                        {% else %}
+                                        {{ chat.timetable.teacher.first_name }} {{ chat.timetable.teacher.last_name }}
+                                        {% endif %}
+                                    </a>
+                                    <!--begin::Info-->
+                                    {% if user.is_teacher %}
+                                    <div class="mb-0 lh-1">
+                                        <span class="badge badge-warning badge-circle w-10px h-10px me-1"></span>
+                                        <span class="fs-7 fw-semibold text-muted">Possible en Ligne</span>
+                                    </div>
+                                    {% else %}
+                                    <div class="mb-0 lh-1">
+                                        <span :class="teacher.is_online ? 'badge-success': 'badge-danger'"
+                                            class="badge badge-circle w-10px h-10px me-1"></span>
+                                        <span class="fs-7 fw-semibold text-muted">
+                                            [[ teacher.is_online ? 'En Ligne' : 'Déconnecté' ]]
+                                        </span>
+                                    </div>
+                                    {% endif %}
+                                    <!--end::Info-->
+                                </div>
+                                <!--end::User-->
+                            </div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Card header-->
+                        <!--begin::Card body-->
+                        <div class="card-body" id="chat_messenger_body">
+                            <!--begin::Messages-->
+                            <div v-if="chats.length" class="scroll-y me-n5 pe-5 h-300px h-lg-auto"
+                                data-kt-element="messages" data-kt-scroll="true"
+                                data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+                                data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer"
+                                data-kt-scroll-wrappers="#kt_content, #kt_app_content, #chat_messenger_body"
+                                data-kt-scroll-offset="5px" style="max-height: 200px;">
+                                <div v-for="chat in chats" :key="chat.id">
+                                    <!--begin::Message(in)-->
+                                    <div v-if="user_id != chat?.from.id" class="d-flex justify-content-start mb-10">
+                                        <!--begin::Wrapper-->
+                                        <div class="d-flex flex-column align-items-start">
+                                            <!--begin::User-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <!--begin::Avatar-->
+                                                <div class="symbol symbol-35px symbol-circle">
+                                                    <img :alt="chat?.from?.first_name"
+                                                        :src="chat?.from?.avatar ?? '/static/media/avatars/blank.png'">
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::Details-->
+                                                <div class="ms-3">
+                                                    <a href="javascript:void(0)"
+                                                        class="fs-5 fw-bold text-gray-900 text-hover-primary me-1">
+                                                        [[ chat?.from.first_name ]] [[ chat?.from.last_name ]]
+                                                    </a>
+                                                    <span class="text-muted fs-7 mb-1"> [[ chat?.created_at ]] </span>
+                                                </div>
+                                                <!--end::Details-->
+                                            </div>
+                                            <!--end::User-->
+                                            <!--begin::Text-->
+                                            <div class="p-5 rounded bg-light-info text-dark fw-semibold mw-lg-400px text-start"
+                                                data-kt-element="message-text">
+                                                [[ chat?.message ]]
+                                            </div>
+                                            <!--end::Text-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Message(in)-->
+                                    <!--begin::Message(out)-->
+                                    <div v-if="user_id == chat?.from.id" class="d-flex justify-content-end mb-10">
+                                        <!--begin::Wrapper-->
+                                        <div class="d-flex flex-column align-items-end">
+                                            <!--begin::User-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <!--begin::Details-->
+                                                <div class="me-3">
+                                                    <span class="text-muted fs-7 mb-1"> [[ chat?.created_at ]] </span>
+                                                    <a href="{% url 'profile' %}"
+                                                        class="fs-5 fw-bold text-gray-900 text-hover-primary ms-1">Vous</a>
+                                                </div>
+                                                <!--end::Details-->
+                                                <!--begin::Avatar-->
+                                                <div class="symbol symbol-35px symbol-circle">
+                                                    <img :alt="chat?.from?.first_name"
+                                                        :src="chat?.from?.avatar ?? '/static/media/avatars/blank.png'">
+                                                </div>
+                                                <!--end::Avatar-->
+                                            </div>
+                                            <!--end::User-->
+                                            <!--begin::Text-->
+                                            <div class="p-5 rounded bg-light-primary text-dark fw-semibold mw-lg-400px text-end"
+                                                data-kt-element="message-text">
+                                                [[ chat?.message ]]
+                                            </div>
+                                            <!--end::Text-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Message(out)-->
+                                </div>
+                            </div>
+                            <div v-if="!chats.length" class="text-center">
+                                <div class="spinner-grow text-warning"></div>
+                                <div class="spinner-grow text-primary m-2"></div>
+                                <div class="spinner-grow text-secondary"></div>
+                            </div>
+                            <!--end::Messages-->
+                        </div>
+                        <!--end::Card body-->
+                        <!--begin::Card footer-->
+                        <div class="card-footer pt-4 border" id="kt_chat_messenger_footer">
+                            <!--begin::Input-->
+                            <textarea @keyup="handleSend" class="form-control form-control-flush mb-3 bg-secondary"
+                                rows="1" data-kt-element="input" placeholder="Entrer votre message"
+                                v-model="message"></textarea>
+                            <!--end::Input-->
+                            <!--begin:Toolbar-->
+                            <div class="d-flex flex-end">
+                                <!--begin::Send-->
+                                <button class="btn btn-primary bg-jma" type="button" data-kt-element="send"
+                                    @click="send">Envoyer</button>
+                                <!--end::Send-->
+                            </div>
+                            <!--end::Toolbar-->
+                        </div>
+                        <!--end::Card footer-->
                     </div>
-                    <!--end::Toolbar-->
                 </div>
-                <!--end::Card footer-->
             </div>
         </div>
         <!--end::Content container-->
@@ -263,21 +299,63 @@
         data() {
             return {
                 chats: [],
-                user_id: "{{ user.id }}"
+                shedule: {},
+                user_id: "{{ user.id }}",
+                shedule_id: "{{ chat.timetable.id }}",
+                teacher: {},
+                message: null,
             }
         },
         methods: {
             get: function () {
                 axios.get("{% url 'ajax.chats.get' %}?shedule_id={{ chat.timetable.id }}").then(res => {
-                    this.chats = res.data;
-                    console.log(res);
+                    this.chats = res.data?.chats;
+                    this.teacher = res.data?.teacher;
+                    this.shedule = res.data?.shedule;
                 })
-            }
+            },
+            send: function () {
+                if (this.message) {
+
+                    const data = {
+                        message: this.message,
+                        shedule_id: this.shedule_id,
+                    }
+
+                    axios.post("{% url 'chats.store' %}", data)
+                        .then(res => {
+                            this.message = ''
+                            this.chats.push(res.data);
+                        })
+                }
+            },
+            handleSend: function (e) {
+                if (e.code == 'Enter') {
+                    e.preventDefault();
+                    this.send();
+                    return false;
+                }
+            },
+            scrollToLastMessage: function () {
+                window.scrollTo(0, document.body.scrollHeight);
+                const messages = document.querySelector('[data-kt-element="messages"]');
+                if (messages) {
+                    messages.scrollTop = messages?.scrollHeight
+                }
+            },
         },
         mounted() {
             setInterval(() => {
                 this.get();
             }, 2000)
+        },
+        watch: {
+            chats: {
+                deep: true,
+                handler() {
+                    this.scrollToLastMessage();
+                },
+            },
         },
     }).mount('#kt_app_content')
 </script>
