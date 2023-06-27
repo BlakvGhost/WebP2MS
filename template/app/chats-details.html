@@ -65,7 +65,7 @@
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
             <!--begin::Table-->
-            <div class="d-flex flex-column flex-lg-row">
+            <div class="d-flex flex-column-reverse flex-lg-row">
                 <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
                     <div class="card">
                         <div class="card-header" id="kt_chat_messenger_header">
@@ -256,7 +256,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10 mb-10 mb-lg-0">
                     <div class="card" id="kt_chat_messenger">
                         <!--begin::Card header-->
                         <div class="card-header" id="kt_chat_messenger_header">
@@ -480,7 +480,11 @@
         methods: {
             get: function () {
                 axios.get("{% url 'ajax.chats.get' %}?shedule_id={{ chat.timetable.id }}").then(res => {
-                    this.chats = res.data?.chats;
+                    const newChat = res.data?.chats;
+
+                    if (newChat.length != this.chats?.length) {
+                        this.chats = newChat;
+                    }
                     this.teacher = res.data?.teacher;
                     this.shedule = res.data?.shedule;
                 })
@@ -530,6 +534,7 @@
             chats: {
                 deep: true,
                 handler(old, newValue) {
+                    console.log(old.length, newValue.length);
                     this.scrollToLastMessage();
                     this.markChat();
                 },

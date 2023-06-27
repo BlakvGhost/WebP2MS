@@ -1,4 +1,6 @@
-<div id="kt_app_header" class="app-header">
+<header id="kt_app_header" class="app-header animation-fade-in animation" data-kt-sticky="true" data-kt-sticky-activate="{default: true, lg: true}"
+    data-kt-sticky-name="app-header-minimize" data-kt-sticky-offset="{default: '10px', lg: '10px'}"
+    data-kt-sticky-animation="false">
     <div class="app-container container-fluid d-flex align-items-stretch justify-content-between"
         id="kt_app_header_container">
         <div class="d-flex align-items-center d-lg-none ms-n3 me-1 me-md-2" title="Show sidebar menu">
@@ -19,6 +21,7 @@
                 <img alt="Logo" src="/static/favicon.ico" class="h-30px" />
             </a>
         </div>
+        {% if user.is_staff or user.is_superuser %}
         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
             <div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true"
                 data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}"
@@ -27,7 +30,7 @@
                 data-kt-swapper-mode="{default: 'append', lg: 'prepend'}"
                 data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
                 <!--begin::Menu-->
-                {% if user.is_staff or user.is_superuser %}
+
                 <div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0"
                     id="kt_app_header_menu" data-kt-menu="true">
                     <!--begin:Menu item-->
@@ -82,9 +85,10 @@
                         <!--end:Menu sub-->
                     </div>
                 </div>
-                {% endif %}
+
                 <!--end::Menu-->
             </div>
+            {% endif %}
             <div class="app-navbar flex-shrink-0">
                 <div class="app-navbar-item ms-1 ms-md-3" id="notificationsPanel">
                     <div class="btn position-relative btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px"
@@ -442,27 +446,27 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
-<script>
-    Vue.createApp({
-        delimiters: ['[[', ']]'],
-        data() {
-            return {
-                notifications: [],
-            }
-        },
-        methods: {
-            get: function () {
-                axios.get("{% url 'ajax.notifications.get' %}").then(res => {
-                    this.notifications = res.data;
-                })
-            }
-        },
-        mounted() {
-            setInterval(() => {
-                this.get();
-            }, 2000)
-        },
-    }).mount('#notificationsPanel')
-</script>
+    <script>
+        Vue.createApp({
+            delimiters: ['[[', ']]'],
+            data() {
+                return {
+                    notifications: [],
+                }
+            },
+            methods: {
+                get: function () {
+                    axios.get("{% url 'ajax.notifications.get' %}").then(res => {
+                        this.notifications = res.data;
+                    })
+                }
+            },
+            mounted() {
+                setInterval(() => {
+                    this.get();
+                }, 2000)
+            },
+        }).mount('#notificationsPanel')
+    </script>
