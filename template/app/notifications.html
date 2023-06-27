@@ -149,10 +149,24 @@
                                     </div>
                                 </td>
                                 <td class="text-end">
-                                    <a href="{% url 'notifications.mark' n.id %}" class="btn btn-success px-3">Marqué
-                                        Vue</a>
-                                    <a href="#" class="btn btn-danger px-3"
-                                        data-kt-users-table-filter="delete_row">Supprimer</a>
+                                    <a href="{% url 'notifications.mark' n.id %}" class="btn btn-success px-3">
+                                        <span class="svg-icon svg-icon-2 svg-light m-0">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="currentColor"></path>
+                                                <path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="currentColor"></path>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <button class="btn btn-danger px-3"
+                                        data-kt-users-table-filter="delete_row">
+                                        <span class="svg-icon svg-icon-2 svg-light m-0">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"></path>
+                                                <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="currentColor"></path>
+                                                <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="currentColor"></path>
+                                            </svg>
+                                        </span>
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}
