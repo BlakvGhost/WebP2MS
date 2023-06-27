@@ -425,6 +425,7 @@
                     <!--end::User account menu-->
                     <!--end::Menu wrapper-->
                 </div>
+                {% if user.is_staff or user.is_superuser %}
                 <div class="app-navbar-item d-lg-none ms-2 me-n3" title="Show header menu">
                     <div class="btn btn-icon btn-active-color-primary w-30px h-30px w-md-35px h-md-35px"
                         id="kt_app_header_menu_toggle">
@@ -443,6 +444,7 @@
                         <!--end::Svg Icon-->
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
