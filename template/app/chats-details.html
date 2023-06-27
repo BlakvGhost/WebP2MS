@@ -297,7 +297,7 @@
                         <!--begin::Card body-->
                         <div class="card-body" id="chat_messenger_body">
                             <!--begin::Messages-->
-                            <div v-if="chats.length" class="scroll-y me-n5 pe-5 h-300px h-lg-auto"
+                            <div v-if="chats.length" class="scroll-y me-n5 pe-5 h-300px h-lg-auto mh-300px mh-lg-200px"
                                 data-kt-element="messages" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer"
@@ -515,8 +515,9 @@
                 }
             },
             scrollToLastMessage: function () {
-                window.scrollTo(0, document.body.scrollHeight);
+                //window.scrollTo(0, document.body.scrollHeight);
                 const messages = document.querySelector('[data-kt-element="messages"]');
+
                 if (messages) {
                     messages.scrollTop = messages?.scrollHeight
                 }
@@ -525,7 +526,7 @@
         mounted() {
             setInterval(() => {
                 this.get();
-            }, 2000)
+            }, 500)
             $("[data-control='select2-custom']").select2({
                 dropdownParent: $("#add_new_chat")
             });
@@ -534,9 +535,11 @@
             chats: {
                 deep: true,
                 handler(old, newValue) {
-                    console.log(old.length, newValue.length);
-                    this.scrollToLastMessage();
-                    this.markChat();
+                    setTimeout(() => {
+                        console.log("Timeout");
+                        this.scrollToLastMessage();
+                        this.markChat();
+                    }, 200, false)
                 },
             },
         },
