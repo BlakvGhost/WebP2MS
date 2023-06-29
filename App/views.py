@@ -82,7 +82,7 @@ def default(request):
         total_subject_student = 0
 
     context = {
-        'total_students': User.objects.filter().count(),
+        'total_students': User.objects.filter(is_teacher=False, is_superuser=False, is_staff=False).count(),
         'total_teachers': User.objects.filter(is_teacher=True).count(),
         'total_subjects': models.Subject.objects.all().count(),
         'total_classroom': models.Classroom.objects.all().count(),
@@ -142,12 +142,12 @@ def teachers(request):
                     'last_name': last_name
                 }
 
-                if send_html_email(
+                try:
+                    send_html_email(
                     'Activation de compte WebP2MS',
                     'mails/new-password.html',
                     {'to': user, 'reset_link': reset_link, 'expire': expire_at},
-                    [email]
-                ):
+                    [email])
 
                     User.objects.create(
                         email=email,
@@ -160,6 +160,8 @@ def teachers(request):
                         reset_token=token,
                         reset_token_expiration=timezone.now() + timedelta(hours=expire_at)
                     )
+                except:
+                    errors.append("Veuillez verifier que vous etes bien connecté afin que le mail contenant les instructions de creation de mot de passe de l'enseignant lui soit transmit, sinon le compte ne pourra pas etre creer")
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
             error = _update_user(request, True)
