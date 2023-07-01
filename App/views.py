@@ -182,7 +182,6 @@ def teachers(request):
 @login_required
 @superuser_or_staff_required
 def students(request):
-    errors, exist = [], False
     levels = Level.objects.all()
 
     if request.method == 'POST':
@@ -191,9 +190,11 @@ def students(request):
 
         user = User.objects.get(id=user_id)
 
+        user.is_active = is_active
+        user.save()
+
     context = {
-        'users': User.objects.filter(Q(is_teacher=True) | Q(is_staff=True)),
-        'errors': errors,
+        'users': User.objects.filter(is_teacher=False, is_superuser=False, is_staff=False),
         'levels': levels,
     }
 
