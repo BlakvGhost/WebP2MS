@@ -181,6 +181,27 @@ def teachers(request):
 
 @login_required
 @superuser_or_staff_required
+def students(request):
+    errors, exist = [], False
+    levels = Level.objects.all()
+
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        is_active = bool(request.POST.get('is_active'))
+
+        user = User.objects.get(id=user_id)
+
+    context = {
+        'users': User.objects.filter(Q(is_teacher=True) | Q(is_staff=True)),
+        'errors': errors,
+        'levels': levels,
+    }
+
+    return render(request, 'app/students.html', context)
+
+
+@login_required
+@superuser_or_staff_required
 def cours(request):
 
     errors, exist = [], False

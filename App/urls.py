@@ -5,6 +5,7 @@ from . import chats
 urlpatterns = [
     path('', views.default, name='default'),
     path('gestion/les-enseignants-et-collaborateurs', views.teachers, name='teachers'),
+    path('gestion/les-comptes-des-etudiants', views.students, name='students'),
     path('gestion/les-emplois-temps', views.shedules, name='shedules'),
     path('gestion/les-matieres', views.cours, name='courses'),
     path('gestion/les-salles-de-cours', views.salles, name='classrooms'),
