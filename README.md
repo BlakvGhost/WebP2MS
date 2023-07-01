@@ -35,7 +35,7 @@ git clone https://github.com/BlakvGhost/PIL1_2223_34.git
 cd PIL1_2223_34
 ```
 
-6. Installer Django:
+6. Installer Django et les dépendances du projet:
 ```bash
 pip install -r requirements.py
 ```
