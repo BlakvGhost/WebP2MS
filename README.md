@@ -8,6 +8,7 @@ WebP2MS (Web Platform for Managing and Monitoring Schedules) est une application
 - Planification des emplois de temps [fait par les Coordonnateurs de formation]
 - Consultation des emplois du temps publiés [par les étudiants]
 - Capacité de chater sur un emploi du temps entre les enseignants et l'administration
+- Capacité d'installer notre application sur smartphone et sur PC en tant que application PWA
 
 
 ## Installation
@@ -131,3 +132,8 @@ Ce projet est distribué sous la licence
 ## Restriction d'accès
 
 Ce projet est destiné à être éditer et consulter uniquement par les membres du groupe de travail avec lesquels il est élaboré.
+
+## Capture d'écran
+
+![Page de connexion](screenshot-auth.png)
+![Page des emplois du temps](screenshot.png)
