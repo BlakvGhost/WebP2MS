@@ -7,7 +7,7 @@
 </head>
 <style>
     body {
-        background: #E6F4F1;
+        background: beige;
         font-family: Arial, sans-serif;
         padding: 10px 10%;
     }
@@ -70,9 +70,9 @@
 
 <body>
     <header>
-        <h1>WebP2MS - Rapport de Projet</h1>
-        <h2>GROUPE N°34</h2>
-        <h3>Membres </h3>
+        <h1 style="color: blueviolet;">WebP2MS - Rapport de Projet</h1>
+        <h2 style="color: aqua;">GROUPE N°34</h2>
+        <h3 style="color: rebeccapurple;">Membres </h3>
     </header>
     <div class="container">
         <section>
@@ -90,11 +90,14 @@
                 <li>COSSOU Christall</li>
                 <li>APLOGAN DJIBODE Thierry</li>
                 <li>DOSSOU Estelle</li>
+                <li>ALOWO Amour</li>
+                <li> FANOU Melsim</li>
+                <li>SENOU Alex</li>
             </ol>
         </section>
     </div>
     <section>
-        <h2>Mode de fonctionnement interne du groupe</h2>
+        <h2 style="color: aqua;">Mode de fonctionnement interne du groupe</h2>
         <p style="font-size: 24px;">Pour la réalisation de notre projet de gestion des emplois du temps, notre équipe a
             adopté une approche
             collaborative et divisée les responsabilités entre les membres de la manière suivante:<br>
@@ -129,11 +132,11 @@
         <h3> DAVI Serge & FAYEMI Halic</h3>
         <p>
             Ils se sont chargés de la gestion des erreurs sur le front-end de l'application et de tester l'application
-            sous ses divers forme.
+            sous ses divers forme.De plus, FAYEMI Halic aida au développement d'une page d'aide.
         </p>
     </section>
     <section>
-        <h2>Description de la conception</h2>
+        <h2 style="color: aqua;">Description de la conception</h2>
         <p>
             Notre application web de gestion des emplois du temps a été conçue en utilisant une architecture
             client-serveur et une approche
@@ -177,14 +180,14 @@
         </p>
     </section>
     <section>
-        <h2>Instructions de déploiement</h2>
+        <h2 style="color: aqua;">Instructions de déploiement</h2>
         <p>
             Pour déployer et exécuter notre application de gestion des emplois du temps, suivez les étapes ci-dessous :
         </p>
         <h3></h3>
         <ul class="installation">
             <li>
-                Assurez-vous d'avoir le language Python installé sur votre machine. Vous pouvez télécharger python <a
+                Assurez-vous d'avoir le language Python installé sur votre machine. Vous pouvez télécharger python  ici si vous ne l'avez pas encore:<a
                     href="https://www.python.org/downloads/" target="_blank">ici</a>
             </li>
             <li>
@@ -195,32 +198,34 @@
             <li>
                 Clonez le référentiel en utilisant la commande `git clone`: <br>
                 <h3><code class="text-green">git clone https://github.com/BlakvGhost/PIL1_2223_34.git</code></h3>
+
             </li>
             <li>
                 Accédez au répertoire du projet nouvellement cloné : <br>
                 <h3><code class="text-green">cd PIL1_2223_34</code></h3>
             </li>
-            <li>
-                Installer Django et les dépendances du projet : <br>
-                <h3><code class="text-green">
-                    pip install -r requirements.py
-                </code></h3>
-            </li>
-            <li>
-                Demarrer le serveur d'application django: <br>
-                <h3><code class="text-green">
-                    py manage.py runserver
-                </code></h3>
-                L'application va démarrer sur l'addresse http://localhost:8000 : copier cet addresse et lancer-le dans
-                le navigateur.
-                L'application est maintenant lancé !
-            </li>
+            <p style="color: red;"><b><i>Dans le cas ou vous ne posséderiez pas la bibliothèque Django, nous vous recommandons de faire ceci: </i></b></p>
+                <li>
+                    Installer Django et les dépendances du projet : <br>
+                    <h3><code class="text-green">
+                        pip install -r requirements.py
+                    </code></h3>
+                </li>
+                <li>
+                    Demarrer le serveur d'application django: <br>
+                    <h3><code class="text-green">
+                        py manage.py runserver
+                    </code></h3>
+                    L'application va démarrer sur l'addresse http://localhost:8000 : copier cet addresse et lancer-le dans
+                    le navigateur.
+                    L'application est maintenant lancé !
+                </li>
             <li>
                 En utilisant notre base de données sqlite déjà configurer; utilisez ces informations pour vous
                 connectez:
                 <ol>
                     <li>
-                        En temps que collaborateur
+                        En temps que collaborateur:
                         <h4>Email: exemple@exemple.com</h4>
                         <h4>Password: passme</h4>
                     </li>
@@ -244,7 +249,7 @@
         </p>
     </section>
     <section>
-        <h2>Structure du project</h2>
+        <h2 style="color: aqua;">Structure du project</h2>
         <p>
             Notre application est structurée de la manière suivante :
         </p>
@@ -292,7 +297,20 @@
 
     </section>
     <section>
-        <h2>Base de données de l'application</h2>
+        <h2 style="color: aqua;">Manuel d'utilisation</h2>
+        <p>Notre application est très simple d'utlisation. Vous n'avez nullement besoin d'avoir des connaissances antérieures en programmation.
+            <ol>
+                
+                    <li><p>Si vous etes <b><i>Collaborateur</i></b>, vous disposez alors de tous les droits, c'est-à-dire que vous pouvez: <i style="color: blue;">Ajouter et supprimer un Etudiant de l'Institut; Ajouter et supprimer un Enseignant de l'Institut; Ajouter et modifier les emplois du temps semestrielles; Apporter autant de changement que possible; etc...</i>.</p></li>
+                    <li><p>Si vous etes <b><i>Enseignant</i></b>, vous droits sont plus limités. Vous pouvez: <i style="color: blue;">Consulter les emplois du temps semestrielles et en Discuter avec les Collaborateurs selon votre disponibilité</i>.</p></li>
+                    <li><p>En tant qu'<b><i>Etudiant</i></b>, vous ne pouvez que: <i style="color: blue;">lire et consulter les emplois du temps. Vous devez vous mettre à jour pour les respecter et etre toujours présent aux heures de cours</i>.</p></li>
+                
+                <p>Ce site de gestion des emplois du temps est dynamique, cohérent et satifaira vos divers besoins de connaitre l'emploi du temps de chaque semaine.</p>
+            </ol>
+        </p>
+    </section>
+    <section>
+        <h2 style="color: aqua;">Base de données de l'application</h2>
         <p>
             Vous pouvez voir ici le modèle relationnel de données (MCD) de notre base de données :
         </p>
