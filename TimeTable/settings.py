@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,10 +80,19 @@ WSGI_APPLICATION = 'TimeTable.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'NAME': config('DATABASE_NAME', default=BASE_DIR / 'db.sqlite3'),
     }
 }
 
+if config('ENVIRONMENT', default='local') == 'production':
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('MYSQL_DATABASE_NAME'),
+        'USER': config('MYSQL_USERNAME'),
+        'PASSWORD': config('MYSQL_PASSWORD'),
+        'HOST': config('MYSQL_HOST'),
+        'PORT': config('MYSQL_PORT'),
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -131,11 +141,9 @@ EMAIL_HOST = 'mail.kabirou-alassane.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'no-reply@kabirou-alassane.com'
 EMAIL_HOST_PASSWORD = 'jQ0yiv~!Y;&='
-#EMAIL_USE_TLS = True
+# EMAIL_USE_TLS = True
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'no-reply@kabirou-alassane.com'
-
-
 
 
 # Default primary key field type
