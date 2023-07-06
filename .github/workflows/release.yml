@@ -1,4 +1,4 @@
-name: Deploy to FTP 
+name: Deploy to FTP
 
 on:
   push:
@@ -12,6 +12,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Set environment variables
+        env:
+          ENVIRONMENT: production
+          MYSQL_DATABASE_NAME: ${{ secrets.MYSQL_DATABASE_NAME }}
+          MYSQL_USERNAME: ${{ secrets.MYSQL_USERNAME }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+        run: |
+          echo "ENVIRONMENT=production" >> .env
+          echo "MYSQL_DATABASE_NAME=${MYSQL_DATABASE_NAME}" >> .env
+          echo "MYSQL_USERNAME=${MYSQL_USERNAME}" >> .env
+          echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> .env
+          echo "MYSQL_HOST=${MYSQL_HOST}" >> .env
+          echo "MYSQL_PORT=${MYSQL_PORT}" >> .env
 
       - name: FTP deployment
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
