@@ -9,7 +9,7 @@ def new_shedule(shedule):
     teacher_message = f"Vous êtes programmé pour le {shedule.start_date} en {shedule.subject.level.slug}"
     message = ''
     levelId = shedule.subject.level.id
-    users = User.objects.filter(Q(id=shedule.teacher_id) | Q(level=levelId))
+    users = User.objects.filter(Q(id=shedule.teacher.id) | Q(level=levelId))
 
     for user in users:
         if user.is_teacher:
