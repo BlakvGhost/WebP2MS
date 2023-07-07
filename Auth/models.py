@@ -71,12 +71,17 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         return self.reset_token_expiration is not None and self.reset_token_expiration < timezone.now()
 
     def serialize(self):
+        if not self.avatar:
+            avatar = '/assets/avatars/blank.png'
+        else:
+            avatar = self.avatar.url
+
         return {
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
             'phone_num': self.phone_num,
             'email': self.email,
-            'avatar': self.avatar.url,
+            'avatar': avatar,
             'is_online': self.is_online,
         }
