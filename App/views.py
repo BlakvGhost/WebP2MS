@@ -287,22 +287,21 @@ def salles(request):
 
         if _method == 'POST':
 
-            if slug and capacity:
+            if slug:
                 if models.Classroom.objects.filter(slug=slug).exists():
-                    exist = True
                     errors.append("Une classe existe déjà avec cet slug")
+                else:
+                    created_by = User.objects.get(id=request.user.id)
+
+                    models.Classroom.objects.create(
+                        slug=slug,
+                        capacity=capacity if capacity else 0,
+                        desc=desc,
+                        created_by=created_by
+                    )
             else:
                 errors.append("Veuillez remplir tous les champs obligatoires")
-
-            if not exist:
-                created_by = User.objects.get(id=request.user.id)
-
-                models.Classroom.objects.create(
-                    slug=slug,
-                    capacity=capacity,
-                    desc=desc,
-                    created_by=created_by
-                )
+            
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
             object_id = request.POST.get('object_id')
@@ -315,7 +314,7 @@ def salles(request):
 
                 classroom.slug = slug
                 classroom.desc = desc
-                classroom.capacity = capacity
+                classroom.capacity = capacity if capacity else 0
                 classroom.save()
 
         else:
@@ -343,17 +342,13 @@ def levels(request):
         if _method == 'POST':
 
             if slug:
-                if Level.objects.filter(slug=slug).exists():
-                    exist = True
-                    errors.append("Une classe existe déjà avec cet slug")
-            else:
-                errors.append("Veuillez remplir tous les champs obligatoires")
-
-            if not exist:
                 Level.objects.create(
                     slug=slug,
-                    total_students=total_students
+                    total_students=total_students if total_students else 0
                 )
+            else:
+                errors.append("Veuillez remplir tous les champs obligatoires")
+            
 
         elif _method in ['PUT', 'PATCH', 'UPDATE']:
             object_id = request.POST.get('object_id')
@@ -365,7 +360,7 @@ def levels(request):
             if slug:
 
                 level.slug = slug
-                level.total_students = total_students
+                level.total_students = total_students if total_students else 0
                 level.save()
 
         else:
@@ -381,8 +376,7 @@ def levels(request):
 
 @login_required
 def shedules(request):
-    # models.Timetable.objects.all().delete()
-    # models.Notification.objects.all().delete()
+
     context = {
         'subjects': models.Subject.objects.all(),
         'levels': Level.objects.all(),
