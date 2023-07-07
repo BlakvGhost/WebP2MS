@@ -276,7 +276,7 @@
                                 <th class="min-w-125px">Slug</th>
                                 <th class="min-w-125px">Identifiant</th>
                                 <th class="min-w-125px">Niveau</th>
-                                <th class="min-w-125px">heure Faite</th>
+                                <th class="min-w-125px">heures totals</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
                         </thead>
@@ -302,8 +302,9 @@
                                 <td data-bs-toggle="modal" data-bs-target="#show_ct{{ subject.id }}">
                                     {{ subject.level.slug }}
                                 </td>
-                                <td class="text-end">
-                                    <div class="d-flex flex-column w-100 me-2">
+                                <td class="">
+                                    {{ subject.total_time }} heures
+                                    {% comment %} <div class="d-flex flex-column w-100 me-2">
                                         <div class="d-flex flex-stack mb-2">
                                             <span class="text-muted me-2 fs-7 fw-bold">{{ subject|calculate_total_percentage }}% | {{ subject.id|calculate_total_hours }} heure/{{ subject.total_time }}heure</span>
                                         </div>
@@ -311,7 +312,7 @@
                                             <div class="progress-bar bg-danger" role="progressbar" style="width: 70%"
                                                 aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
                                 </td>
                                 <td class="text-end">
                                     <button class="btn btn-success px-3" data-bs-toggle="modal"
