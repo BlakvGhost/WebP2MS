@@ -50,7 +50,7 @@ def _update_user(request, admin=None):
 
         if avatar:
             file_extension = avatar.name.split('.')[-1]
-            avatar_name = f'{first_name}-{last_name}-{uuid.uuid4().hex}.{file_extension}'
+            avatar_name = f'{uuid.uuid4().hex}.{file_extension}'
 
             file_path = f'avatars/{avatar_name}'
             default_storage.save(file_path, avatar)
@@ -121,7 +121,7 @@ def teachers(request):
 
                 if avatar and not exist:
                     file_extension = avatar.name.split('.')[-1]
-                    avatar_name = f'{first_name}-{last_name}-{uuid.uuid4().hex}.{file_extension}'
+                    avatar_name = f'{uuid.uuid4().hex}.{file_extension}'
 
                     file_path = f'avatars/{avatar_name}'
                     default_storage.save(file_path, avatar)
