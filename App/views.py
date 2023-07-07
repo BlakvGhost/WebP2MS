@@ -219,7 +219,7 @@ def cours(request):
         if _method == 'POST':
 
             if slug and level and total_time:
-                if models.Subject.objects.filter(slug=slug).exists():
+                if models.Subject.objects.filter(slug=slug, level_id=level).exists():
                     exist = True
                     errors.append("Une matière existe déjà avec cet slug")
             else:
