@@ -24,7 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%#cys#p5lm=mwh7&6*(j@$_k*houfztz$(@e2(pnuk41$a@!5&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+if config('ENVIRONMENT', default='local') == 'production':
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = ["webp2ms.kabirou-alassane.com", 'localhost', '127.0.0.1']
 
@@ -141,7 +145,6 @@ EMAIL_HOST = 'mail.kabirou-alassane.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'no-reply@kabirou-alassane.com'
 EMAIL_HOST_PASSWORD = 'jQ0yiv~!Y;&='
-# EMAIL_USE_TLS = True
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'no-reply@kabirou-alassane.com'
 
