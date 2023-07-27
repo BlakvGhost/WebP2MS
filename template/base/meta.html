@@ -38,7 +38,15 @@
 <!-- beging:: Adding custom js files -->
 <script src="{% static 'js/app.js' %}" async></script>
 <!-- end:: Adding customjs files -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QCL5WT9MM1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-QCL5WT9MM1');
+</script>
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register("{% static 'js/service-worker.js' %}")
