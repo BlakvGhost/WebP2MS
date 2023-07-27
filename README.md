@@ -29,12 +29,12 @@ cd chemin/vers/le/répertoire
 4. Clonez le référentiel en utilisant la commande `git clone` :
 
 ```bash
-git clone https://github.com/BlakvGhost/PIL1_2223_34.git
+git clone https://github.com/BlakvGhost/WebP2MS.git
 ```
 
 5. Accédez au répertoire du projet nouvellement cloné :
 ```bash
-cd PIL1_2223_34
+cd WebP2MS
 ```
 
 6. Installer Django et les dépendances du projet:
