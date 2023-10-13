@@ -6,7 +6,7 @@ WebP2MS (Web Platform for Managing and Monitoring Schedules) est une application
 
 ## Fonctionnalités
 
-- Gestion des enseignements et de la masse horaire [fait par les Coordonnateurs de formation]
+- Gestion des enseignants, des salles de cours et de la masse horaire [fait par les Coordonnateurs de formation]
 - Planification des emplois de temps [fait par les Coordonnateurs de formation]
 - Consultation des emplois du temps publiés [par les étudiants]
 - Capacité de chatter sur un emploi du temps entre les enseignants et l'administration
