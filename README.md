@@ -15,7 +15,7 @@ WebP2MS (Web Platform for Managing and Monitoring Schedules) est une application
 
 ## DEMO
 
-Vous pouvez tester la démo de l'application sur la (version en ligne)[https://webp2ms.kabirou-alassane.com] avec ce compte administrateur : 
+Vous pouvez tester la démo de l'application sur la [version en ligne](https://webp2ms.kabirou-alassane.com) avec ce compte administrateur : 
 
     - Email : exemple@exemple.com
     - password : passme
