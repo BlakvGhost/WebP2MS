@@ -13,6 +13,15 @@ WebP2MS (Web Platform for Managing and Monitoring Schedules) est une application
 - Envoi des emails sur divers événements(ajout ou modification d'un emploi du temps) à tout les acteurs concernés.
 - Capacité d'installer l'application sur smartphone et sur PC en tant que application PWA
 
+## DEMO
+
+Vous pouvez tester la démo de l'application sur la (version en ligne)[https://webp2ms.kabirou-alassane.com] avec ce compte administrateur : 
+
+    - Email : exemple@exemple.com
+    - password : passme
+
+Pour les autres types de comptes (étudiant, professeur) veuillez les créés respectivement à partir du formulaire d'inscription ou sur le dashboard en se connectant en tant que administrateur.
+
 ## Tech Stack
 
 **Client:** HTML5, CSS3, Bootstrap 5, VueJS
