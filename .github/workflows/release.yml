@@ -21,6 +21,9 @@ jobs:
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
           MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
           MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+          EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
           echo "ENVIRONMENT=production" >> .env
           echo "MYSQL_DATABASE_NAME=${MYSQL_DATABASE_NAME}" >> .env
@@ -28,6 +31,9 @@ jobs:
           echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> .env
           echo "MYSQL_HOST=${MYSQL_HOST}" >> .env
           echo "MYSQL_PORT=${MYSQL_PORT}" >> .env
+          echo "EMAIL_HOST=${EMAIL_HOST}" >> .env
+          echo "EMAIL_USERNAME=${EMAIL_USERNAME}" >> .env
+          echo "EMAIL_PASSWORD=${EMAIL_PASSWORD}" >> .env
 
       - name: FTP deployment
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
