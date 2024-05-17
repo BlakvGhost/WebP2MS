@@ -30,7 +30,7 @@ if config('ENVIRONMENT', default='local') == 'production':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ["webp2ms.kabirou-alassane.com", 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["webp2ms.username-blakvghost.com", 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -142,12 +142,12 @@ AUTH_USER_MODEL = 'Auth.MyUser'
 LOGIN_URL = '/auth/login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.kabirou-alassane.com'
+EMAIL_HOST = config('EMAIL_HOST'),
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'no-reply@kabirou-alassane.com'
-EMAIL_HOST_PASSWORD = 'jQ0yiv~!Y;&='
+EMAIL_HOST_USER = config('EMAIL_USERNAME')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'no-reply@kabirou-alassane.com'
+DEFAULT_FROM_EMAIL = config('EMAIL_USERNAME')
 
 
 # Default primary key field type
